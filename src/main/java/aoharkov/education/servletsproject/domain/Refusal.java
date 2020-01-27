@@ -2,7 +2,7 @@ package aoharkov.education.servletsproject.domain;
 
 public class Refusal extends RequestExtension {
     private Integer id;
-    private String reasoning;
+    private String explanation;
     private User manager;
 
     private Refusal(Request request) {
@@ -17,16 +17,16 @@ public class Refusal extends RequestExtension {
         return id;
     }
 
-    public String getReasoning() {
-        return reasoning;
+    public String getExplanation() {
+        return explanation;
     }
 
     public User getManager() {
         return manager;
     }
 
-    public void setReasoning(String reasoning) {
-        this.reasoning = reasoning;
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
     public void setManager(User manager) {
@@ -37,7 +37,7 @@ public class Refusal extends RequestExtension {
     public String toString() {
         return "Refusal{" +
                 "id=" + id +
-                ", reasoning='" + reasoning + '\'' +
+                ", explanation='" + explanation + '\'' +
                 ", manager=" + manager +
                 '}';
     }
@@ -45,7 +45,7 @@ public class Refusal extends RequestExtension {
     public static final class RefusalBuilder {
         private Request request;
         private Integer id;
-        private String reasoning;
+        private String explanation;
         private User manager;
 
         private RefusalBuilder() {
@@ -61,8 +61,8 @@ public class Refusal extends RequestExtension {
             return this;
         }
 
-        public RefusalBuilder withReasoning(String reasoning) {
-            this.reasoning = reasoning;
+        public RefusalBuilder withExplanation(String explanation) {
+            this.explanation = explanation;
             return this;
         }
 
@@ -73,7 +73,7 @@ public class Refusal extends RequestExtension {
 
         public Refusal build() {
             Refusal refusal = new Refusal(request);
-            refusal.setReasoning(reasoning);
+            refusal.setExplanation(explanation);
             refusal.setManager(manager);
             refusal.id = this.id;
             return refusal;

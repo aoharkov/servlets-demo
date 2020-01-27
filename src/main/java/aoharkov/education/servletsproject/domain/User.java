@@ -5,21 +5,26 @@ import java.util.Set;
 
 public class User {
     private Integer id;
-    private String fullName;
+    private String name;
+    private String surname;
     private String email;
     private String password;
     private Set<Role> roles;
 
-    public static Builder builder() {
-        return new Builder();
+    public static UserBuilder builder() {
+        return new UserBuilder();
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public String getEmail() {
@@ -30,8 +35,24 @@ public class User {
         return password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -44,7 +65,8 @@ public class User {
         }
         User user = (User) o;
         return id.equals(user.id) &&
-                Objects.equals(fullName, user.fullName) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(surname, user.surname) &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles);
@@ -52,61 +74,69 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName, email, password, roles);
+        return Objects.hash(id, name, surname, email, password, roles);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", fullName='" + fullName + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
     }
 
-    public static final class Builder {
+    public static final class UserBuilder {
         private Integer id;
-        private String fullName;
+        private String name;
+        private String surname;
         private String email;
         private String password;
         private Set<Role> roles;
 
-        private Builder() {
+        private UserBuilder() {
         }
 
-        public Builder withId(Integer id) {
+        public UserBuilder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public Builder withFullName(String fullName) {
-            this.fullName = fullName;
+        public UserBuilder withName(String name) {
+            this.name = name;
             return this;
         }
 
-        public Builder withEmail(String email) {
+        public UserBuilder withSurname(String surname) {
+            this.surname = surname;
+            return this;
+        }
+
+        public UserBuilder withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder withPassword(String password) {
+        public UserBuilder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder withRoles(Set<Role> roles) {
+        public UserBuilder withRoles(Set<Role> roles) {
             this.roles = roles;
             return this;
         }
 
         public User build() {
             User user = new User();
-            user.fullName = this.fullName;
-            user.password = this.password;
-            user.email = this.email;
-            user.roles = this.roles;
+            user.setName(name);
+            user.setSurname(surname);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setRoles(roles);
             user.id = this.id;
             return user;
         }
