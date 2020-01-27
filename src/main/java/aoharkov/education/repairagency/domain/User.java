@@ -1,15 +1,23 @@
-package aoharkov.education.servletsproject.domain;
+package aoharkov.education.repairagency.domain;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class User {
-    private Integer id;
-    private String name;
+    private final Integer id;
+    private final String name;
     private String surname;
-    private String email;
-    private String password;
-    private Set<Role> roles;
+    private final String email;
+    private final String password;
+    private final Role role;
+
+    private User(UserBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.surname = builder.surname;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.role = builder.role;
+    }
 
     public static UserBuilder builder() {
         return new UserBuilder();
@@ -35,46 +43,30 @@ public class User {
         return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Role getRole() {
+        return role;
     }
 
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
         User user = (User) o;
         return id.equals(user.id) &&
-                Objects.equals(name, user.name) &&
+                name.equals(user.name) &&
                 Objects.equals(surname, user.surname) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(roles, user.roles);
+                email.equals(user.email) &&
+                password.equals(user.password) &&
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email, password, roles);
+        return Objects.hash(id, name, surname, email, password, role);
     }
 
     @Override
@@ -84,8 +76,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
+                ", role=" + role +
                 '}';
     }
 
@@ -95,9 +86,13 @@ public class User {
         private String surname;
         private String email;
         private String password;
-        private Set<Role> roles;
+        private Role role;
 
         private UserBuilder() {
+        }
+
+        public User build() {
+            return new User(this);
         }
 
         public UserBuilder withId(Integer id) {
@@ -125,20 +120,9 @@ public class User {
             return this;
         }
 
-        public UserBuilder withRoles(Set<Role> roles) {
-            this.roles = roles;
+        public UserBuilder withRole(Role role) {
+            this.role = role;
             return this;
-        }
-
-        public User build() {
-            User user = new User();
-            user.setName(name);
-            user.setSurname(surname);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setRoles(roles);
-            user.id = this.id;
-            return user;
         }
     }
 }

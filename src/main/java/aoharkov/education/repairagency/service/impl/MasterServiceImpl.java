@@ -1,6 +1,6 @@
-package aoharkov.education.servletsproject.service.impl;
+package aoharkov.education.repairagency.service.impl;
 
-import aoharkov.education.servletsproject.service.MasterService;
+import aoharkov.education.repairagency.service.MasterService;
 
 public class MasterServiceImpl extends UserServiceImpl implements MasterService {
 

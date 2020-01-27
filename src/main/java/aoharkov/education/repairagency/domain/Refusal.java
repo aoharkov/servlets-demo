@@ -1,12 +1,17 @@
-package aoharkov.education.servletsproject.domain;
+package aoharkov.education.repairagency.domain;
+
+import java.util.Objects;
 
 public class Refusal extends RequestExtension {
-    private Integer id;
-    private String explanation;
-    private User manager;
+    private final Integer id;
+    private final String explanation;
+    private final User manager;
 
-    private Refusal(Request request) {
-        super(request);
+    private Refusal(RefusalBuilder builder) {
+        super(builder.request);
+        this.id = builder.id;
+        this.explanation = builder.explanation;
+        this.manager = builder.manager;
     }
 
     public static RefusalBuilder builder() {
@@ -25,12 +30,23 @@ public class Refusal extends RequestExtension {
         return manager;
     }
 
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Refusal)) {
+            return false;
+        }
+        Refusal refusal = (Refusal) o;
+        return id.equals(refusal.id) &&
+                explanation.equals(refusal.explanation) &&
+                manager.equals(refusal.manager);
     }
 
-    public void setManager(User manager) {
-        this.manager = manager;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, explanation, manager);
     }
 
     @Override
@@ -72,11 +88,7 @@ public class Refusal extends RequestExtension {
         }
 
         public Refusal build() {
-            Refusal refusal = new Refusal(request);
-            refusal.setExplanation(explanation);
-            refusal.setManager(manager);
-            refusal.id = this.id;
-            return refusal;
+            return new Refusal(this);
         }
     }
 }

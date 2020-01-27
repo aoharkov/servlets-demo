@@ -1,7 +1,7 @@
-package aoharkov.education.servletsproject.domain;
+package aoharkov.education.repairagency.domain;
 
 public abstract class RequestExtension {
-    private Request request;
+    private final Request request;
 
     protected RequestExtension(Request request) {
         this.request = request;

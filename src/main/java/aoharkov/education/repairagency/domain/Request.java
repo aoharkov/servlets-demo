@@ -1,13 +1,21 @@
-package aoharkov.education.servletsproject.domain;
+package aoharkov.education.repairagency.domain;
 
 import java.util.Objects;
 
 public class Request {
-    private Integer id;
-    private User client;
-    private String description;
+    private final Integer id;
+    private final User client;
+    private final String description;
     private Boolean viewed;
     private Boolean accepted;
+
+    private Request(RequestBuilder builder) {
+        this.id = builder.id;
+        this.client = builder.client;
+        this.description = builder.description;
+        this.viewed = builder.viewed;
+        this.accepted = builder.accepted;
+    }
 
     public static RequestBuilder builder() {
         return new RequestBuilder();
@@ -33,14 +41,6 @@ public class Request {
         return accepted;
     }
 
-    public void setClient(User client) {
-        this.client = client;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setViewed(Boolean viewed) {
         this.viewed = viewed;
     }
@@ -51,16 +51,12 @@ public class Request {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Request)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Request)) return false;
         Request request = (Request) o;
         return id.equals(request.id) &&
-                Objects.equals(client, request.client) &&
-                Objects.equals(description, request.description) &&
+                client.equals(request.client) &&
+                description.equals(request.description) &&
                 Objects.equals(viewed, request.viewed) &&
                 Objects.equals(accepted, request.accepted);
     }
@@ -91,6 +87,10 @@ public class Request {
         private RequestBuilder() {
         }
 
+        public Request build() {
+            return new Request(this);
+        }
+
         public RequestBuilder withId(Integer id) {
             this.id = id;
             return this;
@@ -114,16 +114,6 @@ public class Request {
         public RequestBuilder withAccepted(Boolean accepted) {
             this.accepted = accepted;
             return this;
-        }
-
-        public Request build() {
-            Request request = new Request();
-            request.setClient(client);
-            request.setDescription(description);
-            request.setViewed(viewed);
-            request.setAccepted(accepted);
-            request.id = this.id;
-            return request;
         }
     }
 }

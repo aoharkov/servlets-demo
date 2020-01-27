@@ -1,4 +1,4 @@
-package aoharkov.education.servletsproject.service;
+package aoharkov.education.repairagency.service;
 
 public interface MasterService extends UserService {
 

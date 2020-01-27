@@ -1,4 +1,4 @@
-package aoharkov.education.servletsproject;
+package aoharkov.education.repairagency;
 
 public class Main {
     public static void main(String[] args) {

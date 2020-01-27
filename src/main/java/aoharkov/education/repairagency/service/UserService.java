@@ -1,6 +1,6 @@
-package aoharkov.education.servletsproject.service;
+package aoharkov.education.repairagency.service;
 
-import aoharkov.education.servletsproject.domain.User;
+import aoharkov.education.repairagency.domain.User;
 
 public interface UserService {
 

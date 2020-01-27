@@ -1,6 +1,6 @@
-package aoharkov.education.servletsproject.service.impl;
+package aoharkov.education.repairagency.service.impl;
 
-import aoharkov.education.servletsproject.service.ClientService;
+import aoharkov.education.repairagency.service.ClientService;
 
 public class ClientServiceImpl extends UserServiceImpl implements ClientService {
 

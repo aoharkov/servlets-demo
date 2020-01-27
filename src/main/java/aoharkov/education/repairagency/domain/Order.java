@@ -1,16 +1,21 @@
-package aoharkov.education.servletsproject.domain;
+package aoharkov.education.repairagency.domain;
 
 import java.util.Objects;
 
 public class Order extends RequestExtension {
-    private Integer id;
-    private User manager;
+    private final Integer id;
+    private final User manager;
     private Integer price;
-    private User master;
-    private boolean done;
+    private final User master;
+    private RepairStages repairStages;
 
-    private Order(Request request) {
-        super(request);
+    private Order(OrderBuilder builder) {
+        super(builder.request);
+        this.id = builder.id;
+        this.manager = builder.manager;
+        this.price = builder.price;
+        this.master = builder.master;
+        this.repairStages = builder.repairStages;
     }
 
     public static OrderBuilder builder() {
@@ -33,24 +38,16 @@ public class Order extends RequestExtension {
         return master;
     }
 
-    public boolean isDone() {
-        return done;
-    }
-
-    public void setManager(User manager) {
-        this.manager = manager;
+    public RepairStages getRepairStages() {
+        return repairStages;
     }
 
     public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public void setMaster(User master) {
-        this.master = master;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setRepairStages(RepairStages repairStages) {
+        this.repairStages = repairStages;
     }
 
     @Override
@@ -62,16 +59,16 @@ public class Order extends RequestExtension {
             return false;
         }
         Order order = (Order) o;
-        return done == order.done &&
-                id.equals(order.id) &&
-                Objects.equals(manager, order.manager) &&
-                Objects.equals(price, order.price) &&
-                Objects.equals(master, order.master);
+        return id.equals(order.id) &&
+                manager.equals(order.manager) &&
+                price.equals(order.price) &&
+                master.equals(order.master) &&
+                repairStages == order.repairStages;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, manager, price, master, done);
+        return Objects.hash(id, manager, price, master, repairStages);
     }
 
     @Override
@@ -81,7 +78,7 @@ public class Order extends RequestExtension {
                 ", manager=" + manager +
                 ", price=" + price +
                 ", master=" + master +
-                ", done=" + done +
+                ", repairStages=" + repairStages +
                 '}';
     }
 
@@ -91,9 +88,13 @@ public class Order extends RequestExtension {
         private User manager;
         private Integer price;
         private User master;
-        private boolean done;
+        private RepairStages repairStages;
 
         private OrderBuilder() {
+        }
+
+        public Order build() {
+            return new Order(this);
         }
 
         public OrderBuilder withRequest(Request request) {
@@ -121,19 +122,9 @@ public class Order extends RequestExtension {
             return this;
         }
 
-        public OrderBuilder withDone(boolean done) {
-            this.done = done;
+        public OrderBuilder withRepairStatus(RepairStages repairStages) {
+            this.repairStages = repairStages;
             return this;
-        }
-
-        public Order build() {
-            Order order = new Order(request);
-            order.setManager(manager);
-            order.setPrice(price);
-            order.setMaster(master);
-            order.setDone(done);
-            order.id = this.id;
-            return order;
         }
     }
 }

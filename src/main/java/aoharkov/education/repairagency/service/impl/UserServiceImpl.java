@@ -1,7 +1,7 @@
-package aoharkov.education.servletsproject.service.impl;
+package aoharkov.education.repairagency.service.impl;
 
-import aoharkov.education.servletsproject.domain.User;
-import aoharkov.education.servletsproject.service.UserService;
+import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.service.UserService;
 
 public class UserServiceImpl implements UserService {
 

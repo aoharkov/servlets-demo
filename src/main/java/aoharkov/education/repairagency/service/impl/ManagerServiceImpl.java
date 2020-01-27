@@ -1,6 +1,6 @@
-package aoharkov.education.servletsproject.service.impl;
+package aoharkov.education.repairagency.service.impl;
 
-import aoharkov.education.servletsproject.service.ManagerService;
+import aoharkov.education.repairagency.service.ManagerService;
 
 public class ManagerServiceImpl extends UserServiceImpl implements ManagerService {
 
