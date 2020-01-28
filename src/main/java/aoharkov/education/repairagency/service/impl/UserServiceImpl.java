@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.service.impl;
 
-import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.UserService;
 
 public class UserServiceImpl implements UserService {

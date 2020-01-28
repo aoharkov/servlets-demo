@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.domain;
+package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 

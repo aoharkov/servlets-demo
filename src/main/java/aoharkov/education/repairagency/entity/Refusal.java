@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.domain;
+package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ public class Refusal extends RequestExtension {
     private final User manager;
 
     private Refusal(RefusalBuilder builder) {
-        super(builder.request);
+        super(builder);
         this.id = builder.id;
         this.explanation = builder.explanation;
         this.manager = builder.manager;
@@ -53,13 +53,13 @@ public class Refusal extends RequestExtension {
     public String toString() {
         return "Refusal{" +
                 "id=" + id +
+                ", request_id=" + super.getRequest().getId() +
                 ", explanation='" + explanation + '\'' +
                 ", manager=" + manager +
                 '}';
     }
 
-    public static final class RefusalBuilder {
-        private Request request;
+    public static final class RefusalBuilder extends RequestExtensionBuilder<RefusalBuilder> {
         private Integer id;
         private String explanation;
         private User manager;
@@ -67,9 +67,8 @@ public class Refusal extends RequestExtension {
         private RefusalBuilder() {
         }
 
-        public RefusalBuilder withRequest(Request request) {
-            this.request = request;
-            return this;
+        public Refusal build() {
+            return new Refusal(this);
         }
 
         public RefusalBuilder withId(Integer id) {
@@ -87,8 +86,9 @@ public class Refusal extends RequestExtension {
             return this;
         }
 
-        public Refusal build() {
-            return new Refusal(this);
+        @Override
+        protected RefusalBuilder self() {
+            return this;
         }
     }
 }

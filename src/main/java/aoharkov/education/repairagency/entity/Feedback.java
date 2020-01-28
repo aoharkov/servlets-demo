@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.domain;
+package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
@@ -8,7 +8,7 @@ public class Feedback extends RequestExtension {
     private Integer score;
 
     private Feedback(FeedbackBuilder builder) {
-        super(builder.request);
+        super(builder);
         this.id = builder.id;
         this.text = builder.text;
         this.score = builder.score;
@@ -61,13 +61,13 @@ public class Feedback extends RequestExtension {
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
+                ", request_id=" + super.getRequest().getId() +
                 ", text='" + text + '\'' +
                 ", score=" + score +
                 '}';
     }
 
-    public static final class FeedbackBuilder {
-        private Request request;
+    public static final class FeedbackBuilder extends RequestExtensionBuilder<FeedbackBuilder> {
         private Integer id;
         private String text;
         private Integer score;
@@ -75,9 +75,8 @@ public class Feedback extends RequestExtension {
         private FeedbackBuilder() {
         }
 
-        public FeedbackBuilder withRequest(Request request) {
-            this.request = request;
-            return this;
+        public Feedback build() {
+            return new Feedback(this);
         }
 
         public FeedbackBuilder withId(Integer id) {
@@ -95,8 +94,9 @@ public class Feedback extends RequestExtension {
             return this;
         }
 
-        public Feedback build() {
-            return new Feedback(this);
+        @Override
+        protected FeedbackBuilder self() {
+            return this;
         }
     }
 }

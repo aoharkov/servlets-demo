@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.service;
 
-import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.entity.User;
 
 public interface UserService {
 

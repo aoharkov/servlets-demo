@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.domain;
+package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class Order extends RequestExtension {
     private RepairStages repairStages;
 
     private Order(OrderBuilder builder) {
-        super(builder.request);
+        super(builder);
         this.id = builder.id;
         this.manager = builder.manager;
         this.price = builder.price;
@@ -75,6 +75,7 @@ public class Order extends RequestExtension {
     public String toString() {
         return "Order{" +
                 "id=" + id +
+                ", request_id=" + super.getRequest().getId() +
                 ", manager=" + manager +
                 ", price=" + price +
                 ", master=" + master +
@@ -82,8 +83,7 @@ public class Order extends RequestExtension {
                 '}';
     }
 
-    public static final class OrderBuilder {
-        private Request request;
+    public static final class OrderBuilder extends RequestExtensionBuilder<OrderBuilder> {
         private Integer id;
         private User manager;
         private Integer price;
@@ -95,11 +95,6 @@ public class Order extends RequestExtension {
 
         public Order build() {
             return new Order(this);
-        }
-
-        public OrderBuilder withRequest(Request request) {
-            this.request = request;
-            return this;
         }
 
         public OrderBuilder withId(Integer id) {
@@ -124,6 +119,11 @@ public class Order extends RequestExtension {
 
         public OrderBuilder withRepairStatus(RepairStages repairStages) {
             this.repairStages = repairStages;
+            return this;
+        }
+
+        @Override
+        protected OrderBuilder self() {
             return this;
         }
     }

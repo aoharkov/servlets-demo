@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.domain;
+package aoharkov.education.repairagency.entity;
 
 public enum Role {
     CLIENT, MANAGER, MASTER
