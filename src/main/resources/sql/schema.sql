@@ -31,8 +31,10 @@ CREATE TABLE requests
 CREATE TABLE refusals
 (
     id          int          NOT NULL AUTO_INCREMENT,
+    request_id  int          NOT NULL,
     explanation varchar(255) NOT NULL,
     manager_id  int          NOT NULL,
+    FOREIGN KEY (request_id) REFERENCES requests (id),
     FOREIGN KEY (manager_id) REFERENCES users (id),
     PRIMARY KEY (id)
 );
@@ -61,9 +63,11 @@ CREATE TABLE repair_stages
 
 CREATE TABLE feedback
 (
-    id    int NOT NULL AUTO_INCREMENT,
-    text  varchar(255),
-    score int,
+    id         int NOT NULL AUTO_INCREMENT,
+    request_id int NOT NULL,
+    text       varchar(255),
+    score      int,
+    FOREIGN KEY (request_id) REFERENCES requests (id),
     PRIMARY KEY (id)
 );
 
