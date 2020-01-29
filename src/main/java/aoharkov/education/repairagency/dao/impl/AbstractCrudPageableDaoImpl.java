@@ -99,7 +99,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
 
     @Override
     public Pageable<E> findAll(int pageNumber, int itemsPerPage) {
-        int maxPageNumber =  (count() + itemsPerPage - 1) / itemsPerPage;
+        int maxPageNumber = (count() + itemsPerPage - 1) / itemsPerPage;
         if (pageNumber > maxPageNumber) {
             pageNumber = maxPageNumber;
         }

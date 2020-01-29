@@ -4,7 +4,7 @@ import aoharkov.education.repairagency.dao.domain.Pageable;
 
 import java.util.Optional;
 
-public interface CrudPageableDao<E>{
+public interface CrudPageableDao<E> {
 
     void save(E entity);
 
