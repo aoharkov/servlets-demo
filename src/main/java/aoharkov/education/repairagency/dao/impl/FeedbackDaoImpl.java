@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.FeedbackDao;
-import aoharkov.education.repairagency.dao.util.ConnectorToDB;
+import aoharkov.education.repairagency.dao.util.HikariCPImpl;
 import aoharkov.education.repairagency.entity.Feedback;
 import aoharkov.education.repairagency.entity.Request;
 
@@ -19,7 +19,7 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
             "UPDATE feedback SET request_id = ?, text = ?, score = ?, WHERE id = ?";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM feedback WHERE id = ?";
 
-    public FeedbackDaoImpl(ConnectorToDB connector) {
+    public FeedbackDaoImpl(HikariCPImpl connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
     }
 

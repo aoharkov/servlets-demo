@@ -3,7 +3,7 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.CrudPageableDao;
 import aoharkov.education.repairagency.dao.domain.Pageable;
 import aoharkov.education.repairagency.dao.domain.PageableImpl;
-import aoharkov.education.repairagency.dao.util.ConnectorToDB;
+import aoharkov.education.repairagency.dao.util.HikariCPImpl;
 import aoharkov.education.repairagency.dao.util.DataBaseSqlRuntimeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +36,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
         }
     });
 
-    protected final ConnectorToDB connector;
+    protected final HikariCPImpl connector;
     private final String saveQuery;
     private final String findByIdQuery;
     private final String findAllAtPageQuery;
@@ -44,7 +44,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     private final String updateQuery;
     private final String deleteQuery;
 
-    public AbstractCrudPageableDaoImpl(ConnectorToDB connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery, String deleteQuery) {
+    public AbstractCrudPageableDaoImpl(HikariCPImpl connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery, String deleteQuery) {
         this.connector = connector;
         this.saveQuery = saveQuery;
         this.findByIdQuery = findByIdQuery;
@@ -83,7 +83,6 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
                      connector.getConnection().prepareStatement(sqlQuery)) {
 
             designedParamSetting.accept(preparedStatement, param);
-
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     return Optional.of(mapResultSetToEntity(resultSet));

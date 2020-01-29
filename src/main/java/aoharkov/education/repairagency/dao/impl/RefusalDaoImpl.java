@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.RefusalDao;
-import aoharkov.education.repairagency.dao.util.ConnectorToDB;
+import aoharkov.education.repairagency.dao.util.HikariCPImpl;
 import aoharkov.education.repairagency.entity.Refusal;
 import aoharkov.education.repairagency.entity.Request;
 import aoharkov.education.repairagency.entity.User;
@@ -20,7 +20,7 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
             "UPDATE refusals SET request_id = ?, explanation = ?, manager_id = ?, WHERE id = ?";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM refusals WHERE id = ?";
 
-    public RefusalDaoImpl(ConnectorToDB connector) {
+    public RefusalDaoImpl(HikariCPImpl connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
     }
 

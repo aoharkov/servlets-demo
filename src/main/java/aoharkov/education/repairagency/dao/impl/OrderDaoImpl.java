@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.OrderDao;
-import aoharkov.education.repairagency.dao.util.ConnectorToDB;
+import aoharkov.education.repairagency.dao.util.HikariCPImpl;
 import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.RepairStage;
 import aoharkov.education.repairagency.entity.Request;
@@ -21,7 +21,7 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
             "UPDATE orders SET request_id = ?, manager_id = ?, price = ?, master_id = ?, repair_stage_id = ?, WHERE id = ?";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM orders WHERE id = ?";
 
-    public OrderDaoImpl(ConnectorToDB connector) {
+    public OrderDaoImpl(HikariCPImpl connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
     }
 
