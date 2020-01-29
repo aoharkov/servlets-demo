@@ -1,19 +1,11 @@
 CREATE TABLE users
 (
-    id       int         NOT NULL AUTO_INCREMENT,
-    name     varchar(60) NOT NULL,
+    id       int                                NOT NULL AUTO_INCREMENT,
+    name     varchar(60)                        NOT NULL,
     surname  varchar(60),
-    email    varchar(60) NOT NULL UNIQUE,
-    password varchar(60) NOT NULL,
-    role_id  int         NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES roles (id),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE roles
-(
-    id   int         NOT NULL AUTO_INCREMENT,
-    name varchar(60) NOT NULL,
+    email    varchar(60)                        NOT NULL UNIQUE,
+    password varchar(60)                        NOT NULL,
+    role     ENUM ('CLIENT','MANAGER','MASTER') NOT NULL,
     PRIMARY KEY (id)
 );
 

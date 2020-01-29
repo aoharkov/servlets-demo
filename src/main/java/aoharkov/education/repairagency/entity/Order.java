@@ -7,7 +7,7 @@ public class Order extends RequestExtension {
     private final User manager;
     private Integer price;
     private final User master;
-    private RepairStages repairStages;
+    private RepairStage repairStage;
 
     private Order(OrderBuilder builder) {
         super(builder);
@@ -15,7 +15,7 @@ public class Order extends RequestExtension {
         this.manager = builder.manager;
         this.price = builder.price;
         this.master = builder.master;
-        this.repairStages = builder.repairStages;
+        this.repairStage = builder.repairStage;
     }
 
     public static OrderBuilder builder() {
@@ -38,16 +38,16 @@ public class Order extends RequestExtension {
         return master;
     }
 
-    public RepairStages getRepairStages() {
-        return repairStages;
+    public RepairStage getRepairStage() {
+        return repairStage;
     }
 
     public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public void setRepairStages(RepairStages repairStages) {
-        this.repairStages = repairStages;
+    public void setRepairStage(RepairStage repairStage) {
+        this.repairStage = repairStage;
     }
 
     @Override
@@ -63,12 +63,12 @@ public class Order extends RequestExtension {
                 manager.equals(order.manager) &&
                 price.equals(order.price) &&
                 master.equals(order.master) &&
-                repairStages == order.repairStages;
+                repairStage == order.repairStage;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, manager, price, master, repairStages);
+        return Objects.hash(id, manager, price, master, repairStage);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Order extends RequestExtension {
                 ", manager=" + manager +
                 ", price=" + price +
                 ", master=" + master +
-                ", repairStages=" + repairStages +
+                ", repairStages=" + repairStage +
                 '}';
     }
 
@@ -88,7 +88,7 @@ public class Order extends RequestExtension {
         private User manager;
         private Integer price;
         private User master;
-        private RepairStages repairStages;
+        private RepairStage repairStage;
 
         private OrderBuilder() {
         }
@@ -117,8 +117,8 @@ public class Order extends RequestExtension {
             return this;
         }
 
-        public OrderBuilder withRepairStatus(RepairStages repairStages) {
-            this.repairStages = repairStages;
+        public OrderBuilder withRepairStatus(RepairStage repairStage) {
+            this.repairStage = repairStage;
             return this;
         }
 
