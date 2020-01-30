@@ -3,8 +3,8 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.CrudPageableDao;
 import aoharkov.education.repairagency.dao.domain.Pageable;
 import aoharkov.education.repairagency.dao.domain.PageableImpl;
-import aoharkov.education.repairagency.dao.util.HikariCPImpl;
 import aoharkov.education.repairagency.dao.util.DataBaseSqlRuntimeException;
+import aoharkov.education.repairagency.dao.util.connector.Connector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,7 +36,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
         }
     });
 
-    protected final HikariCPImpl connector;
+    protected final Connector connector;
     private final String saveQuery;
     private final String findByIdQuery;
     private final String findAllAtPageQuery;
@@ -44,7 +44,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     private final String updateQuery;
     private final String deleteQuery;
 
-    public AbstractCrudPageableDaoImpl(HikariCPImpl connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery, String deleteQuery) {
+    public AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery, String deleteQuery) {
         this.connector = connector;
         this.saveQuery = saveQuery;
         this.findByIdQuery = findByIdQuery;

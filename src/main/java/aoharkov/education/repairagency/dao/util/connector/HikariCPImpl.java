@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.dao.util;
+package aoharkov.education.repairagency.dao.util.connector;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class HikariCPImpl {
+public class HikariCPImpl implements Connector {
     private static final Logger LOGGER = LogManager.getLogger(HikariCPImpl.class);
 
     private static HikariConfig config = new HikariConfig();
@@ -27,7 +27,8 @@ public class HikariCPImpl {
         ds = new HikariDataSource(config);
     }
 
-    public Connection getConnection(){
+    @Override
+    public Connection getConnection() {
         try {
             return ds.getConnection();
         } catch (SQLException e) {

@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.UserDao;
-import aoharkov.education.repairagency.dao.util.HikariCPImpl;
+import aoharkov.education.repairagency.dao.util.connector.Connector;
 import aoharkov.education.repairagency.entity.Role;
 import aoharkov.education.repairagency.entity.User;
 
@@ -21,7 +21,7 @@ public class UserDaoImpl extends AbstractCrudPageableDaoImpl<User> implements Us
             "UPDATE users SET name = ?, surname = ?, email = ?, password = ?, role = ? WHERE id = ?";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM users WHERE id = ?";
 
-    public UserDaoImpl(HikariCPImpl connector) {
+    public UserDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
     }
 

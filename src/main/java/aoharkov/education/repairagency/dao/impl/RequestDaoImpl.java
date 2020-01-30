@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.RequestDao;
-import aoharkov.education.repairagency.dao.util.HikariCPImpl;
+import aoharkov.education.repairagency.dao.util.connector.Connector;
 import aoharkov.education.repairagency.entity.Request;
 import aoharkov.education.repairagency.entity.User;
 
@@ -19,7 +19,7 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
             "UPDATE requests SET client_id = ?, description = ?, viewed = ?, accepted = ?, WHERE id = ?";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM requests WHERE id = ?";
 
-    public RequestDaoImpl(HikariCPImpl connector) {
+    public RequestDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
     }
 
