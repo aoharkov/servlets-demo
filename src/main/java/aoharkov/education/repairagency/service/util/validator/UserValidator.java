@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.service.validator;
+package aoharkov.education.repairagency.service.util.validator;
 
 import aoharkov.education.repairagency.entity.User;
 
