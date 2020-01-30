@@ -12,25 +12,24 @@ import java.util.ResourceBundle;
 
 public class HikariCPImpl implements Connector {
     private static final Logger LOGGER = LogManager.getLogger(HikariCPImpl.class);
+    private HikariDataSource dataSource;
 
-    private static HikariConfig config = new HikariConfig();
-    private static HikariDataSource ds;
-    private static ResourceBundle resource = PropertyResourceBundle.getBundle("database");
-
-    static {
+    public HikariCPImpl(String configFileName) {
+        ResourceBundle resource = PropertyResourceBundle.getBundle(configFileName);
+        HikariConfig config = new HikariConfig();
         config.setJdbcUrl(resource.getString("db.url"));
         config.setUsername(resource.getString("db.user"));
         config.setPassword(resource.getString("db.password"));
         config.addDataSourceProperty("cachePrepStmts", resource.getString("db.cachePrepStmts"));
         config.addDataSourceProperty("prepStmtCacheSize", resource.getString("db.prepStmtCacheSize"));
         config.addDataSourceProperty("prepStmtCacheSqlLimit", resource.getString("db.prepStmtCacheSqlLimit"));
-        ds = new HikariDataSource(config);
+        dataSource = new HikariDataSource(config);
     }
 
     @Override
     public Connection getConnection() {
         try {
-            return ds.getConnection();
+            return dataSource.getConnection();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
