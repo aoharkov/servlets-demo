@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Feedback extends RequestExtension {
     private final Integer id;
-    private String text;
-    private Integer score;
+    private final String text;
+    private final Integer score;
 
     private Feedback(FeedbackBuilder builder) {
         super(builder);
@@ -28,14 +28,6 @@ public class Feedback extends RequestExtension {
 
     public Integer getScore() {
         return score;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
     }
 
     @Override

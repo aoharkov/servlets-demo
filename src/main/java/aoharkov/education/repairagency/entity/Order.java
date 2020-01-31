@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Order extends RequestExtension {
     private final Integer id;
     private final User manager;
-    private Integer price;
+    private final Integer price;
     private final User master;
     private RepairStage repairStage;
 
@@ -40,10 +40,6 @@ public class Order extends RequestExtension {
 
     public RepairStage getRepairStage() {
         return repairStage;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
     }
 
     public void setRepairStage(RepairStage repairStage) {

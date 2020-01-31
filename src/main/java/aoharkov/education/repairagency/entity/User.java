@@ -5,7 +5,7 @@ import java.util.Objects;
 public class User {
     private final Integer id;
     private final String name;
-    private String surname;
+    private final String surname;
     private final String email;
     private final String password;
     private final Role role;
@@ -45,10 +45,6 @@ public class User {
 
     public Role getRole() {
         return role;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     @Override
