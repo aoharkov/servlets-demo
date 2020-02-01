@@ -2,28 +2,33 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Order extends RequestExtension {
+public class Order{
     private final Integer id;
+    private final Request request;
     private final User manager;
-    private Integer price;
+    private final Integer price;
     private final User master;
-    private RepairStage repairStage;
+    private final RepairStage repairStage;
 
-    private Order(OrderBuilder builder) {
-        super(builder);
+    private Order(Builder builder) {
         this.id = builder.id;
+        this.request = builder.request;
         this.manager = builder.manager;
         this.price = builder.price;
         this.master = builder.master;
         this.repairStage = builder.repairStage;
     }
 
-    public static OrderBuilder builder() {
-        return new OrderBuilder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public Request getRequest() {
+        return request;
     }
 
     public User getManager() {
@@ -42,14 +47,6 @@ public class Order extends RequestExtension {
         return repairStage;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public void setRepairStage(RepairStage repairStage) {
-        this.repairStage = repairStage;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -60,71 +57,74 @@ public class Order extends RequestExtension {
         }
         Order order = (Order) o;
         return id.equals(order.id) &&
+                request.equals(order.request) &&
                 manager.equals(order.manager) &&
                 price.equals(order.price) &&
                 master.equals(order.master) &&
-                repairStage == order.repairStage;
+                repairStage.equals(order.repairStage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, manager, price, master, repairStage);
+        return Objects.hash(id, request, manager, price, master, repairStage);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", request_id=" + super.getRequest().getId() +
+                ", request=" + request +
                 ", manager=" + manager +
                 ", price=" + price +
                 ", master=" + master +
-                ", repairStages=" + repairStage +
+                ", repairStage=" + repairStage +
                 '}';
     }
 
-    public static final class OrderBuilder extends RequestExtensionBuilder<OrderBuilder> {
+
+    public static final class Builder {
         private Integer id;
+        private Request request;
         private User manager;
         private Integer price;
         private User master;
         private RepairStage repairStage;
 
-        private OrderBuilder() {
+        private Builder() {
         }
 
-        public Order build() {
-            return new Order(this);
-        }
-
-        public OrderBuilder withId(Integer id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public OrderBuilder withManager(User manager) {
+        public Builder withRequest(Request request) {
+            this.request = request;
+            return this;
+        }
+
+        public Builder withManager(User manager) {
             this.manager = manager;
             return this;
         }
 
-        public OrderBuilder withPrice(Integer price) {
+        public Builder withPrice(Integer price) {
             this.price = price;
             return this;
         }
 
-        public OrderBuilder withMaster(User master) {
+        public Builder withMaster(User master) {
             this.master = master;
             return this;
         }
 
-        public OrderBuilder withRepairStatus(RepairStage repairStage) {
+        public Builder withRepairStage(RepairStage repairStage) {
             this.repairStage = repairStage;
             return this;
         }
 
-        @Override
-        protected OrderBuilder self() {
-            return this;
+        public Order build() {
+            return new Order(this);
         }
     }
 }

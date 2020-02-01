@@ -6,10 +6,10 @@ public class Request {
     private final Integer id;
     private final User client;
     private final String description;
-    private Boolean viewed;
-    private Boolean accepted;
+    private final Boolean viewed;
+    private final Boolean accepted;
 
-    private Request(RequestBuilder builder) {
+    private Request(Builder builder) {
         this.id = builder.id;
         this.client = builder.client;
         this.description = builder.description;
@@ -17,8 +17,8 @@ public class Request {
         this.accepted = builder.accepted;
     }
 
-    public static RequestBuilder builder() {
-        return new RequestBuilder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
@@ -39,14 +39,6 @@ public class Request {
 
     public Boolean getAccepted() {
         return accepted;
-    }
-
-    public void setViewed(Boolean viewed) {
-        this.viewed = viewed;
-    }
-
-    public void setAccepted(Boolean accepted) {
-        this.accepted = accepted;
     }
 
     @Override
@@ -77,43 +69,43 @@ public class Request {
                 '}';
     }
 
-    public static final class RequestBuilder {
+    public static final class Builder {
         private Integer id;
         private User client;
         private String description;
         private Boolean viewed;
         private Boolean accepted;
 
-        private RequestBuilder() {
+        private Builder() {
         }
 
-        public Request build() {
-            return new Request(this);
-        }
-
-        public RequestBuilder withId(Integer id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public RequestBuilder withClient(User client) {
+        public Builder withClient(User client) {
             this.client = client;
             return this;
         }
 
-        public RequestBuilder withDescription(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public RequestBuilder withViewed(Boolean viewed) {
+        public Builder withViewed(Boolean viewed) {
             this.viewed = viewed;
             return this;
         }
 
-        public RequestBuilder withAccepted(Boolean accepted) {
+        public Builder withAccepted(Boolean accepted) {
             this.accepted = accepted;
             return this;
+        }
+
+        public Request build() {
+            return new Request(this);
         }
     }
 }

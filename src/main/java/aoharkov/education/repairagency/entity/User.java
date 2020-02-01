@@ -5,12 +5,12 @@ import java.util.Objects;
 public class User {
     private final Integer id;
     private final String name;
-    private String surname;
+    private final String surname;
     private final String email;
     private final String password;
     private final Role role;
 
-    private User(UserBuilder builder) {
+    private User(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.surname = builder.surname;
@@ -19,8 +19,8 @@ public class User {
         this.role = builder.role;
     }
 
-    public static UserBuilder builder() {
-        return new UserBuilder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
@@ -45,10 +45,6 @@ public class User {
 
     public Role getRole() {
         return role;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     @Override
@@ -80,7 +76,7 @@ public class User {
                 '}';
     }
 
-    public static final class UserBuilder {
+    public static final class Builder {
         private Integer id;
         private String name;
         private String surname;
@@ -88,41 +84,41 @@ public class User {
         private String password;
         private Role role;
 
-        private UserBuilder() {
+        private Builder() {
         }
 
-        public User build() {
-            return new User(this);
-        }
-
-        public UserBuilder withId(Integer id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public UserBuilder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public UserBuilder withSurname(String surname) {
+        public Builder withSurname(String surname) {
             this.surname = surname;
             return this;
         }
 
-        public UserBuilder withEmail(String email) {
+        public Builder withEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public UserBuilder withPassword(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public UserBuilder withRole(Role role) {
+        public Builder withRole(Role role) {
             this.role = role;
             return this;
+        }
+
+        public User build() {
+            return new User(this);
         }
     }
 }
