@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.service;
 
-public interface ClientService extends UserService {
+public interface ClientService extends RegisteredUserService {
 
     void makeRequest();
 

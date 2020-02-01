@@ -2,18 +2,18 @@ package aoharkov.education.repairagency.service.impl;
 
 import aoharkov.education.repairagency.dao.UserDao;
 import aoharkov.education.repairagency.entity.User;
-import aoharkov.education.repairagency.service.UserService;
+import aoharkov.education.repairagency.service.UnregisteredUserService;
 import aoharkov.education.repairagency.service.util.encoder.Encoder;
 import aoharkov.education.repairagency.service.util.validator.Validator;
 
-public abstract class UserServiceImpl implements UserService {
-    public static final String USER_EMAIL_COLLISION = "user is already present with such email";
+public abstract class UnregisteredUserServiceImpl extends AbstractUserServiceImpl implements UnregisteredUserService {
+    private static final String USER_EMAIL_COLLISION = "user is already present with such email";
 
     private final UserDao userDao;
     private final Encoder encoder;
     private final Validator<User> userValidator;
 
-    public UserServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator) {
+    public UnregisteredUserServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator) {
         this.userDao = userDao;
         this.encoder = encoder;
         this.userValidator = userValidator;

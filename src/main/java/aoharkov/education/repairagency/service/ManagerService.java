@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.service;
 
-public interface ManagerService extends UserService {
+public interface ManagerService extends RegisteredUserService {
 
     void transformRequestIntoOrder(Integer requestId);
 
