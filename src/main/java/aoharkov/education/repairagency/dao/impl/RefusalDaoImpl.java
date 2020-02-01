@@ -18,10 +18,9 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM refusals";
     private static final String UPDATE_QUERY =
             "UPDATE refusals SET request_id = ?, explanation = ?, manager_id = ?, WHERE id = ?";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM refusals WHERE id = ?";
 
     public RefusalDaoImpl(Connector connector) {
-        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
+        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
     }
 
     @Override
@@ -42,7 +41,6 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
                 .build();
     }
 
-    @Override
     public Request getRequestById(Integer id) {
         //todo
         return null;
@@ -59,10 +57,5 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
         preparedStatement.setString(2, entity.getExplanation());
         preparedStatement.setInt(3, entity.getManager().getId());
         preparedStatement.setInt(4, entity.getId());
-    }
-
-    @Override
-    protected void fillPreparedStatementForDeleteByIdQuery(PreparedStatement preparedStatement, Refusal entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
     }
 }

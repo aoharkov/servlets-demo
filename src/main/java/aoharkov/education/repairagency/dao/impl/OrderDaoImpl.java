@@ -19,10 +19,9 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM orders";
     private static final String UPDATE_QUERY =
             "UPDATE orders SET request_id = ?, manager_id = ?, price = ?, master_id = ?, repair_stage_id = ?, WHERE id = ?";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM orders WHERE id = ?";
 
     public OrderDaoImpl(Connector connector) {
-        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
+        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
     }
 
     @Override
@@ -43,11 +42,10 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
                 .withManager(getUserById(resultSet.getInt("manager_id")))
                 .withPrice(resultSet.getInt("price"))
                 .withMaster(getUserById(resultSet.getInt("master_id")))
-                .withRepairStatus(getRepairStageById(resultSet.getInt("repair_stage_id")))
+                .withRepairStage(getRepairStageById(resultSet.getInt("repair_stage_id")))
                 .build();
     }
 
-    @Override
     public Request getRequestById(Integer id) {
         //todo
         return null;
@@ -63,7 +61,6 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
         return null;
     }
 
-
     @Override
     protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequest().getId());
@@ -72,10 +69,5 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
         preparedStatement.setInt(4, entity.getMaster().getId());
         preparedStatement.setInt(5, entity.getRepairStage().getId());
         preparedStatement.setInt(6, entity.getId());
-    }
-
-    @Override
-    protected void fillPreparedStatementForDeleteByIdQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
     }
 }

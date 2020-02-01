@@ -16,6 +16,4 @@ public interface CrudPageableDao<E> {
 
     void update(E entity);
 
-    void deleteById(Integer id);
-
 }

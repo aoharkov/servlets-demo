@@ -10,17 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> implements FeedbackDao {
-    private static final String SAVE_QUERY =
-            "INSERT INTO feedback (id, request_id, text, score) values(?, ?, ?, ?)";
+    private static final String SAVE_QUERY = "INSERT INTO feedback (id, request_id, text, score) values(?, ?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM feedback WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM feedback LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM feedback";
-    private static final String UPDATE_QUERY =
-            "UPDATE feedback SET request_id = ?, text = ?, score = ?, WHERE id = ?";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM feedback WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE feedback SET request_id = ?, text = ?, score = ?, WHERE id = ?";
 
     public FeedbackDaoImpl(Connector connector) {
-        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
+        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
     }
 
     @Override
@@ -41,7 +38,6 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
                 .build();
     }
 
-    @Override
     public Request getRequestById(Integer id) {
         //todo
         return null;
@@ -53,10 +49,5 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
         preparedStatement.setString(2, entity.getText());
         preparedStatement.setInt(3, entity.getScore());
         preparedStatement.setInt(4, entity.getId());
-    }
-
-    @Override
-    protected void fillPreparedStatementForDeleteByIdQuery(PreparedStatement preparedStatement, Feedback entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
     }
 }

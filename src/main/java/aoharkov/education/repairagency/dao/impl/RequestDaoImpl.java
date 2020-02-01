@@ -17,10 +17,9 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM requests";
     private static final String UPDATE_QUERY =
             "UPDATE requests SET client_id = ?, description = ?, viewed = ?, accepted = ?, WHERE id = ?";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM requests WHERE id = ?";
 
     public RequestDaoImpl(Connector connector) {
-        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
+        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
     }
 
     @Override
@@ -55,10 +54,5 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
         preparedStatement.setBoolean(3, entity.getViewed());
         preparedStatement.setBoolean(4, entity.getAccepted());
         preparedStatement.setInt(5, entity.getId());
-    }
-
-    @Override
-    protected void fillPreparedStatementForDeleteByIdQuery(PreparedStatement preparedStatement, Request entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
     }
 }

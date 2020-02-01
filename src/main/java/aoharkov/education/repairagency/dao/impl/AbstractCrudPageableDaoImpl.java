@@ -42,16 +42,14 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     private final String findAllAtPageQuery;
     private final String countQuery;
     private final String updateQuery;
-    private final String deleteQuery;
 
-    public AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery, String deleteQuery) {
+    public AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery) {
         this.connector = connector;
         this.saveQuery = saveQuery;
         this.findByIdQuery = findByIdQuery;
         this.findAllAtPageQuery = findAllAtPageQuery;
         this.countQuery = countQuery;
         this.updateQuery = updateQuery;
-        this.deleteQuery = deleteQuery;
     }
 
     @Override
@@ -162,23 +160,4 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     }
 
     protected abstract void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, E entity) throws SQLException;
-
-    @Override
-    public void deleteById(Integer id) {
-        Optional<E> entity = findById(id);
-        if (entity.isPresent()) {
-            try (Connection connection = connector.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
-
-                fillPreparedStatementForDeleteByIdQuery(preparedStatement, entity.get());
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage());
-                throw new DataBaseSqlRuntimeException(e.getMessage(), e);
-            }
-        }
-    }
-
-    protected abstract void fillPreparedStatementForDeleteByIdQuery(PreparedStatement preparedStatement, E entity) throws SQLException;
 }
