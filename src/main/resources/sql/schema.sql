@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS refusals;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS repair_stages;
+DROP TABLE IF EXISTS feedback;
+
 CREATE TABLE users
 (
     id       int                                NOT NULL AUTO_INCREMENT,
