@@ -3,9 +3,6 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.OrderDao;
 import aoharkov.education.repairagency.dao.util.connector.Connector;
 import aoharkov.education.repairagency.entity.Order;
-import aoharkov.education.repairagency.entity.RepairStage;
-import aoharkov.education.repairagency.entity.Request;
-import aoharkov.education.repairagency.entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,47 +24,32 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
         preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setInt(2, entity.getRequest().getId());
-        preparedStatement.setInt(3, entity.getManager().getId());
+        preparedStatement.setInt(2, entity.getRequestId());
+        preparedStatement.setInt(3, entity.getManagerId());
         preparedStatement.setInt(4, entity.getPrice());
-        preparedStatement.setInt(5, entity.getMaster().getId());
-        preparedStatement.setInt(6, entity.getRepairStage().getId());
+        preparedStatement.setInt(5, entity.getMasterId());
+        preparedStatement.setInt(6, entity.getRepairStageId());
     }
 
     @Override
     protected Order mapResultSetToEntity(ResultSet resultSet) throws SQLException {
         return Order.builder()
                 .withId(resultSet.getInt("id"))
-                .withRequest(getRequestById(resultSet.getInt("request_id")))
-                .withManager(getUserById(resultSet.getInt("manager_id")))
+                .withRequestId(resultSet.getInt("request_id"))
+                .withManagerId(resultSet.getInt("manager_id"))
                 .withPrice(resultSet.getInt("price"))
-                .withMaster(getUserById(resultSet.getInt("master_id")))
-                .withRepairStage(getRepairStageById(resultSet.getInt("repair_stage_id")))
+                .withMasterId(resultSet.getInt("master_id"))
+                .withRepairStageId(resultSet.getInt("repair_stage_id"))
                 .build();
-    }
-
-    public Request getRequestById(Integer id) {
-        //todo
-        return null;
-    }
-
-    private User getUserById(Integer id) {
-        //todo
-        return null;
-    }
-
-    private RepairStage getRepairStageById(Integer id) {
-        //todo
-        return null;
     }
 
     @Override
     protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getRequest().getId());
-        preparedStatement.setInt(2, entity.getManager().getId());
+        preparedStatement.setInt(1, entity.getRequestId());
+        preparedStatement.setInt(2, entity.getManagerId());
         preparedStatement.setInt(3, entity.getPrice());
-        preparedStatement.setInt(4, entity.getMaster().getId());
-        preparedStatement.setInt(5, entity.getRepairStage().getId());
+        preparedStatement.setInt(4, entity.getMasterId());
+        preparedStatement.setInt(5, entity.getRepairStageId());
         preparedStatement.setInt(6, entity.getId());
     }
 }

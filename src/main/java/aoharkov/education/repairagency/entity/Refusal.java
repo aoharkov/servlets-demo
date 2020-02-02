@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class Refusal{
     private final Integer id;
-    private final Request request;
+    private final Integer requestId;
     private final String explanation;
-    private final User manager;
+    private final Integer managerId;
 
     private Refusal(Builder builder) {
         this.id = builder.id;
-        this.request = builder.request;
+        this.requestId = builder.requestId;
         this.explanation = builder.explanation;
-        this.manager = builder.manager;
+        this.managerId = builder.managerId;
     }
 
     public static Builder builder() {
@@ -23,16 +23,16 @@ public class Refusal{
         return id;
     }
 
-    public Request getRequest() {
-        return request;
+    public Integer getRequestId() {
+        return requestId;
     }
 
     public String getExplanation() {
         return explanation;
     }
 
-    public User getManager() {
-        return manager;
+    public Integer getManagerId() {
+        return managerId;
     }
 
     @Override
@@ -45,31 +45,31 @@ public class Refusal{
         }
         Refusal refusal = (Refusal) o;
         return id.equals(refusal.id) &&
-                request.equals(refusal.request) &&
+                requestId.equals(refusal.requestId) &&
                 explanation.equals(refusal.explanation) &&
-                manager.equals(refusal.manager);
+                managerId.equals(refusal.managerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, request, explanation, manager);
+        return Objects.hash(id, requestId, explanation, managerId);
     }
 
     @Override
     public String toString() {
         return "Refusal{" +
                 "id=" + id +
-                ", request=" + request +
+                ", requestId=" + requestId +
                 ", explanation='" + explanation + '\'' +
-                ", manager=" + manager +
+                ", managerId=" + managerId +
                 '}';
     }
 
     public static final class Builder {
         private Integer id;
-        private Request request;
+        private Integer requestId;
         private String explanation;
-        private User manager;
+        private Integer managerId;
 
         private Builder() {
         }
@@ -79,8 +79,8 @@ public class Refusal{
             return this;
         }
 
-        public Builder withRequest(Request request) {
-            this.request = request;
+        public Builder withRequestId(Integer requestId) {
+            this.requestId = requestId;
             return this;
         }
 
@@ -89,8 +89,8 @@ public class Refusal{
             return this;
         }
 
-        public Builder withManager(User manager) {
-            this.manager = manager;
+        public Builder withManagerId(Integer managerId) {
+            this.managerId = managerId;
             return this;
         }
 

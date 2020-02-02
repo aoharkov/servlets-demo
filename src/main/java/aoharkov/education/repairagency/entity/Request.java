@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class Request {
     private final Integer id;
-    private final User client;
+    private final Integer clientId;
     private final String description;
     private final Boolean viewed;
     private final Boolean accepted;
 
     private Request(Builder builder) {
         this.id = builder.id;
-        this.client = builder.client;
+        this.clientId = builder.clientId;
         this.description = builder.description;
         this.viewed = builder.viewed;
         this.accepted = builder.accepted;
@@ -25,8 +25,8 @@ public class Request {
         return id;
     }
 
-    public User getClient() {
-        return client;
+    public Integer getClientId() {
+        return clientId;
     }
 
     public String getDescription() {
@@ -43,11 +43,15 @@ public class Request {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Request)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Request)) {
+            return false;
+        }
         Request request = (Request) o;
         return id.equals(request.id) &&
-                client.equals(request.client) &&
+                clientId.equals(request.clientId) &&
                 description.equals(request.description) &&
                 Objects.equals(viewed, request.viewed) &&
                 Objects.equals(accepted, request.accepted);
@@ -55,14 +59,14 @@ public class Request {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, description, viewed, accepted);
+        return Objects.hash(id, clientId, description, viewed, accepted);
     }
 
     @Override
     public String toString() {
         return "Request{" +
                 "id=" + id +
-                ", client=" + client +
+                ", clientId=" + clientId +
                 ", description='" + description + '\'' +
                 ", viewed=" + viewed +
                 ", accepted=" + accepted +
@@ -71,7 +75,7 @@ public class Request {
 
     public static final class Builder {
         private Integer id;
-        private User client;
+        private Integer clientId;
         private String description;
         private Boolean viewed;
         private Boolean accepted;
@@ -84,8 +88,8 @@ public class Request {
             return this;
         }
 
-        public Builder withClient(User client) {
-            this.client = client;
+        public Builder withClientId(Integer clientId) {
+            this.clientId = clientId;
             return this;
         }
 

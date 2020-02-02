@@ -3,7 +3,6 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.FeedbackDao;
 import aoharkov.education.repairagency.dao.util.connector.Connector;
 import aoharkov.education.repairagency.entity.Feedback;
-import aoharkov.education.repairagency.entity.Request;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +22,7 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Feedback entity) throws SQLException {
         preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setInt(2, entity.getRequest().getId());
+        preparedStatement.setInt(2, entity.getRequestId());
         preparedStatement.setString(3, entity.getText());
         preparedStatement.setInt(4, entity.getScore());
     }
@@ -32,20 +31,15 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
     protected Feedback mapResultSetToEntity(ResultSet resultSet) throws SQLException {
         return Feedback.builder()
                 .withId(resultSet.getInt("id"))
-                .withRequest(getRequestById(resultSet.getInt("request_id")))
+                .withRequestId(resultSet.getInt("request_id"))
                 .withText(resultSet.getString("text"))
                 .withScore(resultSet.getInt("score"))
                 .build();
     }
 
-    public Request getRequestById(Integer id) {
-        //todo
-        return null;
-    }
-
     @Override
     protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Feedback entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getRequest().getId());
+        preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setString(2, entity.getText());
         preparedStatement.setInt(3, entity.getScore());
         preparedStatement.setInt(4, entity.getId());

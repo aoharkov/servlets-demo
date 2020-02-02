@@ -3,7 +3,6 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.util.connector.Connector;
 import aoharkov.education.repairagency.entity.Request;
-import aoharkov.education.repairagency.entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +24,7 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Request entity) throws SQLException {
         preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setInt(2, entity.getClient().getId());
+        preparedStatement.setInt(2, entity.getClientId());
         preparedStatement.setString(3, entity.getDescription());
         preparedStatement.setBoolean(4, entity.getViewed());
         preparedStatement.setBoolean(5, entity.getAccepted());
@@ -35,21 +34,16 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
     protected Request mapResultSetToEntity(ResultSet resultSet) throws SQLException {
         return Request.builder()
                 .withId(resultSet.getInt("id"))
-                .withClient(getUserById(resultSet.getInt("client_id")))
+                .withClientId(resultSet.getInt("client_id"))
                 .withDescription(resultSet.getString("description"))
                 .withViewed(resultSet.getBoolean("viewed"))
                 .withAccepted(resultSet.getBoolean("accepted"))
                 .build();
     }
 
-    private User getUserById(Integer id) {
-        //todo
-        return null;
-    }
-
     @Override
     protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Request entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getClient().getId());
+        preparedStatement.setInt(1, entity.getClientId());
         preparedStatement.setString(2, entity.getDescription());
         preparedStatement.setBoolean(3, entity.getViewed());
         preparedStatement.setBoolean(4, entity.getAccepted());

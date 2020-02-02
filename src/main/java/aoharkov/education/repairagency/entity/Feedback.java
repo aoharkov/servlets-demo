@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Feedback{
     private final Integer id;
-    private final Request request;
+    private final Integer requestId;
     private final String text;
     private final Integer score;
 
     private Feedback(Builder builder) {
         this.id = builder.id;
-        this.request = builder.request;
+        this.requestId = builder.requestId;
         this.text = builder.text;
         this.score = builder.score;
     }
@@ -23,8 +23,8 @@ public class Feedback{
         return id;
     }
 
-    public Request getRequest() {
-        return request;
+    public Integer getRequestId() {
+        return requestId;
     }
 
     public String getText() {
@@ -45,21 +45,21 @@ public class Feedback{
         }
         Feedback feedback = (Feedback) o;
         return id.equals(feedback.id) &&
-                request.equals(feedback.request) &&
+                requestId.equals(feedback.requestId) &&
                 Objects.equals(text, feedback.text) &&
                 Objects.equals(score, feedback.score);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, request, text, score);
+        return Objects.hash(id, requestId, text, score);
     }
 
     @Override
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
-                ", request=" + request +
+                ", requestId=" + requestId +
                 ", text='" + text + '\'' +
                 ", score=" + score +
                 '}';
@@ -67,7 +67,7 @@ public class Feedback{
 
     public static final class Builder {
         private Integer id;
-        private Request request;
+        private Integer requestId;
         private String text;
         private Integer score;
 
@@ -79,8 +79,8 @@ public class Feedback{
             return this;
         }
 
-        public Builder withRequest(Request request) {
-            this.request = request;
+        public Builder withRequestId(Integer requestId) {
+            this.requestId = requestId;
             return this;
         }
 
