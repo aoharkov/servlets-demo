@@ -2,7 +2,7 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Order{
+public class Order {
     private final Integer id;
     private final Integer requestId;
     private final Integer managerId;

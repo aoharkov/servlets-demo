@@ -1,24 +1,66 @@
 package aoharkov.education.repairagency.service.impl;
 
+import aoharkov.education.repairagency.dao.OrderDao;
+import aoharkov.education.repairagency.dao.RefusalDao;
+import aoharkov.education.repairagency.dao.RepairStageDao;
+import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
+import aoharkov.education.repairagency.dao.domain.Pageable;
+import aoharkov.education.repairagency.entity.Feedback;
+import aoharkov.education.repairagency.entity.Order;
+import aoharkov.education.repairagency.entity.Refusal;
+import aoharkov.education.repairagency.entity.Request;
+import aoharkov.education.repairagency.entity.Role;
 import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ManagerService;
-import aoharkov.education.repairagency.service.util.encoder.Encoder;
-import aoharkov.education.repairagency.service.util.validator.Validator;
 
 public class ManagerServiceImpl extends RegisteredUserServiceImpl implements ManagerService {
+    protected final RefusalDao refusalDao;
 
-    public ManagerServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator) {
-        super(userDao, encoder, userValidator);
+    public ManagerServiceImpl(UserDao userDao, RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao, RefusalDao refusalDao) {
+        super(userDao, requestDao, orderDao, repairStageDao);
+        this.refusalDao = refusalDao;
     }
 
     @Override
-    public void transformRequestIntoOrder(Integer requestId) {
-
+    public Pageable<Request> listAllRequests(int page, int itemsPerPage) {
+        //todo
+        return null;
     }
 
     @Override
-    public void transformRequestIntoRefusal(Integer requestId) {
+    public Pageable<Request> listUncheckedRequests(int page, int itemsPerPage) {
+        //todo
+        return null;
+    }
 
+    @Override
+    public Order acceptRequest(Integer requestId) {
+        //todo
+        return null;
+    }
+
+    @Override
+    public Refusal declineRequest(Integer requestId) {
+        //todo
+        return null;
+    }
+
+    @Override
+    public Feedback reviewFeedback(Integer requestId) {
+        //todo
+        return null;
+    }
+
+    @Override
+    public Pageable<User> listAllUsers(int page, int itemsPerPage) {
+        //todo
+        return null;
+    }
+
+    @Override
+    public boolean promoteUser(Integer id, Role role) {
+        //todo
+        return false;
     }
 }

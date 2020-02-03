@@ -9,22 +9,21 @@ import aoharkov.education.repairagency.service.util.validator.Validator;
 public abstract class UnregisteredUserServiceImpl extends AbstractUserServiceImpl implements UnregisteredUserService {
     private static final String USER_EMAIL_COLLISION = "user is already present with such email";
 
-    private final UserDao userDao;
     private final Encoder encoder;
     private final Validator<User> userValidator;
 
     public UnregisteredUserServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator) {
-        this.userDao = userDao;
+        super(userDao);
         this.encoder = encoder;
         this.userValidator = userValidator;
     }
 
     @Override
     public boolean login(String email, String password) {
-        //login validate with email and password
+        //todo validate login with email and password
         String encryptedPassword = encoder.encode(password);
         return userDao.findByEmail(email)
-                .map(user -> user.getPassword())
+                .map(User::getPassword)
                 .filter(userPass -> userPass.equals(encryptedPassword))
                 .isPresent();
     }

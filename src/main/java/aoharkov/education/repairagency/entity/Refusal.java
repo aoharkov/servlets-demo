@@ -2,7 +2,7 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Refusal{
+public class Refusal {
     private final Integer id;
     private final Integer requestId;
     private final String explanation;

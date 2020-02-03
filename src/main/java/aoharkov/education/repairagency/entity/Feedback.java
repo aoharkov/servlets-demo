@@ -2,7 +2,7 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Feedback{
+public class Feedback {
     private final Integer id;
     private final Integer requestId;
     private final String text;
