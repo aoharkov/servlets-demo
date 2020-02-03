@@ -4,29 +4,29 @@ import java.util.Objects;
 
 public class Request {
     private final Integer id;
-    private final User client;
+    private final Integer clientId;
     private final String description;
-    private Boolean viewed;
-    private Boolean accepted;
+    private final Boolean viewed;
+    private final Boolean accepted;
 
-    private Request(RequestBuilder builder) {
+    private Request(Builder builder) {
         this.id = builder.id;
-        this.client = builder.client;
+        this.clientId = builder.clientId;
         this.description = builder.description;
         this.viewed = builder.viewed;
         this.accepted = builder.accepted;
     }
 
-    public static RequestBuilder builder() {
-        return new RequestBuilder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
         return id;
     }
 
-    public User getClient() {
-        return client;
+    public Integer getClientId() {
+        return clientId;
     }
 
     public String getDescription() {
@@ -41,21 +41,17 @@ public class Request {
         return accepted;
     }
 
-    public void setViewed(Boolean viewed) {
-        this.viewed = viewed;
-    }
-
-    public void setAccepted(Boolean accepted) {
-        this.accepted = accepted;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Request)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Request)) {
+            return false;
+        }
         Request request = (Request) o;
         return id.equals(request.id) &&
-                client.equals(request.client) &&
+                clientId.equals(request.clientId) &&
                 description.equals(request.description) &&
                 Objects.equals(viewed, request.viewed) &&
                 Objects.equals(accepted, request.accepted);
@@ -63,57 +59,57 @@ public class Request {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, client, description, viewed, accepted);
+        return Objects.hash(id, clientId, description, viewed, accepted);
     }
 
     @Override
     public String toString() {
         return "Request{" +
                 "id=" + id +
-                ", client=" + client +
+                ", clientId=" + clientId +
                 ", description='" + description + '\'' +
                 ", viewed=" + viewed +
                 ", accepted=" + accepted +
                 '}';
     }
 
-    public static final class RequestBuilder {
+    public static final class Builder {
         private Integer id;
-        private User client;
+        private Integer clientId;
         private String description;
         private Boolean viewed;
         private Boolean accepted;
 
-        private RequestBuilder() {
+        private Builder() {
         }
 
-        public Request build() {
-            return new Request(this);
-        }
-
-        public RequestBuilder withId(Integer id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public RequestBuilder withClient(User client) {
-            this.client = client;
+        public Builder withClientId(Integer clientId) {
+            this.clientId = clientId;
             return this;
         }
 
-        public RequestBuilder withDescription(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public RequestBuilder withViewed(Boolean viewed) {
+        public Builder withViewed(Boolean viewed) {
             this.viewed = viewed;
             return this;
         }
 
-        public RequestBuilder withAccepted(Boolean accepted) {
+        public Builder withAccepted(Boolean accepted) {
             this.accepted = accepted;
             return this;
+        }
+
+        public Request build() {
+            return new Request(this);
         }
     }
 }

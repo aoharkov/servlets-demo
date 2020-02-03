@@ -6,13 +6,13 @@ public class PageableImpl<T> implements Pageable {
     private final List<T> items;
     private final int pageNumber;
     private final int itemsNumberPerPage;
-    private final int maxPageNumber;
+    private final int lastPageNumber;
 
     private PageableImpl(Builder<T> builder) {
         this.items = builder.items;
         this.pageNumber = builder.pageNumber;
         this.itemsNumberPerPage = builder.itemsNumberPerPage;
-        this.maxPageNumber = builder.maxPageNumber;
+        this.lastPageNumber = builder.lastPageNumber;
     }
 
     public static <T> Builder builder() {
@@ -35,15 +35,15 @@ public class PageableImpl<T> implements Pageable {
     }
 
     @Override
-    public int getMaxPageNumber() {
-        return maxPageNumber;
+    public int getLastPageNumber() {
+        return lastPageNumber;
     }
 
     public static class Builder<T1> {
         private List<T1> items;
         private int pageNumber;
         private int itemsNumberPerPage;
-        private int maxPageNumber;
+        private int lastPageNumber;
 
         private Builder() {
         }
@@ -68,7 +68,7 @@ public class PageableImpl<T> implements Pageable {
         }
 
         public Builder<T1> withMaxPageNumber(int maxPageNumber) {
-            this.maxPageNumber = maxPageNumber;
+            this.lastPageNumber = maxPageNumber;
             return this;
         }
     }

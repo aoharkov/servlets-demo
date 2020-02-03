@@ -1,6 +1,8 @@
 package aoharkov.education.repairagency.service;
 
-public interface MasterService extends UserService {
+import aoharkov.education.repairagency.entity.RepairStage;
 
-    void processOrder(Integer orderId);
+public interface MasterService extends RegisteredUserService {
+
+    RepairStage updateRepairStage(Integer orderId);
 }

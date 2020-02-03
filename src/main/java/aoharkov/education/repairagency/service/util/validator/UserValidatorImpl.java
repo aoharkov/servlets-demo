@@ -5,7 +5,7 @@ import aoharkov.education.repairagency.entity.User;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserValidator implements Validator<User> {
+public class UserValidatorImpl implements Validator<User> {
     private static final String EMAIL_REGEX
             = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final String USER_IS_NOT_VALID = "User is not valid: ";

@@ -2,24 +2,29 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Feedback extends RequestExtension {
+public class Feedback {
     private final Integer id;
+    private final Integer requestId;
     private final String text;
     private final Integer score;
 
-    private Feedback(FeedbackBuilder builder) {
-        super(builder);
+    private Feedback(Builder builder) {
         this.id = builder.id;
+        this.requestId = builder.requestId;
         this.text = builder.text;
         this.score = builder.score;
     }
 
-    public static FeedbackBuilder builder() {
-        return new FeedbackBuilder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getRequestId() {
+        return requestId;
     }
 
     public String getText() {
@@ -40,55 +45,57 @@ public class Feedback extends RequestExtension {
         }
         Feedback feedback = (Feedback) o;
         return id.equals(feedback.id) &&
+                requestId.equals(feedback.requestId) &&
                 Objects.equals(text, feedback.text) &&
                 Objects.equals(score, feedback.score);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text, score);
+        return Objects.hash(id, requestId, text, score);
     }
 
     @Override
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
-                ", request_id=" + super.getRequest().getId() +
+                ", requestId=" + requestId +
                 ", text='" + text + '\'' +
                 ", score=" + score +
                 '}';
     }
 
-    public static final class FeedbackBuilder extends RequestExtensionBuilder<FeedbackBuilder> {
+    public static final class Builder {
         private Integer id;
+        private Integer requestId;
         private String text;
         private Integer score;
 
-        private FeedbackBuilder() {
+        private Builder() {
         }
 
-        public Feedback build() {
-            return new Feedback(this);
-        }
-
-        public FeedbackBuilder withId(Integer id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public FeedbackBuilder withText(String text) {
+        public Builder withRequestId(Integer requestId) {
+            this.requestId = requestId;
+            return this;
+        }
+
+        public Builder withText(String text) {
             this.text = text;
             return this;
         }
 
-        public FeedbackBuilder withScore(Integer score) {
+        public Builder withScore(Integer score) {
             this.score = score;
             return this;
         }
 
-        @Override
-        protected FeedbackBuilder self() {
-            return this;
+        public Feedback build() {
+            return new Feedback(this);
         }
     }
 }

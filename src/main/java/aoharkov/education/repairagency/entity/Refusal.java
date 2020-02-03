@@ -2,32 +2,37 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Refusal extends RequestExtension {
+public class Refusal {
     private final Integer id;
+    private final Integer requestId;
     private final String explanation;
-    private final User manager;
+    private final Integer managerId;
 
-    private Refusal(RefusalBuilder builder) {
-        super(builder);
+    private Refusal(Builder builder) {
         this.id = builder.id;
+        this.requestId = builder.requestId;
         this.explanation = builder.explanation;
-        this.manager = builder.manager;
+        this.managerId = builder.managerId;
     }
 
-    public static RefusalBuilder builder() {
-        return new RefusalBuilder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
         return id;
     }
 
+    public Integer getRequestId() {
+        return requestId;
+    }
+
     public String getExplanation() {
         return explanation;
     }
 
-    public User getManager() {
-        return manager;
+    public Integer getManagerId() {
+        return managerId;
     }
 
     @Override
@@ -40,55 +45,57 @@ public class Refusal extends RequestExtension {
         }
         Refusal refusal = (Refusal) o;
         return id.equals(refusal.id) &&
+                requestId.equals(refusal.requestId) &&
                 explanation.equals(refusal.explanation) &&
-                manager.equals(refusal.manager);
+                managerId.equals(refusal.managerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, explanation, manager);
+        return Objects.hash(id, requestId, explanation, managerId);
     }
 
     @Override
     public String toString() {
         return "Refusal{" +
                 "id=" + id +
-                ", request_id=" + super.getRequest().getId() +
+                ", requestId=" + requestId +
                 ", explanation='" + explanation + '\'' +
-                ", manager=" + manager +
+                ", managerId=" + managerId +
                 '}';
     }
 
-    public static final class RefusalBuilder extends RequestExtensionBuilder<RefusalBuilder> {
+    public static final class Builder {
         private Integer id;
+        private Integer requestId;
         private String explanation;
-        private User manager;
+        private Integer managerId;
 
-        private RefusalBuilder() {
+        private Builder() {
         }
 
-        public Refusal build() {
-            return new Refusal(this);
-        }
-
-        public RefusalBuilder withId(Integer id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
 
-        public RefusalBuilder withExplanation(String explanation) {
+        public Builder withRequestId(Integer requestId) {
+            this.requestId = requestId;
+            return this;
+        }
+
+        public Builder withExplanation(String explanation) {
             this.explanation = explanation;
             return this;
         }
 
-        public RefusalBuilder withManager(User manager) {
-            this.manager = manager;
+        public Builder withManagerId(Integer managerId) {
+            this.managerId = managerId;
             return this;
         }
 
-        @Override
-        protected RefusalBuilder self() {
-            return this;
+        public Refusal build() {
+            return new Refusal(this);
         }
     }
 }

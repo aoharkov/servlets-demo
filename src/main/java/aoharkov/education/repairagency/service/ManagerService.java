@@ -1,8 +1,20 @@
 package aoharkov.education.repairagency.service;
 
-public interface ManagerService extends UserService {
+import aoharkov.education.repairagency.dao.domain.Pageable;
+import aoharkov.education.repairagency.entity.Feedback;
+import aoharkov.education.repairagency.entity.Order;
+import aoharkov.education.repairagency.entity.Refusal;
+import aoharkov.education.repairagency.entity.Request;
 
-    void transformRequestIntoOrder(Integer requestId);
+public interface ManagerService extends AdminService {
 
-    void transformRequestIntoRefusal(Integer requestId);
+    Pageable<Request> listAllRequests(int page, int itemsPerPage);
+
+    Pageable<Request> listUncheckedRequests(int page, int itemsPerPage);
+
+    Order acceptRequest(Integer requestId);
+
+    Refusal declineRequest(Integer requestId);
+
+    Feedback reviewFeedback(Integer requestId);
 }

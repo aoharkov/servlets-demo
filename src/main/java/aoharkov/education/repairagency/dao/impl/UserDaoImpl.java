@@ -19,10 +19,9 @@ public class UserDaoImpl extends AbstractCrudPageableDaoImpl<User> implements Us
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM users";
     private static final String UPDATE_QUERY =
             "UPDATE users SET name = ?, surname = ?, email = ?, password = ?, role = ? WHERE id = ?";
-    private static final String DELETE_BY_ID_QUERY = "DELETE FROM users WHERE id = ?";
 
     public UserDaoImpl(Connector connector) {
-        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY, DELETE_BY_ID_QUERY);
+        super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
     }
 
     @Override
@@ -60,10 +59,5 @@ public class UserDaoImpl extends AbstractCrudPageableDaoImpl<User> implements Us
         preparedStatement.setString(4, entity.getPassword());
         preparedStatement.setString(5, entity.getRole().name());
         preparedStatement.setInt(6, entity.getId());
-    }
-
-    @Override
-    protected void fillPreparedStatementForDeleteByIdQuery(PreparedStatement preparedStatement, User entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
     }
 }

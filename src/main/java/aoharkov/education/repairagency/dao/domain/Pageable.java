@@ -10,5 +10,5 @@ public interface Pageable<T> {
 
     int getItemsNumberPerPage();
 
-    int getMaxPageNumber();
+    int getLastPageNumber();
 }
