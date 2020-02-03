@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.service;
 
-public interface AbstractUserService {
+public interface UserService {
 
     String setLang(String lang);
 }

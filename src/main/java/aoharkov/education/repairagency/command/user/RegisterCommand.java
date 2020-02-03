@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.command.unregistereduser;
+package aoharkov.education.repairagency.command.user;
 
 import aoharkov.education.repairagency.command.Command;
 import aoharkov.education.repairagency.service.UnregisteredUserService;

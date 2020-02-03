@@ -6,7 +6,7 @@ import aoharkov.education.repairagency.dao.RefusalDao;
 import aoharkov.education.repairagency.dao.RepairStageDao;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
-import aoharkov.education.repairagency.dao.domain.Pageable;
+import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.entity.Feedback;
 import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
@@ -31,7 +31,7 @@ public class ClientServiceImpl extends RegisteredUserServiceImpl implements Clie
     }
 
     @Override
-    public Pageable<Request> listOwnRequests(int page, int itemsPerPage) {
+    public Page<Request> listOwnRequests(int page, int itemsPerPage) {
         //todo
         return null;
     }

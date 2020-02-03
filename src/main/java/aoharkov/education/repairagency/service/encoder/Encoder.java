@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.service.util.encoder;
+package aoharkov.education.repairagency.service.encoder;
 
 public interface Encoder {
 

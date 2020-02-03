@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.dao.util.connector;
+package aoharkov.education.repairagency.dao.connector;
 
 import java.sql.Connection;
 

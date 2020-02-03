@@ -6,7 +6,7 @@ import aoharkov.education.repairagency.dao.RefusalDao;
 import aoharkov.education.repairagency.dao.RepairStageDao;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
-import aoharkov.education.repairagency.dao.domain.Pageable;
+import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.entity.Feedback;
 import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
@@ -27,13 +27,13 @@ public class ManagerServiceImpl extends RegisteredUserServiceImpl implements Man
     }
 
     @Override
-    public Pageable<Request> listAllRequests(int page, int itemsPerPage) {
+    public Page<Request> listAllRequests(int page, int itemsPerPage) {
         //todo
         return null;
     }
 
     @Override
-    public Pageable<Request> listUncheckedRequests(int page, int itemsPerPage) {
+    public Page<Request> listUncheckedRequests(int page, int itemsPerPage) {
         //todo
         return null;
     }
@@ -57,7 +57,7 @@ public class ManagerServiceImpl extends RegisteredUserServiceImpl implements Man
     }
 
     @Override
-    public Pageable<User> listAllUsers(int page, int itemsPerPage) {
+    public Page<User> listAllUsers(int page, int itemsPerPage) {
         //todo
         return null;
     }

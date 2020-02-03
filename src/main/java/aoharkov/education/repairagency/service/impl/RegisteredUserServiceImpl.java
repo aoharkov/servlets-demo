@@ -7,7 +7,7 @@ import aoharkov.education.repairagency.dao.UserDao;
 import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.RegisteredUserService;
 
-public abstract class RegisteredUserServiceImpl extends AbstractUserServiceImpl implements RegisteredUserService {
+public abstract class RegisteredUserServiceImpl extends UserServiceImpl implements RegisteredUserService {
     protected final RequestDao requestDao;
     protected final OrderDao orderDao;
     protected final RepairStageDao repairStageDao;

@@ -1,13 +1,13 @@
 package aoharkov.education.repairagency.service.impl;
 
 import aoharkov.education.repairagency.dao.UserDao;
-import aoharkov.education.repairagency.service.AbstractUserService;
+import aoharkov.education.repairagency.service.UserService;
 
-public class AbstractUserServiceImpl implements AbstractUserService {
+public class UserServiceImpl implements UserService {
     protected final UserDao userDao;
     protected String lang;
 
-    public AbstractUserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 

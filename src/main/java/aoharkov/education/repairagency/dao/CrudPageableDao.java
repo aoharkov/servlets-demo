@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.dao;
 
-import aoharkov.education.repairagency.dao.domain.Pageable;
+import aoharkov.education.repairagency.dao.domain.Page;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ public interface CrudPageableDao<E> {
 
     Optional<E> findById(Integer id);
 
-    Pageable<E> findAll(int page, int itemsPerPage);
+    Page<E> findAll(int page, int itemsPerPage);
 
     int count();
 

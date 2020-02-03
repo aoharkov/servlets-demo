@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.FeedbackDao;
-import aoharkov.education.repairagency.dao.util.connector.Connector;
+import aoharkov.education.repairagency.dao.connector.Connector;
 import aoharkov.education.repairagency.entity.Feedback;
 
 import java.sql.PreparedStatement;

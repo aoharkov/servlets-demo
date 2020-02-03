@@ -6,12 +6,11 @@ import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ManagerService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 
-public class ListAllRequestsCommand implements Command {
+public class ListAllUsersCommand implements Command {
     private final ManagerService userService;
 
-    public ListAllRequestsCommand(ManagerService userService) {
+    public ListAllUsersCommand(ManagerService userService) {
         this.userService = userService;
     }
 
@@ -23,6 +22,6 @@ public class ListAllRequestsCommand implements Command {
             return ERROR_PAGE;
         }
         //todo
-        return "view/manager/requests.jsp";
+        return "view/manager/users.jsp";
     }
 }

@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.dao.util;
+package aoharkov.education.repairagency.dao.exception;
 
 public class DataBaseSqlRuntimeException extends RuntimeException {
 

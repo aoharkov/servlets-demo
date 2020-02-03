@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.service.util.validator;
+package aoharkov.education.repairagency.service.validator;
 
 public class ValidateException extends RuntimeException {
 

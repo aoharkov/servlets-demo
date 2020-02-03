@@ -5,12 +5,12 @@ import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.UnregisteredUserService;
 import aoharkov.education.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.education.repairagency.service.exception.EntityNotFoundException;
-import aoharkov.education.repairagency.service.util.encoder.Encoder;
-import aoharkov.education.repairagency.service.util.validator.Validator;
+import aoharkov.education.repairagency.service.encoder.Encoder;
+import aoharkov.education.repairagency.service.validator.Validator;
 
 import java.util.Objects;
 
-public class UnregisteredUserServiceImpl extends AbstractUserServiceImpl implements UnregisteredUserService {
+public class UnregisteredUserServiceImpl extends UserServiceImpl implements UnregisteredUserService {
     private final Encoder encoder;
     private final Validator<User> userValidator;
 
@@ -22,7 +22,6 @@ public class UnregisteredUserServiceImpl extends AbstractUserServiceImpl impleme
 
     @Override
     public User login(String email, String password) {
-        //todo validate login with email and password
         String encryptedPassword = encoder.encode(password);
         return userDao.findByEmail(email)
                 .filter(user -> Objects.equals(user.getPassword(), encryptedPassword))

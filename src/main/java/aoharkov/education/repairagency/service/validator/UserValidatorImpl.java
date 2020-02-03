@@ -1,4 +1,4 @@
-package aoharkov.education.repairagency.service.util.validator;
+package aoharkov.education.repairagency.service.validator;
 
 import aoharkov.education.repairagency.entity.User;
 
@@ -27,7 +27,8 @@ public class UserValidatorImpl implements Validator<User> {
         }
     }
 
-    private void validateEmail(String email) throws ValidateException {
+    @Override
+    public void validateEmail(String email) throws ValidateException {
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {

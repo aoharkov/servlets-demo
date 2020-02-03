@@ -2,7 +2,6 @@ package aoharkov.education.repairagency.controller;
 
 import aoharkov.education.repairagency.command.Command;
 import aoharkov.education.repairagency.injector.DependencyInjector;
-import aoharkov.education.repairagency.service.UnregisteredUserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,15 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-public class IndexServlet extends HttpServlet {
-    private final UnregisteredUserService userService;
+public class Controller extends HttpServlet {
     private final Map<String, Command> commandNameToCommand;
-    private final Command defaultCommand = request -> "view/problem.jsp";
+    private final Command defaultCommand = request -> Command.ERROR_PAGE;
 
-    public IndexServlet() {
+    public Controller() {
         DependencyInjector injector = DependencyInjector.getInstance();
         commandNameToCommand = injector.getIndexCommands();
-        this.userService = injector.getUnregisteredUserService();
     }
 
     @Override

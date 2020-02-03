@@ -2,13 +2,13 @@ package aoharkov.education.repairagency.dao.domain;
 
 import java.util.List;
 
-public class PageableImpl<T> implements Pageable {
+public class Page<T> {
     private final List<T> items;
     private final int pageNumber;
     private final int itemsNumberPerPage;
     private final int lastPageNumber;
 
-    private PageableImpl(Builder<T> builder) {
+    private Page(Builder<T> builder) {
         this.items = builder.items;
         this.pageNumber = builder.pageNumber;
         this.itemsNumberPerPage = builder.itemsNumberPerPage;
@@ -19,28 +19,24 @@ public class PageableImpl<T> implements Pageable {
         return new Builder<T>();
     }
 
-    @Override
     public List<T> getItems() {
         return items;
     }
 
-    @Override
     public int getPageNumber() {
         return pageNumber;
     }
 
-    @Override
     public int getItemsNumberPerPage() {
         return itemsNumberPerPage;
     }
 
-    @Override
     public int getLastPageNumber() {
         return lastPageNumber;
     }
 
-    public static class Builder<T1> {
-        private List<T1> items;
+    public static class Builder<T> {
+        private List<T> items;
         private int pageNumber;
         private int itemsNumberPerPage;
         private int lastPageNumber;
@@ -48,26 +44,26 @@ public class PageableImpl<T> implements Pageable {
         private Builder() {
         }
 
-        public PageableImpl<T1> build() {
-            return new PageableImpl<>(this);
+        public Page<T> build() {
+            return new Page<>(this);
         }
 
-        public Builder<T1> withItems(List<T1> items) {
+        public Builder<T> withItems(List<T> items) {
             this.items = items;
             return this;
         }
 
-        public Builder<T1> withPageNumber(int pageNumber) {
+        public Builder<T> withPageNumber(int pageNumber) {
             this.pageNumber = pageNumber;
             return this;
         }
 
-        public Builder<T1> withItemsNumberPerPage(int itemsNumberPerPage) {
+        public Builder<T> withItemsNumberPerPage(int itemsNumberPerPage) {
             this.itemsNumberPerPage = itemsNumberPerPage;
             return this;
         }
 
-        public Builder<T1> withMaxPageNumber(int maxPageNumber) {
+        public Builder<T> withMaxPageNumber(int maxPageNumber) {
             this.lastPageNumber = maxPageNumber;
             return this;
         }

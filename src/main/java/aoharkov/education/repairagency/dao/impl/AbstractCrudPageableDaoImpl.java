@@ -1,10 +1,9 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.CrudPageableDao;
-import aoharkov.education.repairagency.dao.domain.Pageable;
-import aoharkov.education.repairagency.dao.domain.PageableImpl;
-import aoharkov.education.repairagency.dao.util.DataBaseSqlRuntimeException;
-import aoharkov.education.repairagency.dao.util.connector.Connector;
+import aoharkov.education.repairagency.dao.domain.Page;
+import aoharkov.education.repairagency.dao.exception.DataBaseSqlRuntimeException;
+import aoharkov.education.repairagency.dao.connector.Connector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -95,7 +94,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     }
 
     @Override
-    public Pageable<E> findAll(int pageNumber, int itemsPerPage) {
+    public Page<E> findAll(int pageNumber, int itemsPerPage) {
         int maxPageNumber = (count() + itemsPerPage - 1) / itemsPerPage;
         if (pageNumber > maxPageNumber) {
             pageNumber = maxPageNumber;
@@ -116,7 +115,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
                 while (resultSet.next()) {
                     entities.add(mapResultSetToEntity(resultSet));
                 }
-                return PageableImpl.<E>builder()
+                return Page.<E>builder()
                         .withItems(entities)
                         .withPageNumber(pageNumber)
                         .withItemsNumberPerPage(itemsPerPage)
