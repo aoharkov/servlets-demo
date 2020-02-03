@@ -8,10 +8,10 @@ import aoharkov.education.repairagency.service.ClientService;
 import javax.servlet.http.HttpServletRequest;
 
 public class ListOwnRequestsCommand implements Command {
-    private final ClientService userService;
+    private final ClientService clientService;
 
-    public ListOwnRequestsCommand(ClientService userService) {
-        this.userService = userService;
+    public ListOwnRequestsCommand(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @Override

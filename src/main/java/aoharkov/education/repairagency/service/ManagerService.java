@@ -6,7 +6,7 @@ import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
 import aoharkov.education.repairagency.entity.Request;
 
-public interface ManagerService extends AdminService {
+public interface ManagerService extends UserService, AdminService {
 
     Page<Request> listAllRequests(int page, int itemsPerPage);
 

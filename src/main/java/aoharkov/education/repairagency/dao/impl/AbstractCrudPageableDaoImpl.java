@@ -1,9 +1,9 @@
 package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.CrudPageableDao;
+import aoharkov.education.repairagency.dao.connector.Connector;
 import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.dao.exception.DataBaseSqlRuntimeException;
-import aoharkov.education.repairagency.dao.connector.Connector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -8,10 +8,10 @@ import aoharkov.education.repairagency.service.ClientService;
 import javax.servlet.http.HttpServletRequest;
 
 public class MakeRequestCommand implements Command {
-    private final ClientService userService;
+    private final ClientService clientService;
 
-    public MakeRequestCommand(ClientService userService) {
-        this.userService = userService;
+    public MakeRequestCommand(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @Override

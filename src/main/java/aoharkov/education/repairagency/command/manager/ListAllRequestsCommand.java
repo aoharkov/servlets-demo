@@ -6,13 +6,12 @@ import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ManagerService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 
 public class ListAllRequestsCommand implements Command {
-    private final ManagerService userService;
+    private final ManagerService managerService;
 
-    public ListAllRequestsCommand(ManagerService userService) {
-        this.userService = userService;
+    public ListAllRequestsCommand(ManagerService managerService) {
+        this.managerService = managerService;
     }
 
     @Override

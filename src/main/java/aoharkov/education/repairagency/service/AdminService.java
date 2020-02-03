@@ -4,7 +4,7 @@ import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.entity.Role;
 import aoharkov.education.repairagency.entity.User;
 
-public interface AdminService extends RegisteredUserService {
+public interface AdminService {
 
     Page<User> listAllUsers(int page, int itemsPerPage);
 

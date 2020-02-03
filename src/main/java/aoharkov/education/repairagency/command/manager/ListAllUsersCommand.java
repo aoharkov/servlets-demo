@@ -8,10 +8,10 @@ import aoharkov.education.repairagency.service.ManagerService;
 import javax.servlet.http.HttpServletRequest;
 
 public class ListAllUsersCommand implements Command {
-    private final ManagerService userService;
+    private final ManagerService managerService;
 
-    public ListAllUsersCommand(ManagerService userService) {
-        this.userService = userService;
+    public ListAllUsersCommand(ManagerService managerService) {
+        this.managerService = managerService;
     }
 
     @Override

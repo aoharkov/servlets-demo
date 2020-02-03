@@ -11,15 +11,19 @@ import aoharkov.education.repairagency.entity.Feedback;
 import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
 import aoharkov.education.repairagency.entity.Request;
+import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ClientService;
+import aoharkov.education.repairagency.service.encoder.Encoder;
+import aoharkov.education.repairagency.service.validator.Validator;
 
-public class ClientServiceImpl extends RegisteredUserServiceImpl implements ClientService {
+public class ClientServiceImpl extends UserServiceImpl implements ClientService {
     private final RefusalDao refusalDao;
     private final FeedbackDao feedbackDao;
 
-    public ClientServiceImpl(UserDao userDao, RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao,
+    public ClientServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator,
+                             RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao,
                              RefusalDao refusalDao, FeedbackDao feedbackDao) {
-        super(userDao, requestDao, orderDao, repairStageDao);
+        super(userDao, encoder, userValidator, requestDao, orderDao, repairStageDao);
         this.refusalDao = refusalDao;
         this.feedbackDao = feedbackDao;
     }

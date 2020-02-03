@@ -14,14 +14,17 @@ import aoharkov.education.repairagency.entity.Request;
 import aoharkov.education.repairagency.entity.Role;
 import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ManagerService;
+import aoharkov.education.repairagency.service.encoder.Encoder;
+import aoharkov.education.repairagency.service.validator.Validator;
 
-public class ManagerServiceImpl extends RegisteredUserServiceImpl implements ManagerService {
+public class ManagerServiceImpl extends UserServiceImpl implements ManagerService {
     private final RefusalDao refusalDao;
     private final FeedbackDao feedbackDao;
 
-    public ManagerServiceImpl(UserDao userDao, RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao,
+    public ManagerServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator,
+                              RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao,
                               RefusalDao refusalDao, FeedbackDao feedbackDao) {
-        super(userDao, requestDao, orderDao, repairStageDao);
+        super(userDao, encoder, userValidator, requestDao, orderDao, repairStageDao);
         this.refusalDao = refusalDao;
         this.feedbackDao = feedbackDao;
     }

@@ -6,7 +6,7 @@ import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
 import aoharkov.education.repairagency.entity.Request;
 
-public interface ClientService extends RegisteredUserService {
+public interface ClientService extends UserService {
 
     Request makeRequest(Request request);
 

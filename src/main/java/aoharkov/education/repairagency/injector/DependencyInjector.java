@@ -11,25 +11,25 @@ import aoharkov.education.repairagency.dao.RefusalDao;
 import aoharkov.education.repairagency.dao.RepairStageDao;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
+import aoharkov.education.repairagency.dao.connector.Connector;
+import aoharkov.education.repairagency.dao.connector.HikariCP;
 import aoharkov.education.repairagency.dao.impl.FeedbackDaoImpl;
 import aoharkov.education.repairagency.dao.impl.OrderDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RefusalDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RepairStageDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RequestDaoImpl;
 import aoharkov.education.repairagency.dao.impl.UserDaoImpl;
-import aoharkov.education.repairagency.dao.connector.Connector;
-import aoharkov.education.repairagency.dao.connector.HikariCP;
 import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ClientService;
 import aoharkov.education.repairagency.service.ManagerService;
 import aoharkov.education.repairagency.service.MasterService;
-import aoharkov.education.repairagency.service.UnregisteredUserService;
+import aoharkov.education.repairagency.service.UserService;
+import aoharkov.education.repairagency.service.encoder.Encoder;
+import aoharkov.education.repairagency.service.encoder.EncoderPBKDF2;
 import aoharkov.education.repairagency.service.impl.ClientServiceImpl;
 import aoharkov.education.repairagency.service.impl.ManagerServiceImpl;
 import aoharkov.education.repairagency.service.impl.MasterServiceImpl;
-import aoharkov.education.repairagency.service.impl.UnregisteredUserServiceImpl;
-import aoharkov.education.repairagency.service.encoder.Encoder;
-import aoharkov.education.repairagency.service.encoder.EncoderPBKDF2;
+import aoharkov.education.repairagency.service.impl.UserServiceImpl;
 import aoharkov.education.repairagency.service.validator.UserValidatorImpl;
 import aoharkov.education.repairagency.service.validator.Validator;
 
@@ -59,21 +59,21 @@ public class DependencyInjector {
 
     private static final FeedbackDao FEEDBACK_DAO = new FeedbackDaoImpl(CONNECTOR);
 
-    private static final UnregisteredUserService UNREGISTERED_USER_SERVICE =
-            new UnregisteredUserServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR);
+    private static final UserService REGISTERED_USER_SERVICE =
+            new UserServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
 
     private static final ClientService CLIENT_SERVICE =
-            new ClientServiceImpl(USER_DAO, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+            new ClientServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
 
     private static final ManagerService MANAGER_SERVICE =
-            new ManagerServiceImpl(USER_DAO, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+            new ManagerServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
 
     private static final MasterService MASTER_SERVICE =
-            new MasterServiceImpl(USER_DAO, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
+            new MasterServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
 
-    private static final Command LOGIN_COMMAND = new LoginCommand(UNREGISTERED_USER_SERVICE);
+    private static final Command LOGIN_COMMAND = new LoginCommand(REGISTERED_USER_SERVICE);
 
-    private static final Command REGISTER_COMMAND = new RegisterCommand(UNREGISTERED_USER_SERVICE);
+    private static final Command REGISTER_COMMAND = new RegisterCommand(REGISTERED_USER_SERVICE);
 
     private static final Command LIST_ALL_REQUEST_COMMAND = new ListAllRequestsCommand(MANAGER_SERVICE);
 
@@ -98,8 +98,8 @@ public class DependencyInjector {
         return INSTANCE;
     }
 
-    public UnregisteredUserService getUnregisteredUserService() {
-        return UNREGISTERED_USER_SERVICE;
+    public UserService getRegisteredUserService() {
+        return REGISTERED_USER_SERVICE;
     }
 
     public ClientService getClientService() {

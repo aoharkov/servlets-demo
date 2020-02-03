@@ -8,10 +8,10 @@ import aoharkov.education.repairagency.service.ManagerService;
 import javax.servlet.http.HttpServletRequest;
 
 public class ListUncheckedRequestsCommand implements Command {
-    private final ManagerService userService;
+    private final ManagerService managerService;
 
-    public ListUncheckedRequestsCommand(ManagerService userService) {
-        this.userService = userService;
+    public ListUncheckedRequestsCommand(ManagerService managerService) {
+        this.managerService = managerService;
     }
 
     @Override
