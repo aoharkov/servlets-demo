@@ -3,12 +3,14 @@ package aoharkov.education.repairagency.service.impl;
 import aoharkov.education.repairagency.dao.UserDao;
 import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.UnregisteredUserService;
+import aoharkov.education.repairagency.service.exception.EntityAlreadyExistException;
+import aoharkov.education.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.education.repairagency.service.util.encoder.Encoder;
 import aoharkov.education.repairagency.service.util.validator.Validator;
 
-public abstract class UnregisteredUserServiceImpl extends AbstractUserServiceImpl implements UnregisteredUserService {
-    private static final String USER_EMAIL_COLLISION = "user is already present with such email";
+import java.util.Objects;
 
+public class UnregisteredUserServiceImpl extends AbstractUserServiceImpl implements UnregisteredUserService {
     private final Encoder encoder;
     private final Validator<User> userValidator;
 
@@ -19,20 +21,19 @@ public abstract class UnregisteredUserServiceImpl extends AbstractUserServiceImp
     }
 
     @Override
-    public boolean login(String email, String password) {
+    public User login(String email, String password) {
         //todo validate login with email and password
         String encryptedPassword = encoder.encode(password);
         return userDao.findByEmail(email)
-                .map(User::getPassword)
-                .filter(userPass -> userPass.equals(encryptedPassword))
-                .isPresent();
+                .filter(user -> Objects.equals(user.getPassword(), encryptedPassword))
+                .orElseThrow(() -> new EntityNotFoundException());
     }
 
     @Override
     public User register(User user) {
         userValidator.validate(user);
         if (userDao.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException(USER_EMAIL_COLLISION);
+            throw new EntityAlreadyExistException();
         }
         userDao.save(user);
         return user;

@@ -1,5 +1,6 @@
 package aoharkov.education.repairagency.service.impl;
 
+import aoharkov.education.repairagency.dao.FeedbackDao;
 import aoharkov.education.repairagency.dao.OrderDao;
 import aoharkov.education.repairagency.dao.RefusalDao;
 import aoharkov.education.repairagency.dao.RepairStageDao;
@@ -13,11 +14,14 @@ import aoharkov.education.repairagency.entity.Request;
 import aoharkov.education.repairagency.service.ClientService;
 
 public class ClientServiceImpl extends RegisteredUserServiceImpl implements ClientService {
-    protected final RefusalDao refusalDao;
+    private final RefusalDao refusalDao;
+    private final FeedbackDao feedbackDao;
 
-    public ClientServiceImpl(UserDao userDao, RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao, RefusalDao refusalDao) {
+    public ClientServiceImpl(UserDao userDao, RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao,
+                             RefusalDao refusalDao, FeedbackDao feedbackDao) {
         super(userDao, requestDao, orderDao, repairStageDao);
         this.refusalDao = refusalDao;
+        this.feedbackDao = feedbackDao;
     }
 
     @Override
