@@ -1,3 +1,5 @@
+SET GLOBAL time_zone = '+2:00';
+
 DROP TABLE IF EXISTS refusals;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS repair_stages;
