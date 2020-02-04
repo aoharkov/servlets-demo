@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class UserDaoImpl extends AbstractCrudPageableDaoImpl<User> implements UserDao {
     private static final String SAVE_QUERY =
-            "INSERT INTO users (id, name, surname, email, password, role) values(?, ?, ?, ?, ?, ?)";
+            "INSERT INTO users (name, surname, email, password, role) values(?, ?, ?, ?, ?)";
     private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email = ?";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM users WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM users LIMIT ?, ?";
@@ -38,12 +38,11 @@ public class UserDaoImpl extends AbstractCrudPageableDaoImpl<User> implements Us
 
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, User entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setString(2, entity.getName());
-        preparedStatement.setString(3, entity.getSurname());
-        preparedStatement.setString(4, entity.getEmail());
-        preparedStatement.setString(5, entity.getPassword());
-        preparedStatement.setString(6, entity.getRole().name());
+        preparedStatement.setString(1, entity.getName());
+        preparedStatement.setString(2, entity.getSurname());
+        preparedStatement.setString(3, entity.getEmail());
+        preparedStatement.setString(4, entity.getPassword());
+        preparedStatement.setString(5, entity.getRole().name());
     }
 
     @Override

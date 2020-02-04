@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> implements RefusalDao {
     private static final String SAVE_QUERY =
-            "INSERT INTO refusals (id, request_id, explanation, manager_id) values(?, ?, ?, ?)";
+            "INSERT INTO refusals (request_id, explanation, manager_id) values(?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM refusals WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM refusals LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM refusals";
@@ -23,10 +23,9 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
 
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Refusal entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setInt(2, entity.getRequestId());
-        preparedStatement.setString(3, entity.getExplanation());
-        preparedStatement.setInt(4, entity.getManagerId());
+        preparedStatement.setInt(1, entity.getRequestId());
+        preparedStatement.setString(2, entity.getExplanation());
+        preparedStatement.setInt(3, entity.getManagerId());
     }
 
     @Override

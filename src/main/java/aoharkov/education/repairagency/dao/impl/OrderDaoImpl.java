@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements OrderDao {
     private static final String SAVE_QUERY =
-            "INSERT INTO orders (id, request_id, manager_id, price, master_id, repair_stage_id) values(?, ?, ?, ?, ?, ?)";
+            "INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id) values(?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM orders WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM orders LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM orders";
@@ -23,12 +23,11 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
 
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setInt(2, entity.getRequestId());
-        preparedStatement.setInt(3, entity.getManagerId());
-        preparedStatement.setInt(4, entity.getPrice());
-        preparedStatement.setInt(5, entity.getMasterId());
-        preparedStatement.setInt(6, entity.getRepairStageId());
+        preparedStatement.setInt(1, entity.getRequestId());
+        preparedStatement.setInt(2, entity.getManagerId());
+        preparedStatement.setInt(3, entity.getPrice());
+        preparedStatement.setInt(4, entity.getMasterId());
+        preparedStatement.setInt(5, entity.getRepairStageId());
     }
 
     @Override

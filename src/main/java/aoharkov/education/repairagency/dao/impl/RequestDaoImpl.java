@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> implements RequestDao {
     private static final String SAVE_QUERY =
-            "INSERT INTO requests (id, client_id, description, viewed, accepted) values(?, ?, ?, ?, ?)";
+            "INSERT INTO requests (client_id, description, viewed, accepted) values(?, ?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM requests WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM requests LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM requests";
@@ -23,11 +23,10 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
 
     @Override
     protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Request entity) throws SQLException {
-        preparedStatement.setInt(1, entity.getId());
-        preparedStatement.setInt(2, entity.getClientId());
-        preparedStatement.setString(3, entity.getDescription());
-        preparedStatement.setBoolean(4, entity.getViewed());
-        preparedStatement.setBoolean(5, entity.getAccepted());
+        preparedStatement.setInt(1, entity.getClientId());
+        preparedStatement.setString(2, entity.getDescription());
+        preparedStatement.setBoolean(3, entity.getViewed());
+        preparedStatement.setBoolean(4, entity.getAccepted());
     }
 
     @Override
