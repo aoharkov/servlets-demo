@@ -8,13 +8,13 @@ import aoharkov.education.repairagency.entity.Request;
 
 public interface ClientService extends UserService {
 
-    Request makeRequest(Request request);
+    void saveRequest(Request request);
 
-    Page<Request> listOwnRequests(int page, int itemsPerPage);
+    Page<Request> findOwnRequests(int page, int itemsPerPage);
 
-    Order showOrder(Integer requestId);
+    Order findOrder(Integer requestId);
 
-    Refusal showRefusal(Integer requestId);
+    Refusal findRefusal(Integer requestId);
 
-    Feedback leaveFeedback(Integer requestId);
+    void saveFeedback(Feedback feedback);
 }

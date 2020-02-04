@@ -11,7 +11,6 @@ import aoharkov.education.repairagency.entity.Feedback;
 import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
 import aoharkov.education.repairagency.entity.Request;
-import aoharkov.education.repairagency.entity.Role;
 import aoharkov.education.repairagency.entity.User;
 import aoharkov.education.repairagency.service.ManagerService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
@@ -30,44 +29,22 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
     }
 
     @Override
-    public Page<Request> listAllRequests(int page, int itemsPerPage) {
-        //todo
-        return null;
-    }
-
-    @Override
-    public Page<Request> listUncheckedRequests(int page, int itemsPerPage) {
-        //todo
+    public Page<Request> findAllRequests(int page, int itemsPerPage) {
         return null;
     }
 
     @Override
     public Order acceptRequest(Integer requestId) {
-        //todo
         return null;
     }
 
     @Override
     public Refusal declineRequest(Integer requestId) {
-        //todo
         return null;
     }
 
     @Override
-    public Feedback reviewFeedback(Integer requestId) {
-        //todo
+    public Page<Feedback> findAllFeedback(int page, int itemsPerPage) {
         return null;
-    }
-
-    @Override
-    public Page<User> listAllUsers(int page, int itemsPerPage) {
-        //todo
-        return null;
-    }
-
-    @Override
-    public boolean promoteUser(Integer id, Role role) {
-        //todo
-        return false;
     }
 }

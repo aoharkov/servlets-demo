@@ -6,15 +6,13 @@ import aoharkov.education.repairagency.entity.Order;
 import aoharkov.education.repairagency.entity.Refusal;
 import aoharkov.education.repairagency.entity.Request;
 
-public interface ManagerService extends UserService, AdminService {
+public interface ManagerService extends UserService {
 
-    Page<Request> listAllRequests(int page, int itemsPerPage);
-
-    Page<Request> listUncheckedRequests(int page, int itemsPerPage);
+    Page<Request> findAllRequests(int page, int itemsPerPage);
 
     Order acceptRequest(Integer requestId);
 
     Refusal declineRequest(Integer requestId);
 
-    Feedback reviewFeedback(Integer requestId);
+    Page<Feedback> findAllFeedback(int page, int itemsPerPage);
 }

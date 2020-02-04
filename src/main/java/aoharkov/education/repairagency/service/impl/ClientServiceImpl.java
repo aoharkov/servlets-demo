@@ -29,32 +29,27 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     }
 
     @Override
-    public Request makeRequest(Request request) {
-        //todo
+    public void saveRequest(Request request) {
+
+    }
+
+    @Override
+    public Page<Request> findOwnRequests(int page, int itemsPerPage) {
         return null;
     }
 
     @Override
-    public Page<Request> listOwnRequests(int page, int itemsPerPage) {
-        //todo
+    public Order findOrder(Integer requestId) {
         return null;
     }
 
     @Override
-    public Order showOrder(Integer requestId) {
-        //todo
+    public Refusal findRefusal(Integer requestId) {
         return null;
     }
 
     @Override
-    public Refusal showRefusal(Integer requestId) {
-        //todo
-        return null;
-    }
+    public void saveFeedback(Feedback feedback) {
 
-    @Override
-    public Feedback leaveFeedback(Integer requestId) {
-        //todo
-        return null;
     }
 }

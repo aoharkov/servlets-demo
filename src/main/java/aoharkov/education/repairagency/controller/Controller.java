@@ -16,7 +16,7 @@ public class Controller extends HttpServlet {
 
     public Controller() {
         DependencyInjector injector = DependencyInjector.getInstance();
-        commandNameToCommand = injector.getIndexCommands();
+        commandNameToCommand = injector.getCommands();
     }
 
     @Override

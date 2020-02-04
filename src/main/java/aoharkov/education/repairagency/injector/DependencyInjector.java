@@ -20,12 +20,14 @@ import aoharkov.education.repairagency.dao.impl.RepairStageDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RequestDaoImpl;
 import aoharkov.education.repairagency.dao.impl.UserDaoImpl;
 import aoharkov.education.repairagency.entity.User;
+import aoharkov.education.repairagency.service.AdminService;
 import aoharkov.education.repairagency.service.ClientService;
 import aoharkov.education.repairagency.service.ManagerService;
 import aoharkov.education.repairagency.service.MasterService;
 import aoharkov.education.repairagency.service.UserService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.encoder.EncoderPBKDF2;
+import aoharkov.education.repairagency.service.impl.AdminServiceImpl;
 import aoharkov.education.repairagency.service.impl.ClientServiceImpl;
 import aoharkov.education.repairagency.service.impl.ManagerServiceImpl;
 import aoharkov.education.repairagency.service.impl.MasterServiceImpl;
@@ -71,6 +73,9 @@ public class DependencyInjector {
     private static final MasterService MASTER_SERVICE =
             new MasterServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
 
+    private static final AdminService ADMIN_SERVICE =
+            new AdminServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+
     private static final Command LOGIN_COMMAND = new LoginCommand(REGISTERED_USER_SERVICE);
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(REGISTERED_USER_SERVICE);
@@ -81,6 +86,10 @@ public class DependencyInjector {
 
     private static final Map<String, Command> COMMANDS = initCommands();
 
+    private DependencyInjector() {
+
+    }
+
     private static Map<String, Command> initCommands() {
         Map<String, Command> userCommandNameToCommand = new HashMap<>();
         userCommandNameToCommand.put("login", LOGIN_COMMAND);
@@ -88,10 +97,6 @@ public class DependencyInjector {
         userCommandNameToCommand.put("listAllRequests", LIST_ALL_REQUEST_COMMAND);
         userCommandNameToCommand.put("listUncheckedRequests", LIST_UNCHECKED_REQUESTS_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
-    }
-
-    private DependencyInjector() {
-
     }
 
     public static DependencyInjector getInstance() {
@@ -114,7 +119,11 @@ public class DependencyInjector {
         return MASTER_SERVICE;
     }
 
-    public Map<String, Command> getIndexCommands() {
+    public AdminService getAdminService() {
+        return ADMIN_SERVICE;
+    }
+
+    public Map<String, Command> getCommands() {
         return COMMANDS;
     }
 }

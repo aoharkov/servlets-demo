@@ -6,7 +6,7 @@ import aoharkov.education.repairagency.entity.User;
 
 public interface AdminService {
 
-    Page<User> listAllUsers(int page, int itemsPerPage);
+    Page<User> findAllUsers(int page, int itemsPerPage);
 
-    boolean promoteUser(Integer id, Role role);
+    void setRoleToUser(Role role, Integer id);
 }

@@ -15,11 +15,11 @@ import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
     protected final UserDao userDao;
-    private final Encoder encoder;
-    private final Validator<User> userValidator;
     protected final RequestDao requestDao;
     protected final OrderDao orderDao;
     protected final RepairStageDao repairStageDao;
+    private final Encoder encoder;
+    private final Validator<User> userValidator;
     protected User user;
 
     public UserServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator,
@@ -41,24 +41,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(User user) {
+    public void register(User user) {
         userValidator.validate(user);
         if (userDao.findByEmail(user.getEmail()).isPresent()) {
             throw new EntityAlreadyExistException();
         }
         userDao.save(user);
-        return user;
     }
 
     @Override
-    public boolean logout() {
-        //todo
-        return false;
+    public void logout() {
+
     }
 
     @Override
-    public String setLang(String lang) {
-        //todo
-        return "en";
+    public void setLang(String lang) {
+
     }
 }

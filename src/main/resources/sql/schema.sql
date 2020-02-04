@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS feedback;
 
 CREATE TABLE users
 (
-    id       int                                NOT NULL AUTO_INCREMENT,
-    name     varchar(60)                        NOT NULL,
+    id       int                                        NOT NULL AUTO_INCREMENT,
+    name     varchar(60)                                NOT NULL,
     surname  varchar(60),
-    email    varchar(60)                        NOT NULL UNIQUE,
-    password varchar(60)                        NOT NULL,
-    role     ENUM ('CLIENT','MANAGER','MASTER') NOT NULL,
+    email    varchar(60)                                NOT NULL UNIQUE,
+    password varchar(60)                                NOT NULL,
+    role     ENUM ('CLIENT','MANAGER','MASTER','ADMIN') NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -21,8 +21,8 @@ CREATE TABLE requests
     id          int          NOT NULL AUTO_INCREMENT,
     client_id   int          NOT NULL,
     description varchar(255) NOT NULL,
-    viewed      bool,
-    accepted    bool,
+    viewed      bool         NOT NULL,
+    accepted    bool         NOT NULL,
     FOREIGN KEY (client_id) REFERENCES users (id),
     PRIMARY KEY (id)
 );
