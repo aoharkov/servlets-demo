@@ -61,7 +61,7 @@ public class DependencyInjector {
 
     private static final FeedbackDao FEEDBACK_DAO = new FeedbackDaoImpl(CONNECTOR);
 
-    private static final UserService REGISTERED_USER_SERVICE =
+    private static final UserService USER_SERVICE =
             new UserServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
 
     private static final ClientService CLIENT_SERVICE =
@@ -76,9 +76,9 @@ public class DependencyInjector {
     private static final AdminService ADMIN_SERVICE =
             new AdminServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
 
-    private static final Command LOGIN_COMMAND = new LoginCommand(REGISTERED_USER_SERVICE);
+    private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
 
-    private static final Command REGISTER_COMMAND = new RegisterCommand(REGISTERED_USER_SERVICE);
+    private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
 
     private static final Command LIST_ALL_REQUEST_COMMAND = new ListAllRequestsCommand(MANAGER_SERVICE);
 
@@ -103,8 +103,8 @@ public class DependencyInjector {
         return INSTANCE;
     }
 
-    public UserService getRegisteredUserService() {
-        return REGISTERED_USER_SERVICE;
+    public UserService getUserService() {
+        return USER_SERVICE;
     }
 
     public ClientService getClientService() {

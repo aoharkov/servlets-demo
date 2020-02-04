@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS requests;
 DROP TABLE IF EXISTS refusals;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS repair_stages;
 DROP TABLE IF EXISTS feedback;
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users
 (
@@ -38,6 +38,13 @@ CREATE TABLE refusals
     PRIMARY KEY (id)
 );
 
+CREATE TABLE repair_stages
+(
+    id   int         NOT NULL AUTO_INCREMENT,
+    name varchar(80) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE orders
 (
     id              int NOT NULL AUTO_INCREMENT,
@@ -53,13 +60,6 @@ CREATE TABLE orders
     PRIMARY KEY (id)
 );
 
-CREATE TABLE repair_stages
-(
-    id   int         NOT NULL AUTO_INCREMENT,
-    name varchar(80) NOT NULL,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE feedback
 (
     id         int NOT NULL AUTO_INCREMENT,
@@ -69,4 +69,3 @@ CREATE TABLE feedback
     FOREIGN KEY (request_id) REFERENCES requests (id),
     PRIMARY KEY (id)
 );
-

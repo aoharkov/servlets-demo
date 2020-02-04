@@ -21,9 +21,6 @@ public class HikariCP implements Connector {
         config.setJdbcUrl(resource.getString("db.url"));
         config.setUsername(resource.getString("db.user"));
         config.setPassword(resource.getString("db.password"));
-        config.addDataSourceProperty("cachePrepStmts", resource.getString("db.cachePrepStmts"));
-        config.addDataSourceProperty("prepStmtCacheSize", resource.getString("db.prepStmtCacheSize"));
-        config.addDataSourceProperty("prepStmtCacheSqlLimit", resource.getString("db.prepStmtCacheSqlLimit"));
         dataSource = new HikariDataSource(config);
     }
 
