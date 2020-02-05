@@ -5,7 +5,7 @@
          version="4.0">
     <servlet>
         <servlet-name>indexServlet</servlet-name>
-        <servlet-class>aoharkov.education.repairagency.controller.Controller</servlet-class>
+        <servlet-class>aoharkov.education.repairagency.controller.FrontController</servlet-class>
     </servlet>
 
     <servlet-mapping>

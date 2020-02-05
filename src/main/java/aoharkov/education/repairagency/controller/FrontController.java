@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-public class Controller extends HttpServlet {
+public class FrontController extends HttpServlet {
     private final Map<String, Command> commandNameToCommand;
     private final Command defaultCommand = request -> Command.ERROR_PAGE;
 
-    public Controller() {
+    public FrontController() {
         DependencyInjector injector = DependencyInjector.getInstance();
         commandNameToCommand = injector.getCommands();
     }
