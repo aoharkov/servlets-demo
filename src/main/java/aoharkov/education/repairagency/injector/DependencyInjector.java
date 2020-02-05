@@ -47,7 +47,7 @@ public class DependencyInjector {
 
     private static final Encoder PASSWORD_ENCODER = new EncoderPBKDF2();
 
-    private static final Connector CONNECTOR = new HikariCP("database");
+    private static final Connector CONNECTOR = new HikariCP("db");
 
     private static final UserDao USER_DAO = new UserDaoImpl(CONNECTOR);
 

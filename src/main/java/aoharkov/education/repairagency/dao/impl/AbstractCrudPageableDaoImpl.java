@@ -7,6 +7,8 @@ import aoharkov.education.repairagency.dao.exception.DataBaseSqlRuntimeException
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +20,8 @@ import java.util.function.BiConsumer;
 
 public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<E> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractCrudPageableDaoImpl.class);
+    private static final String EXECUTE_QUERY_ERROR = "executeQuery error";
+    private static final String DB_CONNECTION_PROBLEM = "db connection problem";
 
     protected static final BiConsumer<PreparedStatement, Integer> INT_PARAM_SETTER = ((preparedStatement, integer) -> {
         try {
@@ -60,8 +64,8 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-            throw new DataBaseSqlRuntimeException(e.getMessage(), e);
+            LOGGER.error(DB_CONNECTION_PROBLEM, e);
+            throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
         }
     }
 
@@ -84,11 +88,14 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
                 if (resultSet.next()) {
                     return Optional.of(mapResultSetToEntity(resultSet));
                 }
+            } catch (SQLException e) {
+                LOGGER.error(EXECUTE_QUERY_ERROR, e);
+                throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-            throw new DataBaseSqlRuntimeException(e.getMessage(), e);
+            LOGGER.error(DB_CONNECTION_PROBLEM, e);
+            throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
         }
         return Optional.empty();
     }
@@ -121,11 +128,14 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
                         .withItemsNumberPerPage(itemsPerPage)
                         .withMaxPageNumber(maxPageNumber)
                         .build();
+            } catch (SQLException e) {
+                LOGGER.error(EXECUTE_QUERY_ERROR, e);
+                throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-            throw new DataBaseSqlRuntimeException(e.getMessage(), e);
+            LOGGER.error(DB_CONNECTION_PROBLEM, e);
+            throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
         }
     }
 
@@ -133,14 +143,17 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     public int count() {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(countQuery)) {
-
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+                resultSet.next();
                 return resultSet.getInt("rowcount");
+            } catch (SQLException e) {
+                LOGGER.error(EXECUTE_QUERY_ERROR, e);
+                throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-            throw new DataBaseSqlRuntimeException(e.getMessage(), e);
+            LOGGER.error(DB_CONNECTION_PROBLEM, e);
+            throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
         }
     }
 

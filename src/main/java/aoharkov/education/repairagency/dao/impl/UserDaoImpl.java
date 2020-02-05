@@ -16,7 +16,7 @@ public class UserDaoImpl extends AbstractCrudPageableDaoImpl<User> implements Us
     private static final String FIND_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email = ?";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM users WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM users LIMIT ?, ?";
-    private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM users";
+    private static final String COUNT_ALL_QUERY = "SELECT COUNT(*) AS rowcount FROM users";
     private static final String UPDATE_QUERY =
             "UPDATE users SET name = ?, surname = ?, email = ?, password = ?, role = ? WHERE id = ?";
 

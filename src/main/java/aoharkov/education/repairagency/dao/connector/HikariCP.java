@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 
 public class HikariCP implements Connector {
     private static final Logger LOGGER = LogManager.getLogger(HikariCP.class);
+    private static final String NO_CONNECTION = "no connection";
+
     private final HikariDataSource dataSource;
 
     public HikariCP(String configFileName) {
@@ -21,6 +23,7 @@ public class HikariCP implements Connector {
         config.setJdbcUrl(resource.getString("db.url"));
         config.setUsername(resource.getString("db.user"));
         config.setPassword(resource.getString("db.password"));
+        config.setDriverClassName(resource.getString("db.driver"));
         dataSource = new HikariDataSource(config);
     }
 
@@ -29,8 +32,8 @@ public class HikariCP implements Connector {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            LOGGER.error("no connection", e);
-            throw new DataBaseSqlRuntimeException("no connection");
+            LOGGER.error(NO_CONNECTION, e);
+            throw new DataBaseSqlRuntimeException(NO_CONNECTION);
         }
     }
 }
