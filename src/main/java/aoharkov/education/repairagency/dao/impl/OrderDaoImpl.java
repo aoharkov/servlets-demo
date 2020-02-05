@@ -15,7 +15,7 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM orders LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM orders";
     private static final String UPDATE_QUERY =
-            "UPDATE orders SET request_id = ?, manager_id = ?, price = ?, master_id = ?, repair_stage_id = ?, WHERE id = ?";
+            "UPDATE orders SET request_id = ?, manager_id = ?, price = ?, master_id = ?, repair_stage_id = ? WHERE id = ?";
 
     public OrderDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);

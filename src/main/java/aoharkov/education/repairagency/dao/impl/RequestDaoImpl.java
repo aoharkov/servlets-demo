@@ -15,7 +15,7 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<Request> impleme
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM requests LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM requests";
     private static final String UPDATE_QUERY =
-            "UPDATE requests SET client_id = ?, description = ?, viewed = ?, accepted = ?, WHERE id = ?";
+            "UPDATE requests SET client_id = ?, description = ?, viewed = ?, accepted = ? WHERE id = ?";
 
     public RequestDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);

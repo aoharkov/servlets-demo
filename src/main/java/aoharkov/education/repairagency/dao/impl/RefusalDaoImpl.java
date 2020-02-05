@@ -15,7 +15,7 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM refusals LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM refusals";
     private static final String UPDATE_QUERY =
-            "UPDATE refusals SET request_id = ?, explanation = ?, manager_id = ?, WHERE id = ?";
+            "UPDATE refusals SET request_id = ?, explanation = ?, manager_id = ? WHERE id = ?";
 
     public RefusalDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);

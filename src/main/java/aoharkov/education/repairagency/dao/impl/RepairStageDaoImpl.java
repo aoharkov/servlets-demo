@@ -13,7 +13,7 @@ public class RepairStageDaoImpl extends AbstractCrudPageableDaoImpl<RepairStage>
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM repair_stages WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM repair_stages LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM repair_stages";
-    private static final String UPDATE_QUERY = "UPDATE repair_stages SET name = ?, WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE repair_stages SET name = ? WHERE id = ?";
 
     public RepairStageDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);

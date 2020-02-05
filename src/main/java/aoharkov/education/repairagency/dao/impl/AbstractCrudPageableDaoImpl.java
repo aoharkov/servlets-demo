@@ -7,8 +7,6 @@ import aoharkov.education.repairagency.dao.exception.DataBaseSqlRuntimeException
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,9 +18,6 @@ import java.util.function.BiConsumer;
 
 public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<E> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractCrudPageableDaoImpl.class);
-    private static final String EXECUTE_QUERY_ERROR = "executeQuery error";
-    private static final String DB_CONNECTION_PROBLEM = "db connection problem";
-
     protected static final BiConsumer<PreparedStatement, Integer> INT_PARAM_SETTER = ((preparedStatement, integer) -> {
         try {
             preparedStatement.setInt(1, integer);
@@ -30,7 +25,6 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
             LOGGER.error(e.getMessage());
         }
     });
-
     protected static final BiConsumer<PreparedStatement, String> STRING_PARAM_SETTER = ((preparedStatement, str) -> {
         try {
             preparedStatement.setString(1, str);
@@ -38,7 +32,8 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
             LOGGER.error(e.getMessage());
         }
     });
-
+    private static final String EXECUTE_QUERY_ERROR = "executeQuery error";
+    private static final String DB_CONNECTION_PROBLEM = "db connection problem";
     protected final Connector connector;
     private final String saveQuery;
     private final String findByIdQuery;

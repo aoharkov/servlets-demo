@@ -46,4 +46,8 @@ VALUES (1, 'Change color of the car to black', 1, 1);
 INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
 VALUES (2, 2, 4500, 3, 8);
 
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (1, 'Change color of the car to white', 0, 0);
+
+
 

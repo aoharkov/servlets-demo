@@ -69,7 +69,7 @@ public class UserDaoImplTest {
 
     @Test
     public void findAllShouldFindPage1WithUser1AndUser2() {
-        User[] expected = new User[]{userDao.findById(1).get(),userDao.findById(2).get()};
+        User[] expected = new User[]{userDao.findById(1).get(), userDao.findById(2).get()};
         Page<User> page = userDao.findAll(1, 2);
         assertArrayEquals(expected, page.getItems().toArray());
     }

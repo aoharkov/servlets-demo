@@ -13,7 +13,7 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM feedback WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM feedback LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM feedback";
-    private static final String UPDATE_QUERY = "UPDATE feedback SET request_id = ?, text = ?, score = ?, WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE feedback SET request_id = ?, text = ?, score = ? WHERE id = ?";
 
     public FeedbackDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
