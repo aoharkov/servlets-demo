@@ -2,13 +2,13 @@ package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.RepairStageDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
-import aoharkov.education.repairagency.entity.RepairStage;
+import aoharkov.education.repairagency.entity.RepairStageEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RepairStageDaoImpl extends AbstractCrudPageableDaoImpl<RepairStage> implements RepairStageDao {
+public class RepairStageDaoImpl extends AbstractCrudPageableDaoImpl<RepairStageEntity> implements RepairStageDao {
     private static final String SAVE_QUERY = "INSERT INTO repair_stages (name) values(?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM repair_stages WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM repair_stages LIMIT ?, ?";
@@ -20,17 +20,17 @@ public class RepairStageDaoImpl extends AbstractCrudPageableDaoImpl<RepairStage>
     }
 
     @Override
-    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, RepairStage entity) throws SQLException {
+    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, RepairStageEntity entity) throws SQLException {
         preparedStatement.setString(1, entity.getName());
     }
 
     @Override
-    protected RepairStage mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return new RepairStage(resultSet.getInt("id"), resultSet.getString("name"));
+    protected RepairStageEntity mapResultSetToEntity(ResultSet resultSet) throws SQLException {
+        return new RepairStageEntity(resultSet.getInt("id"), resultSet.getString("name"));
     }
 
     @Override
-    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, RepairStage entity) throws SQLException {
+    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, RepairStageEntity entity) throws SQLException {
         preparedStatement.setString(1, entity.getName());
         preparedStatement.setInt(2, entity.getId());
     }

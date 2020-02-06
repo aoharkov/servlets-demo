@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao;
 
-import aoharkov.education.repairagency.entity.Refusal;
+import aoharkov.education.repairagency.entity.RefusalEntity;
 
-public interface RefusalDao extends CrudPageableDao<Refusal> {
+public interface RefusalDao extends CrudPageableDao<RefusalEntity> {
 
 }

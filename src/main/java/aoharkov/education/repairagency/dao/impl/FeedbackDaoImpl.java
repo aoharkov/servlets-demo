@@ -2,13 +2,13 @@ package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.FeedbackDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
-import aoharkov.education.repairagency.entity.Feedback;
+import aoharkov.education.repairagency.entity.FeedbackEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> implements FeedbackDao {
+public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<FeedbackEntity> implements FeedbackDao {
     private static final String SAVE_QUERY = "INSERT INTO feedback (request_id, text, score) values(?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM feedback WHERE id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM feedback LIMIT ?, ?";
@@ -20,15 +20,15 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
     }
 
     @Override
-    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Feedback entity) throws SQLException {
+    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, FeedbackEntity entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setString(2, entity.getText());
         preparedStatement.setInt(3, entity.getScore());
     }
 
     @Override
-    protected Feedback mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return Feedback.builder()
+    protected FeedbackEntity mapResultSetToEntity(ResultSet resultSet) throws SQLException {
+        return FeedbackEntity.builder()
                 .withId(resultSet.getInt("id"))
                 .withRequestId(resultSet.getInt("request_id"))
                 .withText(resultSet.getString("text"))
@@ -37,7 +37,7 @@ public class FeedbackDaoImpl extends AbstractCrudPageableDaoImpl<Feedback> imple
     }
 
     @Override
-    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Feedback entity) throws SQLException {
+    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, FeedbackEntity entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setString(2, entity.getText());
         preparedStatement.setInt(3, entity.getScore());

@@ -2,13 +2,13 @@ package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.RefusalDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
-import aoharkov.education.repairagency.entity.Refusal;
+import aoharkov.education.repairagency.entity.RefusalEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> implements RefusalDao {
+public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<RefusalEntity> implements RefusalDao {
     private static final String SAVE_QUERY =
             "INSERT INTO refusals (request_id, explanation, manager_id) values(?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM refusals WHERE id = ?";
@@ -22,15 +22,15 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
     }
 
     @Override
-    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Refusal entity) throws SQLException {
+    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, RefusalEntity entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setString(2, entity.getExplanation());
         preparedStatement.setInt(3, entity.getManagerId());
     }
 
     @Override
-    protected Refusal mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return Refusal.builder()
+    protected RefusalEntity mapResultSetToEntity(ResultSet resultSet) throws SQLException {
+        return RefusalEntity.builder()
                 .withId(resultSet.getInt("id"))
                 .withRequestId(resultSet.getInt("request_id"))
                 .withExplanation(resultSet.getString("explanation"))
@@ -39,7 +39,7 @@ public class RefusalDaoImpl extends AbstractCrudPageableDaoImpl<Refusal> impleme
     }
 
     @Override
-    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Refusal entity) throws SQLException {
+    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, RefusalEntity entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setString(2, entity.getExplanation());
         preparedStatement.setInt(3, entity.getManagerId());

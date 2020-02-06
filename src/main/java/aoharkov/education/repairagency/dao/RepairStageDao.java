@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao;
 
-import aoharkov.education.repairagency.entity.RepairStage;
+import aoharkov.education.repairagency.entity.RepairStageEntity;
 
-public interface RepairStageDao extends CrudPageableDao<RepairStage> {
+public interface RepairStageDao extends CrudPageableDao<RepairStageEntity> {
 
 }

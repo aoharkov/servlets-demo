@@ -2,13 +2,13 @@ package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.OrderDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
-import aoharkov.education.repairagency.entity.Order;
+import aoharkov.education.repairagency.entity.OrderEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements OrderDao {
+public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<OrderEntity> implements OrderDao {
     private static final String SAVE_QUERY =
             "INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id) values(?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM orders WHERE id = ?";
@@ -22,7 +22,7 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
     }
 
     @Override
-    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
+    protected void fillPreparedStatementForSaveQuery(PreparedStatement preparedStatement, OrderEntity entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setInt(2, entity.getManagerId());
         preparedStatement.setInt(3, entity.getPrice());
@@ -31,8 +31,8 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
     }
 
     @Override
-    protected Order mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return Order.builder()
+    protected OrderEntity mapResultSetToEntity(ResultSet resultSet) throws SQLException {
+        return OrderEntity.builder()
                 .withId(resultSet.getInt("id"))
                 .withRequestId(resultSet.getInt("request_id"))
                 .withManagerId(resultSet.getInt("manager_id"))
@@ -43,7 +43,7 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<Order> implements 
     }
 
     @Override
-    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, Order entity) throws SQLException {
+    protected void fillPreparedStatementForUpdateQuery(PreparedStatement preparedStatement, OrderEntity entity) throws SQLException {
         preparedStatement.setInt(1, entity.getRequestId());
         preparedStatement.setInt(2, entity.getManagerId());
         preparedStatement.setInt(3, entity.getPrice());

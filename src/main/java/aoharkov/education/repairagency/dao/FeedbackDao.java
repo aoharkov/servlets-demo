@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao;
 
-import aoharkov.education.repairagency.entity.Feedback;
+import aoharkov.education.repairagency.entity.FeedbackEntity;
 
-public interface FeedbackDao extends CrudPageableDao<Feedback> {
+public interface FeedbackDao extends CrudPageableDao<FeedbackEntity> {
 
 }

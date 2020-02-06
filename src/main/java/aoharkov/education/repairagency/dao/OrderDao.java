@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.dao;
 
-import aoharkov.education.repairagency.entity.Order;
+import aoharkov.education.repairagency.entity.OrderEntity;
 
-public interface OrderDao extends CrudPageableDao<Order> {
+public interface OrderDao extends CrudPageableDao<OrderEntity> {
 
 }
