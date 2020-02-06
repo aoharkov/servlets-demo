@@ -20,6 +20,12 @@ import aoharkov.education.repairagency.dao.impl.RepairStageDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RequestDaoImpl;
 import aoharkov.education.repairagency.dao.impl.UserDaoImpl;
 import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.mapper.FeedbackMapper;
+import aoharkov.education.repairagency.mapper.OrderMapper;
+import aoharkov.education.repairagency.mapper.RefusalMapper;
+import aoharkov.education.repairagency.mapper.RepairStageMapper;
+import aoharkov.education.repairagency.mapper.RequestMapper;
+import aoharkov.education.repairagency.mapper.UserMapper;
 import aoharkov.education.repairagency.service.AdminService;
 import aoharkov.education.repairagency.service.ClientService;
 import aoharkov.education.repairagency.service.ManagerService;
@@ -61,20 +67,44 @@ public class DependencyInjector {
 
     private static final FeedbackDao FEEDBACK_DAO = new FeedbackDaoImpl(CONNECTOR);
 
+    private static final UserMapper USER_MAPPER = new UserMapper();
+
+    private static final RequestMapper REQUEST_MAPPER = new RequestMapper();
+
+    private static final RefusalMapper REFUSAL_MAPPER = new RefusalMapper();
+
+    private static final OrderMapper ORDER_MAPPER = new OrderMapper();
+
+    private static final RepairStageMapper REPAIR_STAGE_MAPPER = new RepairStageMapper();
+
+    private static final FeedbackMapper FEEDBACK_MAPPER = new FeedbackMapper();
+
     private static final UserService USER_SERVICE =
-            new UserServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR);
+            new UserServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR, USER_DAO, USER_MAPPER);
 
     private static final ClientService CLIENT_SERVICE =
-            new ClientServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+            new ClientServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR,
+                    USER_DAO, REQUEST_DAO, REFUSAL_DAO,
+                    ORDER_DAO, REPAIR_STAGE_DAO, FEEDBACK_DAO,
+                    USER_MAPPER, REQUEST_MAPPER, REFUSAL_MAPPER,
+                    ORDER_MAPPER, REPAIR_STAGE_MAPPER, FEEDBACK_MAPPER);
 
     private static final ManagerService MANAGER_SERVICE =
-            new ManagerServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+            new ManagerServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR,
+                    USER_DAO, REQUEST_DAO, REFUSAL_DAO,
+                    ORDER_DAO, FEEDBACK_DAO,
+                    USER_MAPPER, REQUEST_MAPPER, REFUSAL_MAPPER,
+                    ORDER_MAPPER, FEEDBACK_MAPPER);
 
     private static final MasterService MASTER_SERVICE =
-            new MasterServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, ORDER_DAO, REPAIR_STAGE_DAO);
+            new MasterServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR,
+                    USER_DAO, REQUEST_DAO,
+                    ORDER_DAO, REPAIR_STAGE_DAO,
+                    USER_MAPPER, REQUEST_MAPPER,
+                    ORDER_MAPPER, REPAIR_STAGE_MAPPER);
 
     private static final AdminService ADMIN_SERVICE =
-            new AdminServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR);
+            new AdminServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR, USER_DAO, USER_MAPPER);
 
     private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
 

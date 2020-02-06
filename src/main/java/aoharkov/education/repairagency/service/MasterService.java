@@ -7,5 +7,7 @@ public interface MasterService extends UserService {
 
     Page<Order> findAllOrders(int page, int itemsPerPage);
 
+    String getRequestDescription(Integer orderId);
+
     void updateRepairStage(Integer orderId);
 }
