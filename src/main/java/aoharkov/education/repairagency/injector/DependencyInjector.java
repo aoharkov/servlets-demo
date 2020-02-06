@@ -62,19 +62,19 @@ public class DependencyInjector {
     private static final FeedbackDao FEEDBACK_DAO = new FeedbackDaoImpl(CONNECTOR);
 
     private static final UserService USER_SERVICE =
-            new UserServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
+            new UserServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR);
 
     private static final ClientService CLIENT_SERVICE =
             new ClientServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
 
     private static final ManagerService MANAGER_SERVICE =
-            new ManagerServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+            new ManagerServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REFUSAL_DAO, FEEDBACK_DAO);
 
     private static final MasterService MASTER_SERVICE =
-            new MasterServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO);
+            new MasterServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, ORDER_DAO, REPAIR_STAGE_DAO);
 
     private static final AdminService ADMIN_SERVICE =
-            new AdminServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR, REQUEST_DAO, ORDER_DAO, REPAIR_STAGE_DAO, REFUSAL_DAO, FEEDBACK_DAO);
+            new AdminServiceImpl(USER_DAO, PASSWORD_ENCODER, USER_VALIDATOR);
 
     private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
 

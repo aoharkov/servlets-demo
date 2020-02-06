@@ -1,8 +1,5 @@
 package aoharkov.education.repairagency.service.impl;
 
-import aoharkov.education.repairagency.dao.OrderDao;
-import aoharkov.education.repairagency.dao.RepairStageDao;
-import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
 import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.service.UserService;
@@ -12,29 +9,27 @@ import aoharkov.education.repairagency.service.validator.Validator;
 
 public class UserServiceImpl implements UserService {
     protected final UserDao userDao;
-    protected final RequestDao requestDao;
-    protected final OrderDao orderDao;
-    protected final RepairStageDao repairStageDao;
     private final Encoder encoder;
     private final Validator<User> userValidator;
     protected User user;
 
-    public UserServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator,
-                           RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao) {
+    public UserServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator) {
         this.userDao = userDao;
-        this.requestDao = requestDao;
         this.encoder = encoder;
         this.userValidator = userValidator;
-        this.orderDao = orderDao;
-        this.repairStageDao = repairStageDao;
     }
 
     @Override
     public User login(String email, String password) {
-        String encryptedPassword = encoder.encode(password);
-        /*return userDao.findByEmail(email)
-                .filter(x -> Objects.equals(x.getPassword(), encryptedPassword))
-                .orElseThrow(() -> new EntityNotFoundException());*/
+        /*String encryptedPassword = encoder.encode(password);
+
+        Optional<User> user = userDao.findByEmail(email).map(x -> );
+
+        return userDao.findByEmail(email)
+                .map(UserEntity::getPassword)
+                .filter(pass -> pass.equals(encryptedPassword))
+                .;*/
+
         throw new UnsupportedOperationException();
     }
 

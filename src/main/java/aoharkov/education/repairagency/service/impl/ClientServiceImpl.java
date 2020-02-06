@@ -17,14 +17,20 @@ import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.validator.Validator;
 
 public class ClientServiceImpl extends UserServiceImpl implements ClientService {
+    private final RequestDao requestDao;
     private final RefusalDao refusalDao;
+    private final OrderDao orderDao;
+    private final RepairStageDao repairStageDao;
     private final FeedbackDao feedbackDao;
 
     public ClientServiceImpl(UserDao userDao, Encoder encoder, Validator<User> userValidator,
                              RequestDao requestDao, OrderDao orderDao, RepairStageDao repairStageDao,
                              RefusalDao refusalDao, FeedbackDao feedbackDao) {
-        super(userDao, encoder, userValidator, requestDao, orderDao, repairStageDao);
+        super(userDao, encoder, userValidator);
+        this.requestDao = requestDao;
         this.refusalDao = refusalDao;
+        this.orderDao = orderDao;
+        this.repairStageDao = repairStageDao;
         this.feedbackDao = feedbackDao;
     }
 
