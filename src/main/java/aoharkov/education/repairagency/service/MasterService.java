@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.service;
 
 import aoharkov.education.repairagency.dao.domain.Page;
-import aoharkov.education.repairagency.entity.Order;
+import aoharkov.education.repairagency.domain.Order;
 
 public interface MasterService extends UserService {
 

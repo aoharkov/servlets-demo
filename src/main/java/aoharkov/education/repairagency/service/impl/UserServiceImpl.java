@@ -4,7 +4,7 @@ import aoharkov.education.repairagency.dao.OrderDao;
 import aoharkov.education.repairagency.dao.RepairStageDao;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
-import aoharkov.education.repairagency.entity.User;
+import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.service.UserService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.exception.EntityAlreadyExistException;
@@ -35,9 +35,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String email, String password) {
         String encryptedPassword = encoder.encode(password);
-        return userDao.findByEmail(email)
+        /*return userDao.findByEmail(email)
                 .filter(x -> Objects.equals(x.getPassword(), encryptedPassword))
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(() -> new EntityNotFoundException());*/
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -46,7 +47,8 @@ public class UserServiceImpl implements UserService {
         if (userDao.findByEmail(user.getEmail()).isPresent()) {
             throw new EntityAlreadyExistException();
         }
-        userDao.save(user);
+        //userDao.save(user);
+        throw new UnsupportedOperationException();
     }
 
     @Override

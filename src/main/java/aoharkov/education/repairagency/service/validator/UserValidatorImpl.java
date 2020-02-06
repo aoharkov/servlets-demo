@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.service.validator;
 
-import aoharkov.education.repairagency.entity.User;
+import aoharkov.education.repairagency.domain.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
