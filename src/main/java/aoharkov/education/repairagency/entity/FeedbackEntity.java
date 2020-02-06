@@ -2,13 +2,13 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class Feedback {
+public class FeedbackEntity {
     private final Integer id;
     private final Integer requestId;
     private final String text;
     private final Integer score;
 
-    private Feedback(Builder builder) {
+    private FeedbackEntity(Builder builder) {
         this.id = builder.id;
         this.requestId = builder.requestId;
         this.text = builder.text;
@@ -40,14 +40,14 @@ public class Feedback {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Feedback)) {
+        if (!(o instanceof FeedbackEntity)) {
             return false;
         }
-        Feedback feedback = (Feedback) o;
-        return id.equals(feedback.id) &&
-                requestId.equals(feedback.requestId) &&
-                Objects.equals(text, feedback.text) &&
-                Objects.equals(score, feedback.score);
+        FeedbackEntity feedbackEntity = (FeedbackEntity) o;
+        return id.equals(feedbackEntity.id) &&
+                requestId.equals(feedbackEntity.requestId) &&
+                Objects.equals(text, feedbackEntity.text) &&
+                Objects.equals(score, feedbackEntity.score);
     }
 
     @Override
@@ -94,8 +94,8 @@ public class Feedback {
             return this;
         }
 
-        public Feedback build() {
-            return new Feedback(this);
+        public FeedbackEntity build() {
+            return new FeedbackEntity(this);
         }
     }
 }

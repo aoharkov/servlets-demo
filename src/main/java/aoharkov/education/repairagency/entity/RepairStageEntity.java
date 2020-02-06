@@ -2,11 +2,11 @@ package aoharkov.education.repairagency.entity;
 
 import java.util.Objects;
 
-public class RepairStage {
+public class RepairStageEntity {
     private final Integer id;
     private final String name;
 
-    public RepairStage(Integer id, String name) {
+    public RepairStageEntity(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -24,10 +24,10 @@ public class RepairStage {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof RepairStage)) {
+        if (!(o instanceof RepairStageEntity)) {
             return false;
         }
-        RepairStage that = (RepairStage) o;
+        RepairStageEntity that = (RepairStageEntity) o;
         return id.equals(that.id) &&
                 name.equals(that.name);
     }
