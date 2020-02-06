@@ -1,6 +1,6 @@
 package aoharkov.education.repairagency.mapper;
 
-public interface Mapper <E, D> {
+public interface Mapper<E, D> {
 
     E mapDomainToEntity(D item);
 

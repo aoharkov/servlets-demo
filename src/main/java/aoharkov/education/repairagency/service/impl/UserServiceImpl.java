@@ -8,10 +8,7 @@ import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.service.UserService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.exception.EntityAlreadyExistException;
-import aoharkov.education.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.education.repairagency.service.validator.Validator;
-
-import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
     protected final UserDao userDao;

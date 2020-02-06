@@ -26,7 +26,10 @@ public class RepairStageDaoImpl extends AbstractCrudPageableDaoImpl<RepairStageE
 
     @Override
     protected RepairStageEntity mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return new RepairStageEntity(resultSet.getInt("id"), resultSet.getString("name"));
+        return RepairStageEntity.builder()
+                .withId(resultSet.getInt("id"))
+                .withName(resultSet.getString("name"))
+                .build();
     }
 
     @Override

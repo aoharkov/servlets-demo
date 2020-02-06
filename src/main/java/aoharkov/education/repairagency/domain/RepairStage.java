@@ -6,9 +6,13 @@ public class RepairStage {
     private final Integer id;
     private final String name;
 
-    public RepairStage(Integer id, String name) {
-        this.id = id;
-        this.name = name;
+    private RepairStage(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Integer getId() {
@@ -43,5 +47,27 @@ public class RepairStage {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public static final class Builder {
+        private Integer id;
+        private String name;
+
+        private Builder() {
+        }
+
+        public Builder withId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public RepairStage build() {
+            return new RepairStage(this);
+        }
     }
 }
