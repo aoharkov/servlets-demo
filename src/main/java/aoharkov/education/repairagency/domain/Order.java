@@ -4,19 +4,19 @@ import java.util.Objects;
 
 public class Order {
     private final Integer id;
-    private final Integer requestId;
-    private final Integer managerId;
+    private final Request request;
+    private final User manager;
     private final Integer price;
-    private final Integer masterId;
-    private final Integer repairStageId;
+    private final User master;
+    private final RepairStage repairStage;
 
     private Order(Builder builder) {
         this.id = builder.id;
-        this.requestId = builder.requestId;
-        this.managerId = builder.managerId;
+        this.request = builder.request;
+        this.manager = builder.manager;
         this.price = builder.price;
-        this.masterId = builder.masterId;
-        this.repairStageId = builder.repairStageId;
+        this.master = builder.master;
+        this.repairStage = builder.repairStage;
     }
 
     public static Builder builder() {
@@ -27,24 +27,24 @@ public class Order {
         return id;
     }
 
-    public Integer getRequestId() {
-        return requestId;
+    public Request getRequest() {
+        return request;
     }
 
-    public Integer getManagerId() {
-        return managerId;
+    public User getManager() {
+        return manager;
     }
 
     public Integer getPrice() {
         return price;
     }
 
-    public Integer getMasterId() {
-        return masterId;
+    public User getMaster() {
+        return master;
     }
 
-    public Integer getRepairStageId() {
-        return repairStageId;
+    public RepairStage getRepairStage() {
+        return repairStage;
     }
 
     @Override
@@ -57,37 +57,37 @@ public class Order {
         }
         Order order = (Order) o;
         return id.equals(order.id) &&
-                requestId.equals(order.requestId) &&
-                managerId.equals(order.managerId) &&
-                price.equals(order.price) &&
-                masterId.equals(order.masterId) &&
-                repairStageId.equals(order.repairStageId);
+                Objects.equals(request, order.request) &&
+                Objects.equals(manager, order.manager) &&
+                Objects.equals(price, order.price) &&
+                Objects.equals(master, order.master) &&
+                Objects.equals(repairStage, order.repairStage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, requestId, managerId, price, masterId, repairStageId);
+        return Objects.hash(id, request, manager, price, master, repairStage);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", requestId=" + requestId +
-                ", managerId=" + managerId +
+                ", request=" + request +
+                ", manager=" + manager +
                 ", price=" + price +
-                ", masterId=" + masterId +
-                ", repairStageId=" + repairStageId +
+                ", master=" + master +
+                ", repairStage=" + repairStage +
                 '}';
     }
 
     public static final class Builder {
         private Integer id;
-        private Integer requestId;
-        private Integer managerId;
+        private Request request;
+        private User manager;
         private Integer price;
-        private Integer masterId;
-        private Integer repairStageId;
+        private User master;
+        private RepairStage repairStage;
 
         private Builder() {
         }
@@ -97,13 +97,13 @@ public class Order {
             return this;
         }
 
-        public Builder withRequestId(Integer requestId) {
-            this.requestId = requestId;
+        public Builder withRequest(Request request) {
+            this.request = request;
             return this;
         }
 
-        public Builder withManagerId(Integer managerId) {
-            this.managerId = managerId;
+        public Builder withManager(User manager) {
+            this.manager = manager;
             return this;
         }
 
@@ -112,13 +112,13 @@ public class Order {
             return this;
         }
 
-        public Builder withMasterId(Integer masterId) {
-            this.masterId = masterId;
+        public Builder withMaster(User master) {
+            this.master = master;
             return this;
         }
 
-        public Builder withRepairStageId(Integer repairStageId) {
-            this.repairStageId = repairStageId;
+        public Builder withRepairStage(RepairStage repairStage) {
+            this.repairStage = repairStage;
             return this;
         }
 

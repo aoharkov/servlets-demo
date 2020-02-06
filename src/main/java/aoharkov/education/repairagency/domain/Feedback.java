@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Feedback {
     private final Integer id;
-    private final Integer requestId;
+    private final Request request;
     private final String text;
     private final Integer score;
 
     private Feedback(Builder builder) {
         this.id = builder.id;
-        this.requestId = builder.requestId;
+        this.request = builder.request;
         this.text = builder.text;
         this.score = builder.score;
     }
@@ -23,8 +23,8 @@ public class Feedback {
         return id;
     }
 
-    public Integer getRequestId() {
-        return requestId;
+    public Request getRequest() {
+        return request;
     }
 
     public String getText() {
@@ -45,21 +45,21 @@ public class Feedback {
         }
         Feedback feedback = (Feedback) o;
         return id.equals(feedback.id) &&
-                requestId.equals(feedback.requestId) &&
+                Objects.equals(request, feedback.request) &&
                 Objects.equals(text, feedback.text) &&
                 Objects.equals(score, feedback.score);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, requestId, text, score);
+        return Objects.hash(id, request, text, score);
     }
 
     @Override
     public String toString() {
         return "Feedback{" +
                 "id=" + id +
-                ", requestId=" + requestId +
+                ", request=" + request +
                 ", text='" + text + '\'' +
                 ", score=" + score +
                 '}';
@@ -67,7 +67,7 @@ public class Feedback {
 
     public static final class Builder {
         private Integer id;
-        private Integer requestId;
+        private Request request;
         private String text;
         private Integer score;
 
@@ -79,8 +79,8 @@ public class Feedback {
             return this;
         }
 
-        public Builder withRequestId(Integer requestId) {
-            this.requestId = requestId;
+        public Builder withRequest(Request request) {
+            this.request = request;
             return this;
         }
 
