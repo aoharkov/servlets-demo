@@ -7,11 +7,13 @@ import aoharkov.education.repairagency.domain.Refusal;
 import aoharkov.education.repairagency.domain.RepairStage;
 import aoharkov.education.repairagency.domain.Request;
 
+import java.util.List;
+
 public interface ClientService extends UserService {
 
     void saveRequest(Request request);
 
-    Page<Request> findOwnRequests(int page, int itemsPerPage);
+    List<Request> findOwnRequests(int page, int itemsPerPage);
 
     Order findOrder(Integer requestId);
 

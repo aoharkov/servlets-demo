@@ -6,8 +6,8 @@ public class Request {
     private final Integer id;
     private final User client;
     private final String description;
-    private final Boolean viewed;
-    private final Boolean accepted;
+    private Boolean viewed;
+    private Boolean accepted;
 
     private Request(Builder builder) {
         this.id = builder.id;
@@ -39,6 +39,14 @@ public class Request {
 
     public Boolean getAccepted() {
         return accepted;
+    }
+
+    public void setViewed(Boolean viewed) {
+        this.viewed = viewed;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
     }
 
     @Override

@@ -6,13 +6,15 @@ import aoharkov.education.repairagency.domain.Order;
 import aoharkov.education.repairagency.domain.Refusal;
 import aoharkov.education.repairagency.domain.Request;
 
+import java.util.List;
+
 public interface ManagerService extends UserService {
 
-    Page<Request> findAllRequests(int page, int itemsPerPage);
+    List<Request> findAllRequests(int page, int itemsPerPage);
 
-    Order acceptRequest(Integer requestId);
+    boolean acceptRequest(Order order);
 
-    Refusal declineRequest(Integer requestId);
+    boolean declineRequest(Refusal refusal);
 
-    Page<Feedback> findAllFeedback(int page, int itemsPerPage);
+    List<Feedback> findAllFeedback(int page, int itemsPerPage);
 }

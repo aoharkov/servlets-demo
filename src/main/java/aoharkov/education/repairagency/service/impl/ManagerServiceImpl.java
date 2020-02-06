@@ -11,6 +11,9 @@ import aoharkov.education.repairagency.domain.Order;
 import aoharkov.education.repairagency.domain.Refusal;
 import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.entity.FeedbackEntity;
+import aoharkov.education.repairagency.entity.RequestEntity;
+import aoharkov.education.repairagency.entity.UserEntity;
 import aoharkov.education.repairagency.mapper.FeedbackMapper;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RefusalMapper;
@@ -19,6 +22,10 @@ import aoharkov.education.repairagency.mapper.UserMapper;
 import aoharkov.education.repairagency.service.ManagerService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.validator.Validator;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ManagerServiceImpl extends UserServiceImpl implements ManagerService {
     private final RequestDao requestDao;
@@ -47,22 +54,46 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
     }
 
     @Override
-    public Page<Request> findAllRequests(int page, int itemsPerPage) {
-        return null;
+    public List<Request> findAllRequests(int page, int itemsPerPage) {
+        Page<RequestEntity> requestEntityPage = requestDao.findAll(page, itemsPerPage);
+        return requestEntityPage.getItems().stream()
+                .map(requestMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Order acceptRequest(Integer requestId) {
-        return null;
+    public boolean acceptRequest(Order order) {
+        Optional<RequestEntity> requestEntity = requestDao.findById(order.getRequest().getId());
+        if (requestEntity.isPresent()) {
+            Request request = requestMapper.mapEntityToDomain(requestEntity.get());
+            request.setViewed(true);
+            request.setViewed(true);
+            requestDao.save(requestMapper.mapDomainToEntity(request));
+            orderDao.save(orderMapper.mapDomainToEntity(order));
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public Refusal declineRequest(Integer requestId) {
-        return null;
+    public boolean declineRequest(Refusal refusal) {
+        Optional<RequestEntity> requestEntity = requestDao.findById(refusal.getRequest().getId());
+        if (requestEntity.isPresent()) {
+            Request request = requestMapper.mapEntityToDomain(requestEntity.get());
+            request.setViewed(true);
+            request.setViewed(false);
+            requestDao.save(requestMapper.mapDomainToEntity(request));
+            refusalDao.save(refusalMapper.mapDomainToEntity(refusal));
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public Page<Feedback> findAllFeedback(int page, int itemsPerPage) {
-        return null;
+    public List<Feedback> findAllFeedback(int page, int itemsPerPage) {
+        Page<FeedbackEntity> feedbackEntityPage = feedbackDao.findAll(page, itemsPerPage);
+        return feedbackEntityPage.getItems().stream()
+                .map(feedbackMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
     }
 }

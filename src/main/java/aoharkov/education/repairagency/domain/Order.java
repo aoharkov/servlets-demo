@@ -8,7 +8,7 @@ public class Order {
     private final User manager;
     private final Integer price;
     private final User master;
-    private final RepairStage repairStage;
+    private RepairStage repairStage;
 
     private Order(Builder builder) {
         this.id = builder.id;
@@ -45,6 +45,10 @@ public class Order {
 
     public RepairStage getRepairStage() {
         return repairStage;
+    }
+
+    public void setRepairStage(RepairStage repairStage) {
+        this.repairStage = repairStage;
     }
 
     @Override

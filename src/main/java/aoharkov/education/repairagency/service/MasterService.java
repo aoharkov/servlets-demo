@@ -2,12 +2,15 @@ package aoharkov.education.repairagency.service;
 
 import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.domain.Order;
+import aoharkov.education.repairagency.domain.RepairStage;
+
+import java.util.List;
 
 public interface MasterService extends UserService {
 
-    Page<Order> findAllOrders(int page, int itemsPerPage);
+    List<Order> findAllOrders(int page, int itemsPerPage);
 
     String getRequestDescription(Integer orderId);
 
-    void updateRepairStage(Integer orderId);
+    boolean updateRepairStage(Order order, RepairStage repairStage);
 }

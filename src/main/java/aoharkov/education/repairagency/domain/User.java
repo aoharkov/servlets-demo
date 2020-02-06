@@ -8,7 +8,7 @@ public class User {
     private final String surname;
     private final String email;
     private final String password;
-    private final Role role;
+    private Role role;
 
     private User(Builder builder) {
         this.id = builder.id;
@@ -45,6 +45,10 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

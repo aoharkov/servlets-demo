@@ -13,6 +13,7 @@ import aoharkov.education.repairagency.domain.Refusal;
 import aoharkov.education.repairagency.domain.RepairStage;
 import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.entity.RefusalEntity;
 import aoharkov.education.repairagency.mapper.FeedbackMapper;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RefusalMapper;
@@ -22,6 +23,9 @@ import aoharkov.education.repairagency.mapper.UserMapper;
 import aoharkov.education.repairagency.service.ClientService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.validator.Validator;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ClientServiceImpl extends UserServiceImpl implements ClientService {
     private final RequestDao requestDao;
@@ -55,31 +59,35 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
 
     @Override
     public void saveRequest(Request request) {
-
+        requestDao.save(requestMapper.mapDomainToEntity(request));
     }
 
     @Override
-    public Page<Request> findOwnRequests(int page, int itemsPerPage) {
-        return null;
+    public List<Request> findOwnRequests(int page, int itemsPerPage) {
+        //todo find with where
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Order findOrder(Integer requestId) {
-        return null;
+        //todo findByRequestID
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Refusal findRefusal(Integer requestId) {
-        return null;
+        //todo findByRequestID
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void saveFeedback(Feedback feedback) {
-
+        feedbackDao.save(feedbackMapper.mapDomainToEntity(feedback));
     }
 
     @Override
     public RepairStage getRepairStage(Integer requestId) {
-        return null;
+        //todo with JOIN
+        throw new UnsupportedOperationException();
     }
 }
