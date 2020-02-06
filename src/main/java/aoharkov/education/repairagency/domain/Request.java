@@ -88,7 +88,7 @@ public class Request {
             return this;
         }
 
-        public Builder withClientId(User client) {
+        public Builder withClient(User client) {
             this.client = client;
             return this;
         }

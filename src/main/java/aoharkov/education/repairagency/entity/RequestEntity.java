@@ -49,12 +49,12 @@ public class RequestEntity {
         if (!(o instanceof RequestEntity)) {
             return false;
         }
-        RequestEntity requestEntity = (RequestEntity) o;
-        return id.equals(requestEntity.id) &&
-                clientId.equals(requestEntity.clientId) &&
-                description.equals(requestEntity.description) &&
-                Objects.equals(viewed, requestEntity.viewed) &&
-                Objects.equals(accepted, requestEntity.accepted);
+        RequestEntity that = (RequestEntity) o;
+        return id.equals(that.id) &&
+                Objects.equals(clientId, that.clientId) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(viewed, that.viewed) &&
+                Objects.equals(accepted, that.accepted);
     }
 
     @Override

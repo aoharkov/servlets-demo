@@ -79,7 +79,7 @@ public class Refusal {
             return this;
         }
 
-        public Builder withRequestId(Request request) {
+        public Builder withRequest(Request request) {
             this.request = request;
             return this;
         }
@@ -89,7 +89,7 @@ public class Refusal {
             return this;
         }
 
-        public Builder withManagerId(User manager) {
+        public Builder withManager(User manager) {
             this.manager = manager;
             return this;
         }

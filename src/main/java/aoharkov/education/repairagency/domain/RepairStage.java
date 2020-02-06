@@ -29,7 +29,7 @@ public class RepairStage {
         }
         RepairStage that = (RepairStage) o;
         return id.equals(that.id) &&
-                name.equals(that.name);
+                Objects.equals(name, that.name);
     }
 
     @Override

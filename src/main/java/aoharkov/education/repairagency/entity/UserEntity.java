@@ -51,15 +51,19 @@ public class UserEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserEntity)) return false;
-        UserEntity userEntity = (UserEntity) o;
-        return id.equals(userEntity.id) &&
-                name.equals(userEntity.name) &&
-                Objects.equals(surname, userEntity.surname) &&
-                email.equals(userEntity.email) &&
-                password.equals(userEntity.password) &&
-                role == userEntity.role;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof UserEntity)) {
+            return false;
+        }
+        UserEntity entity = (UserEntity) o;
+        return id.equals(entity.id) &&
+                Objects.equals(name, entity.name) &&
+                Objects.equals(surname, entity.surname) &&
+                Objects.equals(email, entity.email) &&
+                Objects.equals(password, entity.password) &&
+                role == entity.role;
     }
 
     @Override

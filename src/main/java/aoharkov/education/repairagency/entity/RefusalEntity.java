@@ -43,11 +43,11 @@ public class RefusalEntity {
         if (!(o instanceof RefusalEntity)) {
             return false;
         }
-        RefusalEntity refusalEntity = (RefusalEntity) o;
-        return id.equals(refusalEntity.id) &&
-                requestId.equals(refusalEntity.requestId) &&
-                explanation.equals(refusalEntity.explanation) &&
-                managerId.equals(refusalEntity.managerId);
+        RefusalEntity that = (RefusalEntity) o;
+        return id.equals(that.id) &&
+                Objects.equals(requestId, that.requestId) &&
+                Objects.equals(explanation, that.explanation) &&
+                Objects.equals(managerId, that.managerId);
     }
 
     @Override

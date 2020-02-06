@@ -53,10 +53,10 @@ public class User {
         if (!(o instanceof User)) return false;
         User user = (User) o;
         return id.equals(user.id) &&
-                name.equals(user.name) &&
+                Objects.equals(name, user.name) &&
                 Objects.equals(surname, user.surname) &&
-                email.equals(user.email) &&
-                password.equals(user.password) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
                 role == user.role;
     }
 

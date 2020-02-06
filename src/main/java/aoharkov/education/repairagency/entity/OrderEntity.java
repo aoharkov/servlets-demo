@@ -55,13 +55,13 @@ public class OrderEntity {
         if (!(o instanceof OrderEntity)) {
             return false;
         }
-        OrderEntity orderEntity = (OrderEntity) o;
-        return id.equals(orderEntity.id) &&
-                requestId.equals(orderEntity.requestId) &&
-                managerId.equals(orderEntity.managerId) &&
-                price.equals(orderEntity.price) &&
-                masterId.equals(orderEntity.masterId) &&
-                repairStageId.equals(orderEntity.repairStageId);
+        OrderEntity that = (OrderEntity) o;
+        return id.equals(that.id) &&
+                Objects.equals(requestId, that.requestId) &&
+                Objects.equals(managerId, that.managerId) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(masterId, that.masterId) &&
+                Objects.equals(repairStageId, that.repairStageId);
     }
 
     @Override

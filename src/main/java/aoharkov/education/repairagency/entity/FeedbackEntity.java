@@ -43,11 +43,11 @@ public class FeedbackEntity {
         if (!(o instanceof FeedbackEntity)) {
             return false;
         }
-        FeedbackEntity feedbackEntity = (FeedbackEntity) o;
-        return id.equals(feedbackEntity.id) &&
-                requestId.equals(feedbackEntity.requestId) &&
-                Objects.equals(text, feedbackEntity.text) &&
-                Objects.equals(score, feedbackEntity.score);
+        FeedbackEntity that = (FeedbackEntity) o;
+        return id.equals(that.id) &&
+                Objects.equals(requestId, that.requestId) &&
+                Objects.equals(text, that.text) &&
+                Objects.equals(score, that.score);
     }
 
     @Override
