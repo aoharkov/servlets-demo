@@ -19,7 +19,7 @@ import aoharkov.education.repairagency.dao.impl.RefusalDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RepairStageDaoImpl;
 import aoharkov.education.repairagency.dao.impl.RequestDaoImpl;
 import aoharkov.education.repairagency.dao.impl.UserDaoImpl;
-import aoharkov.education.repairagency.entity.User;
+import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.service.AdminService;
 import aoharkov.education.repairagency.service.ClientService;
 import aoharkov.education.repairagency.service.ManagerService;
