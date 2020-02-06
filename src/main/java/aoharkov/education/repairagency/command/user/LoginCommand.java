@@ -1,7 +1,7 @@
 package aoharkov.education.repairagency.command.user;
 
 import aoharkov.education.repairagency.command.Command;
-import aoharkov.education.repairagency.entity.User;
+import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;

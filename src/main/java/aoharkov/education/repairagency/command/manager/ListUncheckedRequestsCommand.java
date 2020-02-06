@@ -1,8 +1,8 @@
 package aoharkov.education.repairagency.command.manager;
 
 import aoharkov.education.repairagency.command.Command;
-import aoharkov.education.repairagency.entity.Role;
-import aoharkov.education.repairagency.entity.User;
+import aoharkov.education.repairagency.domain.Role;
+import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.service.ManagerService;
 
 import javax.servlet.http.HttpServletRequest;
