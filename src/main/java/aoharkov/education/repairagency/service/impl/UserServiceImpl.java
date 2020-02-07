@@ -7,15 +7,17 @@ import aoharkov.education.repairagency.mapper.UserMapper;
 import aoharkov.education.repairagency.service.UserService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.exception.EntityAlreadyExistException;
-import aoharkov.education.repairagency.service.exception.InvalidEmailException;
-import aoharkov.education.repairagency.service.exception.InvalidPasswordException;
+import aoharkov.education.repairagency.service.exception.EntityNotFoundException;
+import aoharkov.education.repairagency.service.exception.IncorrectPasswordException;
+import aoharkov.education.repairagency.service.exception.validation.InvalidEmailException;
+import aoharkov.education.repairagency.service.exception.validation.InvalidPasswordException;
 import aoharkov.education.repairagency.service.validator.Validator;
 
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
-    final UserDao userDao;
-    final UserMapper userMapper;
+    protected final UserDao userDao;
+    protected final UserMapper userMapper;
     private final Encoder encoder;
     private final Validator<User> userValidator;
 
@@ -29,17 +31,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        String encryptedPassword = encoder.encode(password);
+        userValidator.validateEmail(email);
         Optional<UserEntity> userEntity = userDao.findByEmail(email);
         if (userEntity.isPresent()) {
-            User user = userMapper.mapEntityToDomain(userEntity.get());
-            if (encryptedPassword.equals(user.getPassword())) {
-                return user;
+            String encryptedPassword = encoder.encode(password);
+            if (encryptedPassword.equals(userEntity.get().getPassword())) {
+                return userMapper.mapEntityToDomain(userEntity.get());
             } else {
-                throw new InvalidPasswordException();
+                throw new IncorrectPasswordException();
             }
         }
-        throw new InvalidEmailException();
+        throw new EntityNotFoundException();
     }
 
     @Override
