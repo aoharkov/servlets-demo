@@ -19,6 +19,7 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<RequestEntity> i
     private static final String FIND_BY_CLIENT_ID_QUERY = "SELECT * FROM requests WHERE client_id = ? LIMIT ?, ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM requests LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM requests";
+    private static final String COUNT_QUERY_FORMAT = "SELECT COUNT(id) AS rowcount FROM requests WHERE client_id = %d";
     private static final String UPDATE_QUERY =
             "UPDATE requests SET client_id = ?, description = ?, viewed = ?, accepted = ? WHERE id = ?";
 
@@ -28,7 +29,8 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<RequestEntity> i
 
     @Override
     public Page<RequestEntity> findAllByClientId(int pageNumber, int itemsPerPage, int clientId) {
-        return findAllByForeignId(pageNumber, itemsPerPage, clientId, FIND_BY_CLIENT_ID_QUERY);
+        String countQuery = String.format(COUNT_QUERY_FORMAT, clientId);
+        return findAllByForeignId(pageNumber, itemsPerPage, clientId, FIND_BY_CLIENT_ID_QUERY, countQuery);
     }
 
     @Override

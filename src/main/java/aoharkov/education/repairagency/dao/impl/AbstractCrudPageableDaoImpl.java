@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
+import static aoharkov.education.repairagency.dao.util.PageCalculator.calculateMaxPageNumber;
+import static aoharkov.education.repairagency.dao.util.PageCalculator.calculateOffset;
+import static aoharkov.education.repairagency.dao.util.PageCalculator.checkPageNumber;
+
 public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<E> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractCrudPageableDaoImpl.class);
     protected static final BiConsumer<PreparedStatement, Integer> INT_PARAM_SETTER = ((preparedStatement, integer) -> {
@@ -38,15 +42,15 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     private final String saveQuery;
     private final String findByIdQuery;
     private final String findAllAtPageQuery;
-    private final String countQuery;
+    private final String defaultCountQuery;
     private final String updateQuery;
 
-    public AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String countQuery, String updateQuery) {
+    public AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String defaultCountQuery, String updateQuery) {
         this.connector = connector;
         this.saveQuery = saveQuery;
         this.findByIdQuery = findByIdQuery;
         this.findAllAtPageQuery = findAllAtPageQuery;
-        this.countQuery = countQuery;
+        this.defaultCountQuery = defaultCountQuery;
         this.updateQuery = updateQuery;
     }
 
@@ -102,23 +106,19 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
 
     @Override
     public Page<E> findAll(int pageNumber, int itemsPerPage, String query) {
-        return findAll(pageNumber, itemsPerPage, query, false);
+        return findAll(pageNumber, itemsPerPage, query, false, defaultCountQuery);
     }
 
     @Override
-    public Page<E> findAllByForeignId(int pageNumber, int itemsPerPage, int foreignId, String query) {
-        return findAll(pageNumber, itemsPerPage, query, true, foreignId);
+    public Page<E> findAllByForeignId(int pageNumber, int itemsPerPage, int foreignId, String query, String customCountQuery) {
+        return findAll(pageNumber, itemsPerPage, query, true, customCountQuery, foreignId);
     }
 
-    private Page<E> findAll(int pageNumber, int itemsPerPage, String query, boolean withForeignId, Integer ... identifiers) {
-        int maxPageNumber = (count() + itemsPerPage - 1) / itemsPerPage;
-        if (pageNumber > maxPageNumber) {
-            pageNumber = maxPageNumber;
-        }
-        if (pageNumber < 1) {
-            pageNumber = 1;
-        }
-        int offset = (pageNumber - 1) * itemsPerPage;
+    private Page<E> findAll(int pageNumber, int itemsPerPage, String query, boolean withForeignId, String queryForCount,
+                            Integer ... identifiers) {
+        int maxPageNumber = calculateMaxPageNumber(itemsPerPage, count(queryForCount));
+        pageNumber = checkPageNumber(pageNumber, maxPageNumber);
+        int offset = calculateOffset(pageNumber, itemsPerPage);
 
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -156,8 +156,13 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
 
     @Override
     public int count() {
+        return count(defaultCountQuery);
+    }
+
+    @Override
+    public int count(String query) {
         try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(countQuery)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 resultSet.next();
                 return resultSet.getInt("rowcount");

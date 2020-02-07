@@ -13,6 +13,7 @@ import aoharkov.education.repairagency.domain.Refusal;
 import aoharkov.education.repairagency.domain.RepairStage;
 import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.entity.OrderEntity;
 import aoharkov.education.repairagency.entity.RequestEntity;
 import aoharkov.education.repairagency.entity.UserEntity;
 import aoharkov.education.repairagency.mapper.FeedbackMapper;
@@ -26,6 +27,7 @@ import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.validator.Validator;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClientServiceImpl extends UserServiceImpl implements ClientService {
@@ -73,8 +75,8 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
 
     @Override
     public Order findOrder(Integer requestId) {
-        //todo findByRequestID
-        throw new UnsupportedOperationException();
+        Optional<OrderEntity> orderEntity = orderDao.findByRequestId(requestId);
+        return orderEntity.map(orderMapper::mapEntityToDomain).orElse(null);
     }
 
     @Override

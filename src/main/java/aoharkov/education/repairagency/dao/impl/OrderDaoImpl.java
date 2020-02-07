@@ -3,15 +3,19 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.OrderDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
 import aoharkov.education.repairagency.entity.OrderEntity;
+import aoharkov.education.repairagency.entity.RequestEntity;
+import aoharkov.education.repairagency.entity.UserEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<OrderEntity> implements OrderDao {
     private static final String SAVE_QUERY =
             "INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id) values(?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM orders WHERE id = ?";
+    private static final String FIND_BY_REQUEST_ID_QUERY = "SELECT * FROM orders WHERE request_id = ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM orders LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM orders";
     private static final String UPDATE_QUERY =
@@ -19,6 +23,11 @@ public class OrderDaoImpl extends AbstractCrudPageableDaoImpl<OrderEntity> imple
 
     public OrderDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
+    }
+
+    @Override
+    public Optional<OrderEntity> findByRequestId(Integer requestId) {
+        return findByParam(requestId, FIND_BY_REQUEST_ID_QUERY, INT_PARAM_SETTER);
     }
 
     @Override
