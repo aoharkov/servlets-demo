@@ -13,7 +13,6 @@ import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.entity.FeedbackEntity;
 import aoharkov.education.repairagency.entity.RequestEntity;
-import aoharkov.education.repairagency.entity.UserEntity;
 import aoharkov.education.repairagency.mapper.FeedbackMapper;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RefusalMapper;
@@ -63,12 +62,13 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
 
     @Override
     public boolean acceptRequest(Order order) {
+        //todo as transaction in dao
         Optional<RequestEntity> requestEntity = requestDao.findById(order.getRequest().getId());
         if (requestEntity.isPresent()) {
             Request request = requestMapper.mapEntityToDomain(requestEntity.get());
             request.setViewed(true);
-            request.setViewed(true);
-            requestDao.save(requestMapper.mapDomainToEntity(request));
+            request.setAccepted(true);
+            requestDao.update(requestMapper.mapDomainToEntity(request));
             orderDao.save(orderMapper.mapDomainToEntity(order));
             return true;
         }
@@ -77,12 +77,13 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
 
     @Override
     public boolean declineRequest(Refusal refusal) {
+        //todo as transaction in dao
         Optional<RequestEntity> requestEntity = requestDao.findById(refusal.getRequest().getId());
         if (requestEntity.isPresent()) {
             Request request = requestMapper.mapEntityToDomain(requestEntity.get());
             request.setViewed(true);
             request.setViewed(false);
-            requestDao.save(requestMapper.mapDomainToEntity(request));
+            requestDao.update(requestMapper.mapDomainToEntity(request));
             refusalDao.save(refusalMapper.mapDomainToEntity(refusal));
             return true;
         }

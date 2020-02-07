@@ -25,15 +25,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        /*String encryptedPassword = encoder.encode(password);
+  /*      String encryptedPassword = encoder.encode(password);
 
-        Optional<User> user = userDao.findByEmail(email).map(x -> );
+        Optional<UserEntity> userEntity = userDao.findByEmail(email);
 
         return userDao.findByEmail(email)
                 .map(UserEntity::getPassword)
-                .filter(pass -> pass.equals(encryptedPassword))
-                .;*/
-
+                .filter(pass -> pass.equals(encryptedPassword));
+*/
         throw new UnsupportedOperationException();
     }
 
@@ -43,17 +42,12 @@ public class UserServiceImpl implements UserService {
         if (userDao.findByEmail(user.getEmail()).isPresent()) {
             throw new EntityAlreadyExistException();
         }
-        //userDao.save(user);
-        throw new UnsupportedOperationException();
+        userDao.save(userMapper.mapDomainToEntity(user));
     }
 
     @Override
     public void logout() {
-
+        throw new UnsupportedOperationException();
     }
 
-    @Override
-    public void setLang(String lang) {
-
-    }
 }

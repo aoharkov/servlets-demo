@@ -23,6 +23,6 @@ public class LoginCommand implements Command {
 
         final HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        return "view/main.jsp";
+        return "view/client/home.jsp";
     }
 }

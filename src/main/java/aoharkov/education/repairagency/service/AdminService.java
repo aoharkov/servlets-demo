@@ -1,6 +1,5 @@
 package aoharkov.education.repairagency.service;
 
-import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.domain.Role;
 import aoharkov.education.repairagency.domain.User;
 

@@ -9,6 +9,4 @@ public interface UserService {
     void register(User user);
 
     void logout();
-
-    void setLang(String lang);
 }
