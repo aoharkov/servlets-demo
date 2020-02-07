@@ -37,12 +37,12 @@ public class Request {
         return viewed;
     }
 
-    public Boolean getAccepted() {
-        return accepted;
-    }
-
     public void setViewed(Boolean viewed) {
         this.viewed = viewed;
+    }
+
+    public Boolean getAccepted() {
+        return accepted;
     }
 
     public void setAccepted(Boolean accepted) {

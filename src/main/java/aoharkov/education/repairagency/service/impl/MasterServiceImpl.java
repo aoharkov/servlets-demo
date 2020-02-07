@@ -7,15 +7,18 @@ import aoharkov.education.repairagency.dao.UserDao;
 import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.domain.Order;
 import aoharkov.education.repairagency.domain.RepairStage;
+import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.entity.OrderEntity;
 import aoharkov.education.repairagency.entity.RepairStageEntity;
+import aoharkov.education.repairagency.entity.RequestEntity;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RepairStageMapper;
 import aoharkov.education.repairagency.mapper.RequestMapper;
 import aoharkov.education.repairagency.mapper.UserMapper;
 import aoharkov.education.repairagency.service.MasterService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
+import aoharkov.education.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.education.repairagency.service.validator.Validator;
 
 import java.util.List;
@@ -53,9 +56,15 @@ public class MasterServiceImpl extends UserServiceImpl implements MasterService 
     }
 
     @Override
-    public String getRequestDescription(Integer orderId) {
-        //todo with JOIN
-        throw new UnsupportedOperationException();
+    public Request getRequest(Integer orderId) {
+        Optional<OrderEntity> orderEntity = orderDao.findById(orderId);
+        if (orderEntity.isPresent()) {
+            Optional<RequestEntity> requestEntity = requestDao.findById(orderEntity.get().getRequestId());
+            if (requestEntity.isPresent()) {
+                return requestMapper.mapEntityToDomain(requestEntity.get());
+            }
+        }
+        throw new EntityNotFoundException();
     }
 
     @Override

@@ -3,14 +3,11 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
 import aoharkov.education.repairagency.dao.domain.Page;
-import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.entity.RequestEntity;
-import aoharkov.education.repairagency.entity.UserEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<RequestEntity> implements RequestDao {
     private static final String SAVE_QUERY =

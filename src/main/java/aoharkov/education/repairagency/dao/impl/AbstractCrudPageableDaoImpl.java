@@ -115,7 +115,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     }
 
     private Page<E> findAll(int pageNumber, int itemsPerPage, String query, boolean withForeignId, String queryForCount,
-                            Integer ... identifiers) {
+                            Integer... identifiers) {
         int maxPageNumber = calculateMaxPageNumber(itemsPerPage, count(queryForCount));
         pageNumber = checkPageNumber(pageNumber, maxPageNumber);
         int offset = calculateOffset(pageNumber, itemsPerPage);

@@ -3,8 +3,6 @@ package aoharkov.education.repairagency.dao.impl;
 import aoharkov.education.repairagency.dao.OrderDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
 import aoharkov.education.repairagency.entity.OrderEntity;
-import aoharkov.education.repairagency.entity.RequestEntity;
-import aoharkov.education.repairagency.entity.UserEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

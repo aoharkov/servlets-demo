@@ -4,7 +4,6 @@ import aoharkov.education.repairagency.domain.User;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -19,7 +18,7 @@ public class LoginFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         //todo what if session is null?
         final HttpSession session = req.getSession();
-        if (session==null) {
+        if (session == null) {
             req.getRequestDispatcher("login.jsp").forward(req, response);
         } else {
             final User user = (User) session.getAttribute("user");
