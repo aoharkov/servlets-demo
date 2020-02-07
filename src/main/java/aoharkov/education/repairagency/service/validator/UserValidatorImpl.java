@@ -18,7 +18,7 @@ public class UserValidatorImpl implements Validator<User> {
             = String.format("password is longer than %d 60 symbols", MAX_PASSWORD_LENGTH);
 
     @Override
-    public void validate(User entity) throws ValidateException {
+    public void validate(User entity){
         try {
             validateEmail(entity.getEmail());
             validatePassword(entity.getPassword());
@@ -28,7 +28,7 @@ public class UserValidatorImpl implements Validator<User> {
     }
 
     @Override
-    public void validateEmail(String email) throws ValidateException {
+    public void validateEmail(String email) {
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
@@ -36,7 +36,7 @@ public class UserValidatorImpl implements Validator<User> {
         }
     }
 
-    private void validatePassword(String password) throws ValidateException {
+    private void validatePassword(String password) {
         if (password.length() < MIN_PASSWORD_LENGTH) {
             throw new ValidateException(PASSWORD_IS_TOO_SHORT);
         }

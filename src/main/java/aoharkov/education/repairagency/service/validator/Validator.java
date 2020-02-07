@@ -2,7 +2,7 @@ package aoharkov.education.repairagency.service.validator;
 
 public interface Validator<E> {
 
-    void validate(E entity) throws ValidateException;
+    void validate(E entity);
 
-    void validateEmail(String email) throws ValidateException;
+    void validateEmail(String email);
 }
