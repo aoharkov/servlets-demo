@@ -6,12 +6,15 @@ import aoharkov.education.repairagency.dao.RefusalDao;
 import aoharkov.education.repairagency.dao.RepairStageDao;
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.UserDao;
+import aoharkov.education.repairagency.dao.domain.Page;
 import aoharkov.education.repairagency.domain.Feedback;
 import aoharkov.education.repairagency.domain.Order;
 import aoharkov.education.repairagency.domain.Refusal;
 import aoharkov.education.repairagency.domain.RepairStage;
 import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
+import aoharkov.education.repairagency.entity.RequestEntity;
+import aoharkov.education.repairagency.entity.UserEntity;
 import aoharkov.education.repairagency.mapper.FeedbackMapper;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RefusalMapper;
@@ -23,6 +26,7 @@ import aoharkov.education.repairagency.service.encoder.Encoder;
 import aoharkov.education.repairagency.service.validator.Validator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClientServiceImpl extends UserServiceImpl implements ClientService {
     private final RequestDao requestDao;
@@ -60,9 +64,11 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     }
 
     @Override
-    public List<Request> findOwnRequests(int page, int itemsPerPage) {
-        //todo find with where
-        throw new UnsupportedOperationException();
+    public List<Request> findOwnRequests(int page, int itemsPerPage, Integer clientId) {
+        Page<RequestEntity> requestEntityPage = requestDao.findAllByClientId(page, itemsPerPage, clientId);
+        return requestEntityPage.getItems().stream()
+                .map(requestMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
     }
 
     @Override

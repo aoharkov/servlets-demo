@@ -12,6 +12,10 @@ public interface CrudPageableDao<E> {
 
     Page<E> findAll(int page, int itemsPerPage);
 
+    Page<E> findAll(int pageNumber, int itemsPerPage, String query);
+
+    Page<E> findAllByForeignId(int pageNumber, int itemsPerPage, int foreignId, String query);
+
     int count();
 
     void update(E entity);

@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class RequestEntityDaoImplTest {
+public class RequestDaoImplTest {
     private static final String DB_TEST = "db_test";
 
     private static TestDBLoader loader;
@@ -78,5 +78,10 @@ public class RequestEntityDaoImplTest {
                 .build();
         requestDao.update(requestEntity4Updated);
         assertEquals(Optional.of(requestEntity4Updated), requestDao.findById(4));
+    }
+
+    @Test
+    public void findAllByClientIdShouldReturnListOfSize3() {
+        assertEquals(3, requestDao.findAllByClientId(1, 4, 1).getItems().size());
     }
 }

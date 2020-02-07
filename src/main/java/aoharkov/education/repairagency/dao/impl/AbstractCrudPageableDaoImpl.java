@@ -97,6 +97,20 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
 
     @Override
     public Page<E> findAll(int pageNumber, int itemsPerPage) {
+        return findAll(pageNumber, itemsPerPage, findAllAtPageQuery);
+    }
+
+    @Override
+    public Page<E> findAll(int pageNumber, int itemsPerPage, String query) {
+        return findAll(pageNumber, itemsPerPage, query, false);
+    }
+
+    @Override
+    public Page<E> findAllByForeignId(int pageNumber, int itemsPerPage, int foreignId, String query) {
+        return findAll(pageNumber, itemsPerPage, query, true, foreignId);
+    }
+
+    private Page<E> findAll(int pageNumber, int itemsPerPage, String query, boolean withForeignId, Integer ... identifiers) {
         int maxPageNumber = (count() + itemsPerPage - 1) / itemsPerPage;
         if (pageNumber > maxPageNumber) {
             pageNumber = maxPageNumber;
@@ -107,10 +121,16 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
         int offset = (pageNumber - 1) * itemsPerPage;
 
         try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(findAllAtPageQuery)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, offset);
-            preparedStatement.setInt(2, itemsPerPage);
+            if (withForeignId) {
+                preparedStatement.setInt(1, identifiers[0]);
+                preparedStatement.setInt(2, offset);
+                preparedStatement.setInt(3, itemsPerPage);
+            } else {
+                preparedStatement.setInt(1, offset);
+                preparedStatement.setInt(2, itemsPerPage);
+            }
 
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 List<E> entities = new ArrayList<>();

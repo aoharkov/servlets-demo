@@ -2,16 +2,21 @@ package aoharkov.education.repairagency.dao.impl;
 
 import aoharkov.education.repairagency.dao.RequestDao;
 import aoharkov.education.repairagency.dao.connector.Connector;
+import aoharkov.education.repairagency.dao.domain.Page;
+import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.entity.RequestEntity;
+import aoharkov.education.repairagency.entity.UserEntity;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<RequestEntity> implements RequestDao {
     private static final String SAVE_QUERY =
             "INSERT INTO requests (client_id, description, viewed, accepted) values(?, ?, ?, ?)";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM requests WHERE id = ?";
+    private static final String FIND_BY_CLIENT_ID_QUERY = "SELECT * FROM requests WHERE client_id = ? LIMIT ?, ?";
     private static final String FIND_ALL_AT_PAGE_QUERY = "SELECT * FROM requests LIMIT ?, ?";
     private static final String COUNT_ALL_QUERY = "SELECT COUNT(id) AS rowcount FROM requests";
     private static final String UPDATE_QUERY =
@@ -19,6 +24,11 @@ public class RequestDaoImpl extends AbstractCrudPageableDaoImpl<RequestEntity> i
 
     public RequestDaoImpl(Connector connector) {
         super(connector, SAVE_QUERY, FIND_BY_ID_QUERY, FIND_ALL_AT_PAGE_QUERY, COUNT_ALL_QUERY, UPDATE_QUERY);
+    }
+
+    @Override
+    public Page<RequestEntity> findAllByClientId(int pageNumber, int itemsPerPage, int clientId) {
+        return findAllByForeignId(pageNumber, itemsPerPage, clientId, FIND_BY_CLIENT_ID_QUERY);
     }
 
     @Override

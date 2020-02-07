@@ -12,7 +12,7 @@ public interface ClientService extends UserService {
 
     void saveRequest(Request request);
 
-    List<Request> findOwnRequests(int page, int itemsPerPage);
+    List<Request> findOwnRequests(int page, int itemsPerPage, Integer id);
 
     Order findOrder(Integer requestId);
 

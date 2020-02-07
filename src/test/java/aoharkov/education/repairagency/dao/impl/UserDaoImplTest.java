@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class UserEntityDaoImplTest {
+public class UserDaoImplTest {
     private static final String DB_TEST = "db_test";
 
     private static TestDBLoader loader;
