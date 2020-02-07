@@ -12,4 +12,6 @@ public interface MasterService extends UserService {
     String getRequestDescription(Integer orderId);
 
     boolean updateRepairStage(Order order, RepairStage repairStage);
+
+    List<RepairStage> findAllRepairStages(int page, int itemsPerPage);
 }

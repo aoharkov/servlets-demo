@@ -20,5 +20,5 @@ public interface ClientService extends UserService {
 
     void saveFeedback(Feedback feedback);
 
-    RepairStage getRepairStage(Integer requestId);
+    RepairStage findRepairStage(Integer requestId);
 }

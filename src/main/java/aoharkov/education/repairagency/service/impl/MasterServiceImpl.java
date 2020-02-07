@@ -9,6 +9,7 @@ import aoharkov.education.repairagency.domain.Order;
 import aoharkov.education.repairagency.domain.RepairStage;
 import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.entity.OrderEntity;
+import aoharkov.education.repairagency.entity.RepairStageEntity;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RepairStageMapper;
 import aoharkov.education.repairagency.mapper.RequestMapper;
@@ -66,5 +67,13 @@ public class MasterServiceImpl extends UserServiceImpl implements MasterService 
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<RepairStage> findAllRepairStages(int page, int itemsPerPage) {
+        Page<RepairStageEntity> repairStageEntityPage = repairStageDao.findAll(page, itemsPerPage);
+        return repairStageEntityPage.getItems().stream()
+                .map(repairStageMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
     }
 }

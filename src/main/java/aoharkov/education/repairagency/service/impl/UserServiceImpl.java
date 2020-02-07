@@ -44,10 +44,4 @@ public class UserServiceImpl implements UserService {
         }
         userDao.save(userMapper.mapDomainToEntity(user));
     }
-
-    @Override
-    public void logout() {
-        throw new UnsupportedOperationException();
-    }
-
 }

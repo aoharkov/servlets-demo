@@ -14,8 +14,9 @@ import aoharkov.education.repairagency.domain.RepairStage;
 import aoharkov.education.repairagency.domain.Request;
 import aoharkov.education.repairagency.domain.User;
 import aoharkov.education.repairagency.entity.OrderEntity;
+import aoharkov.education.repairagency.entity.RefusalEntity;
+import aoharkov.education.repairagency.entity.RepairStageEntity;
 import aoharkov.education.repairagency.entity.RequestEntity;
-import aoharkov.education.repairagency.entity.UserEntity;
 import aoharkov.education.repairagency.mapper.FeedbackMapper;
 import aoharkov.education.repairagency.mapper.OrderMapper;
 import aoharkov.education.repairagency.mapper.RefusalMapper;
@@ -24,6 +25,7 @@ import aoharkov.education.repairagency.mapper.RequestMapper;
 import aoharkov.education.repairagency.mapper.UserMapper;
 import aoharkov.education.repairagency.service.ClientService;
 import aoharkov.education.repairagency.service.encoder.Encoder;
+import aoharkov.education.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.education.repairagency.service.validator.Validator;
 
 import java.util.List;
@@ -76,13 +78,19 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     @Override
     public Order findOrder(Integer requestId) {
         Optional<OrderEntity> orderEntity = orderDao.findByRequestId(requestId);
-        return orderEntity.map(orderMapper::mapEntityToDomain).orElse(null);
+        if (orderEntity.isPresent()) {
+            return orderMapper.mapEntityToDomain(orderEntity.get());
+        }
+        throw new EntityNotFoundException();
     }
 
     @Override
     public Refusal findRefusal(Integer requestId) {
-        //todo findByRequestID
-        throw new UnsupportedOperationException();
+        Optional<RefusalEntity> refusalEntity = refusalDao.findByRequestId(requestId);
+        if (refusalEntity.isPresent()) {
+            return refusalMapper.mapEntityToDomain(refusalEntity.get());
+        }
+        throw new EntityNotFoundException();
     }
 
     @Override
@@ -91,8 +99,12 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     }
 
     @Override
-    public RepairStage getRepairStage(Integer requestId) {
-        //todo with JOIN
-        throw new UnsupportedOperationException();
+    public RepairStage findRepairStage(Integer requestId) {
+        Integer repairStageId = findOrder(requestId).getRepairStage().getId();
+        Optional<RepairStageEntity> repairStageEntity = repairStageDao.findById(repairStageId);
+        if (repairStageEntity.isPresent()) {
+            return repairStageMapper.mapEntityToDomain(repairStageEntity.get());
+        }
+        throw new EntityNotFoundException();
     }
 }
