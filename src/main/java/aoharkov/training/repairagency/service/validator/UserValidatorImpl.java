@@ -18,7 +18,7 @@ public class UserValidatorImpl implements Validator<User> {
             = String.format("password is longer than %d 60 symbols", MAX_PASSWORD_LENGTH);
 
     @Override
-    public void validate(User entity){
+    public void validate(User entity) {
         validateEmail(entity.getEmail());
         validatePassword(entity.getPassword());
     }

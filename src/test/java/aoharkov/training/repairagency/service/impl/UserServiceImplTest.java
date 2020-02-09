@@ -10,7 +10,6 @@ import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
 import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
-import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,20 +52,20 @@ public class UserServiceImplTest {
             .build();
 
     @Mock
-    private UserDao userDao;
-    @Mock
-    private UserMapper userMapper;
-    @Mock
     private UserValidatorImpl userValidator;
     @Mock
     private Encoder passwordEncoder;
+    @Mock
+    private UserDao userDao;
+    @Mock
+    private UserMapper userMapper;
 
     @InjectMocks
     private UserServiceImpl userService;
 
     @After
     public void resetMocks() {
-        Mockito.reset(userValidator, userDao, passwordEncoder);
+        Mockito.reset(userValidator, passwordEncoder, userDao, userMapper);
     }
 
     @Test
