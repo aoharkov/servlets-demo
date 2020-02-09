@@ -139,6 +139,18 @@ public class UserServiceImplTest {
         verify(userDao).save(USER_ENTITY);
     }
 
+    @Test(expected = InvalidEmailException.class)
+    public void userShouldNotRegisterAsEmailIsInvalid() {
+        doThrow(InvalidEmailException.class).when(userValidator).validate(any(User.class));
+
+        userService.register(USER);
+
+        verify(userValidator).validate(any(User.class));
+        verifyZeroInteractions(userDao);
+        verifyZeroInteractions(userMapper);
+        verifyZeroInteractions(userDao);
+    }
+
     @Test(expected = EntityAlreadyExistException.class)
     public void userShouldNotRegisterAsEmailIsAlreadyInDB() {
         doNothing().when(userValidator).validate(any(User.class));
@@ -151,5 +163,4 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userMapper);
         verifyZeroInteractions(userDao);
     }
-
 }
