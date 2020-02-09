@@ -7,6 +7,7 @@ import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.service.encoder.Encoder;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
+import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
 import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
 import org.junit.Test;
@@ -108,19 +109,19 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userMapper);
     }
 
-   /* @Test(expected = EntityNotFoundException.class)
+    @Test(expected = InvalidPasswordException.class)
     public void userShouldNotLoginAsPasswordIsIncorrect() {
         doNothing().when(userValidator).validateEmail(eq(EMAIL));
-        doThrow(EntityNotFoundException.class).when(userDao).findByEmail(eq(EMAIL));
+        when(userDao.findByEmail(eq(EMAIL))).thenReturn(Optional.of(USER_ENTITY));
+        doThrow(InvalidPasswordException.class).when(passwordEncoder).encode(eq(INCORRECT_PASSWORD));
 
-        userService.login(CORRECT_EMAIL_NOT_IN_DB, PASSWORD);
+        userService.login(EMAIL, INCORRECT_PASSWORD);
 
-        verify(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
-        verify(userDao).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
-        verifyZeroInteractions(passwordEncoder);
+        verify(userValidator).validateEmail(eq(EMAIL));
+        verify(userDao).findByEmail(eq(EMAIL));
+        verify(passwordEncoder).encode(INCORRECT_PASSWORD);
         verifyZeroInteractions(userMapper);
-    }*/
-
+    }
 
 /*    @Test
     public void userShouldRegisterSuccessfully() {
