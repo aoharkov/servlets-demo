@@ -8,6 +8,7 @@ import aoharkov.training.repairagency.service.encoder.Encoder;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
+import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
 import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
 import org.junit.Test;
@@ -20,7 +21,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -56,7 +56,7 @@ public class UserServiceImplTest {
     @Mock
     private UserMapper userMapper;
     @Mock
-    private Validator userValidator;
+    private UserValidatorImpl userValidator;
     @Mock
     private Encoder passwordEncoder;
 
@@ -123,18 +123,18 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userMapper);
     }
 
-/*    @Test
+    @Test
     public void userShouldRegisterSuccessfully() {
         doNothing().when(userValidator).validate(any(User.class));
         when(userDao.findByEmail(anyString())).thenReturn(Optional.empty());
-        doNothing().when(userValidator).validate(any(User.class));
+        when(userMapper.mapDomainToEntity(eq(USER))).thenReturn(USER_ENTITY);
+        doNothing().when(userDao).save(USER_ENTITY);
 
-        final User actual = userService.register(USER);
-
-        assertEquals(USER, actual);
+        userService.register(USER);
 
         verify(userValidator).validate(any(User.class));
-        verify(userDao).findByEmail(eq(EMAIL));
-        verifyZeroInteractions(userValidator);
-    }*/
+        verify(userDao).findByEmail(anyString());
+        verify(userMapper).mapDomainToEntity(USER);
+        verify(userDao).save(USER_ENTITY);
+    }
 }
