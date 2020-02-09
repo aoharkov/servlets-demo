@@ -15,8 +15,8 @@ public class Page<T> {
         this.lastPageNumber = builder.lastPageNumber;
     }
 
-    public static <T> Builder builder() {
-        return new Builder<T>();
+    public static <T> Builder<T> builder() {
+        return new Builder<>();
     }
 
     public List<T> getItems() {
