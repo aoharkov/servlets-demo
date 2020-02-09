@@ -5,6 +5,8 @@ import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
 import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.service.encoder.Encoder;
+import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
+import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
 import org.junit.Test;
@@ -19,9 +21,12 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,6 +36,7 @@ public class UserServiceImplTest {
     private static final String INCORRECT_PASSWORD = "incorrect password";
     private static final String INCORRECT_ENCODED_PASSWORD = "incorrect encoded_password";
     private static final String EMAIL = "admin@gmail.com";
+    private static final String INVALID_EMAIL = "admin#gmail.com";
     private static final String CORRECT_EMAIL_NOT_IN_DB = "admin@mail.ru";
 
     private static final UserEntity USER_ENTITY = UserEntity.builder()
@@ -72,35 +78,49 @@ public class UserServiceImplTest {
         assertEquals(USER, user);
 
         verify(userValidator).validateEmail(eq(EMAIL));
-        verify(passwordEncoder).encode(eq(PASSWORD));
         verify(userDao).findByEmail(eq(EMAIL));
+        verify(passwordEncoder).encode(eq(PASSWORD));
         verify(userMapper).mapEntityToDomain(eq(USER_ENTITY));
     }
 
-/*    @Test(expected = EntityNotFoundException.class)
-    public void userShouldNotLoginAsThereIsNoAnyUserWithSuchEmail() {
-        doNothing().when(userValidator).validateEmail(anyString());
-        when(userDao.findByEmail(anyString())).thenReturn(Optional.empty());
+    @Test(expected = InvalidEmailException.class)
+    public void userShouldNotLoginAsEmailIsNotValid() {
+        doThrow(InvalidEmailException.class).when(userValidator).validateEmail(INVALID_EMAIL);
+
+        userService.login(INVALID_EMAIL, PASSWORD);
+
+        verify(userValidator).validateEmail(eq(INVALID_EMAIL));
+        verifyZeroInteractions(userDao);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userMapper);
+    }
+
+    @Test(expected = EntityNotFoundException.class)
+    public void userShouldNotLoginAsEmailNotFoundInDB() {
+        doNothing().when(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
+        doThrow(EntityNotFoundException.class).when(userDao).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
 
         userService.login(CORRECT_EMAIL_NOT_IN_DB, PASSWORD);
 
-        verify(userValidator).validateEmail(CORRECT_EMAIL_NOT_IN_DB);
+        verify(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
         verify(userDao).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
-        verifyZeroInteractions(userValidator);
+        verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userMapper);
-    }*/
+    }
 
-   /* @Test(expected = InvalidPasswordException.class)
+   /* @Test(expected = EntityNotFoundException.class)
     public void userShouldNotLoginAsPasswordIsIncorrect() {
-        when(userDao.findByEmail(anyString())).thenReturn(Optional.of(USER_ENTITY));
-        when(passwordEncoder.encode(eq(INCORRECT_PASSWORD))).thenReturn(INCORRECT_ENCODED_PASSWORD);
+        doNothing().when(userValidator).validateEmail(eq(EMAIL));
+        doThrow(EntityNotFoundException.class).when(userDao).findByEmail(eq(EMAIL));
 
         userService.login(CORRECT_EMAIL_NOT_IN_DB, PASSWORD);
 
-        verify(userDao).findByEmail(eq(EMAIL));
-        verifyZeroInteractions(userValidator);
+        verify(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
+        verify(userDao).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
+        verifyZeroInteractions(passwordEncoder);
         verifyZeroInteractions(userMapper);
     }*/
+
 
 /*    @Test
     public void userShouldRegisterSuccessfully() {
