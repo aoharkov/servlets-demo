@@ -5,6 +5,7 @@ import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.UserEntity;
 import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.service.encoder.Encoder;
+import aoharkov.training.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
@@ -137,4 +138,18 @@ public class UserServiceImplTest {
         verify(userMapper).mapDomainToEntity(USER);
         verify(userDao).save(USER_ENTITY);
     }
+
+    @Test(expected = EntityAlreadyExistException.class)
+    public void userShouldNotRegisterAsEmailIsAlreadyInDB() {
+        doNothing().when(userValidator).validate(any(User.class));
+        doThrow(EntityAlreadyExistException.class).when(userDao).findByEmail(EMAIL);
+
+        userService.register(USER);
+
+        verify(userValidator).validate(any(User.class));
+        verify(userDao).findByEmail(anyString());
+        verifyZeroInteractions(userMapper);
+        verifyZeroInteractions(userDao);
+    }
+
 }
