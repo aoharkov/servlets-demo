@@ -6,6 +6,7 @@ import aoharkov.training.repairagency.dao.RefusalDao;
 import aoharkov.training.repairagency.dao.RepairStageDao;
 import aoharkov.training.repairagency.dao.RequestDao;
 import aoharkov.training.repairagency.dao.UserDao;
+import aoharkov.training.repairagency.dao.domain.Page;
 import aoharkov.training.repairagency.domain.Feedback;
 import aoharkov.training.repairagency.domain.Order;
 import aoharkov.training.repairagency.domain.Refusal;
@@ -32,9 +33,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -46,6 +53,12 @@ public class ClientServiceImplTest {
             .build();
     private static final Request REQUEST = Request.builder()
             .withId(1)
+            .build();
+    private static final Page<RequestEntity> REQUEST_ENTITY_PAGE = Page.<RequestEntity>builder()
+            .withItems(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
+            .build();
+    private static final Page<Request> REQUEST_PAGE = Page.<Request>builder()
+            .withItems(Collections.emptyList())
             .build();
     private static final OrderEntity ORDER_ENTITY = OrderEntity.builder()
             .withId(2)
@@ -143,7 +156,28 @@ public class ClientServiceImplTest {
     }
 
     @Test
-    public void findOwnRequests() {
+    public void findOwnRequestsShouldFindSuccessfully() {
+        when(requestDao.findAllByClientId(anyInt(), anyInt(), anyInt())).thenReturn(REQUEST_ENTITY_PAGE);
+        when(requestMapper.mapEntityToDomain(eq(REQUEST_ENTITY))).thenReturn(REQUEST);
+
+        clientService.findOwnRequests(1, 5, 1);
+
+        verify(requestDao).findAllByClientId(anyInt(), anyInt(), anyInt());
+        verify(requestMapper, times(2)).mapEntityToDomain(eq(REQUEST_ENTITY));
+        verifyZeroInteractions(userValidator);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDao);
+        verifyZeroInteractions(userMapper);
+        //verifyZeroInteractions(requestDao);
+        verifyZeroInteractions(refusalDao);
+        verifyZeroInteractions(orderDao);
+        verifyZeroInteractions(repairStageDao);
+        verifyZeroInteractions(feedbackDao);
+        //verifyZeroInteractions(requestMapper);
+        verifyZeroInteractions(refusalMapper);
+        verifyZeroInteractions(orderMapper);
+        verifyZeroInteractions(repairStageMapper);
+        verifyZeroInteractions(feedbackMapper);
     }
 
     @Test
