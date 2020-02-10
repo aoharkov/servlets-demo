@@ -24,7 +24,7 @@ import aoharkov.training.repairagency.mapper.RepairStageMapper;
 import aoharkov.training.repairagency.mapper.RequestMapper;
 import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.service.encoder.Encoder;
-import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
+import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +60,7 @@ public class ClientServiceImplTest {
     private static final RepairStage REPAIR_STAGE = initRepairStage();
 
     @Mock
-    private UserValidatorImpl userValidator;
+    private Validator userValidator;
     @Mock
     private Encoder passwordEncoder;
     @Mock
@@ -90,79 +90,6 @@ public class ClientServiceImplTest {
 
     @InjectMocks
     private ClientServiceImpl clientService;
-
-    @After
-    public void resetMocks() {
-        Mockito.reset(userValidator, passwordEncoder, userDao, userMapper,
-                requestDao, refusalDao, orderDao, repairStageDao, feedbackDao,
-                requestMapper, refusalMapper, orderMapper, repairStageMapper, feedbackMapper);
-    }
-
-    @Test
-    public void saveRequestShouldSaveSuccessfully() {
-        when(requestMapper.mapDomainToEntity(eq(REQUEST))).thenReturn(REQUEST_ENTITY);
-        doNothing().when(requestDao).save(REQUEST_ENTITY);
-
-        clientService.saveRequest(REQUEST);
-
-        verify(requestMapper).mapDomainToEntity(eq(REQUEST));
-        verify(requestDao).save(eq(REQUEST_ENTITY));
-        verifyZeroInteractions(userValidator);
-        verifyZeroInteractions(passwordEncoder);
-        verifyZeroInteractions(userDao);
-        verifyZeroInteractions(userMapper);
-        //verifyZeroInteractions(requestDao);
-        verifyZeroInteractions(refusalDao);
-        verifyZeroInteractions(orderDao);
-        verifyZeroInteractions(repairStageDao);
-        verifyZeroInteractions(feedbackDao);
-        //verifyZeroInteractions(requestMapper);
-        verifyZeroInteractions(refusalMapper);
-        verifyZeroInteractions(orderMapper);
-        verifyZeroInteractions(repairStageMapper);
-        verifyZeroInteractions(feedbackMapper);
-    }
-
-    @Test
-    public void findOwnRequestsShouldFindSuccessfully() {
-        when(requestDao.findAllByClientId(anyInt(), anyInt(), anyInt())).thenReturn(REQUEST_ENTITY_PAGE);
-        when(requestMapper.mapEntityToDomain(eq(REQUEST_ENTITY))).thenReturn(REQUEST);
-
-        clientService.findOwnRequests(1, 5, 1);
-
-        verify(requestDao).findAllByClientId(anyInt(), anyInt(), anyInt());
-        verify(requestMapper, times(2)).mapEntityToDomain(eq(REQUEST_ENTITY));
-        verifyZeroInteractions(userValidator);
-        verifyZeroInteractions(passwordEncoder);
-        verifyZeroInteractions(userDao);
-        verifyZeroInteractions(userMapper);
-        //verifyZeroInteractions(requestDao);
-        verifyZeroInteractions(refusalDao);
-        verifyZeroInteractions(orderDao);
-        verifyZeroInteractions(repairStageDao);
-        verifyZeroInteractions(feedbackDao);
-        //verifyZeroInteractions(requestMapper);
-        verifyZeroInteractions(refusalMapper);
-        verifyZeroInteractions(orderMapper);
-        verifyZeroInteractions(repairStageMapper);
-        verifyZeroInteractions(feedbackMapper);
-    }
-
-    @Test
-    public void findOrder() {
-    }
-
-    @Test
-    public void findRefusal() {
-    }
-
-    @Test
-    public void saveFeedback() {
-    }
-
-    @Test
-    public void findRepairStage() {
-    }
 
     private static RequestEntity initRequestEntity() {
         return RequestEntity.builder()
@@ -240,5 +167,78 @@ public class ClientServiceImplTest {
         return RepairStage.builder()
                 .withId(5)
                 .build();
+    }
+
+    @After
+    public void resetMocks() {
+        Mockito.reset(userValidator, passwordEncoder, userDao, userMapper,
+                requestDao, refusalDao, orderDao, repairStageDao, feedbackDao,
+                requestMapper, refusalMapper, orderMapper, repairStageMapper, feedbackMapper);
+    }
+
+    @Test
+    public void saveRequestShouldSaveSuccessfully() {
+        when(requestMapper.mapDomainToEntity(eq(REQUEST))).thenReturn(REQUEST_ENTITY);
+        doNothing().when(requestDao).save(REQUEST_ENTITY);
+
+        clientService.saveRequest(REQUEST);
+
+        verify(requestMapper).mapDomainToEntity(eq(REQUEST));
+        verify(requestDao).save(eq(REQUEST_ENTITY));
+        verifyZeroInteractions(userValidator);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDao);
+        verifyZeroInteractions(userMapper);
+        //verifyZeroInteractions(requestDao);
+        verifyZeroInteractions(refusalDao);
+        verifyZeroInteractions(orderDao);
+        verifyZeroInteractions(repairStageDao);
+        verifyZeroInteractions(feedbackDao);
+        //verifyZeroInteractions(requestMapper);
+        verifyZeroInteractions(refusalMapper);
+        verifyZeroInteractions(orderMapper);
+        verifyZeroInteractions(repairStageMapper);
+        verifyZeroInteractions(feedbackMapper);
+    }
+
+    @Test
+    public void findOwnRequestsShouldFindSuccessfully() {
+        when(requestDao.findAllByClientId(anyInt(), anyInt(), anyInt())).thenReturn(REQUEST_ENTITY_PAGE);
+        when(requestMapper.mapEntityToDomain(eq(REQUEST_ENTITY))).thenReturn(REQUEST);
+
+        clientService.findOwnRequests(1, 5, 1);
+
+        verify(requestDao).findAllByClientId(anyInt(), anyInt(), anyInt());
+        verify(requestMapper, times(2)).mapEntityToDomain(eq(REQUEST_ENTITY));
+        verifyZeroInteractions(userValidator);
+        verifyZeroInteractions(passwordEncoder);
+        verifyZeroInteractions(userDao);
+        verifyZeroInteractions(userMapper);
+        //verifyZeroInteractions(requestDao);
+        verifyZeroInteractions(refusalDao);
+        verifyZeroInteractions(orderDao);
+        verifyZeroInteractions(repairStageDao);
+        verifyZeroInteractions(feedbackDao);
+        //verifyZeroInteractions(requestMapper);
+        verifyZeroInteractions(refusalMapper);
+        verifyZeroInteractions(orderMapper);
+        verifyZeroInteractions(repairStageMapper);
+        verifyZeroInteractions(feedbackMapper);
+    }
+
+    @Test
+    public void findOrder() {
+    }
+
+    @Test
+    public void findRefusal() {
+    }
+
+    @Test
+    public void saveFeedback() {
+    }
+
+    @Test
+    public void findRepairStage() {
     }
 }

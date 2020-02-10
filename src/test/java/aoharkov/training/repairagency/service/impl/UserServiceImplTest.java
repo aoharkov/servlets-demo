@@ -9,7 +9,7 @@ import aoharkov.training.repairagency.service.exception.EntityAlreadyExistExcept
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
-import aoharkov.training.repairagency.service.validator.UserValidatorImpl;
+import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +43,7 @@ public class UserServiceImplTest {
     private static final User USER = initUser();
 
     @Mock
-    private UserValidatorImpl userValidator;
+    private Validator userValidator;
     @Mock
     private Encoder passwordEncoder;
     @Mock
@@ -53,6 +53,22 @@ public class UserServiceImplTest {
 
     @InjectMocks
     private UserServiceImpl userService;
+
+    private static UserEntity initUserEntity() {
+        return UserEntity.builder()
+                .withId(1)
+                .withPassword(ENCODED_PASSWORD)
+                .withEmail(EMAIL)
+                .build();
+    }
+
+    private static User initUser() {
+        return User.builder()
+                .withId(1)
+                .withPassword(ENCODED_PASSWORD)
+                .withEmail(EMAIL)
+                .build();
+    }
 
     @After
     public void resetMocks() {
@@ -152,21 +168,5 @@ public class UserServiceImplTest {
         verify(userDao).findByEmail(anyString());
         verifyZeroInteractions(userMapper);
         verifyZeroInteractions(userDao);
-    }
-
-    private static UserEntity initUserEntity() {
-        return UserEntity.builder()
-                .withId(1)
-                .withPassword(ENCODED_PASSWORD)
-                .withEmail(EMAIL)
-                .build();
-    }
-
-    private static User initUser() {
-        return User.builder()
-                .withId(1)
-                .withPassword(ENCODED_PASSWORD)
-                .withEmail(EMAIL)
-                .build();
     }
 }
