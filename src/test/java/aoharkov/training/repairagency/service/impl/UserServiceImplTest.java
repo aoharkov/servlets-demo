@@ -39,17 +39,8 @@ public class UserServiceImplTest {
     private static final String EMAIL = "admin@gmail.com";
     private static final String INVALID_EMAIL = "admin#gmail.com";
     private static final String CORRECT_EMAIL_NOT_IN_DB = "admin@mail.ru";
-
-    private static final UserEntity USER_ENTITY = UserEntity.builder()
-            .withId(1)
-            .withPassword(ENCODED_PASSWORD)
-            .withEmail(EMAIL)
-            .build();
-    private static final User USER = User.builder()
-            .withId(1)
-            .withPassword(ENCODED_PASSWORD)
-            .withEmail(EMAIL)
-            .build();
+    private static final UserEntity USER_ENTITY = initUserEntity();
+    private static final User USER = initUser();
 
     @Mock
     private UserValidatorImpl userValidator;
@@ -161,5 +152,21 @@ public class UserServiceImplTest {
         verify(userDao).findByEmail(anyString());
         verifyZeroInteractions(userMapper);
         verifyZeroInteractions(userDao);
+    }
+
+    private static UserEntity initUserEntity() {
+        return UserEntity.builder()
+                .withId(1)
+                .withPassword(ENCODED_PASSWORD)
+                .withEmail(EMAIL)
+                .build();
+    }
+
+    private static User initUser() {
+        return User.builder()
+                .withId(1)
+                .withPassword(ENCODED_PASSWORD)
+                .withEmail(EMAIL)
+                .build();
     }
 }

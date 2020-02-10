@@ -35,9 +35,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -48,48 +46,18 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientServiceImplTest {
-    private static final RequestEntity REQUEST_ENTITY = RequestEntity.builder()
-            .withId(1)
-            .build();
-    private static final Request REQUEST = Request.builder()
-            .withId(1)
-            .build();
-    private static final Page<RequestEntity> REQUEST_ENTITY_PAGE = Page.<RequestEntity>builder()
-            .withItems(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
-            .build();
-    private static final Page<Request> REQUEST_PAGE = Page.<Request>builder()
-            .withItems(Collections.emptyList())
-            .build();
-    private static final OrderEntity ORDER_ENTITY = OrderEntity.builder()
-            .withId(2)
-            .withRequestId(1)
-            .build();
-    private static final Order ORDER = Order.builder()
-            .withId(2)
-            .withRequest(REQUEST)
-            .build();
-    private static final RefusalEntity REFUSAL_ENTITY = RefusalEntity.builder()
-            .withId(3)
-            .withRequestId(1)
-            .build();
-    private static final Refusal REFUSAL = Refusal.builder()
-            .withId(3)
-            .withRequest(REQUEST)
-            .build();
-    private static final FeedbackEntity FEEDBACK_ENTITY = FeedbackEntity.builder()
-            .withId(4)
-            .withRequestId(1)
-            .build();
-    private static final Feedback FEEDBACK = Feedback.builder()
-            .withId(4)
-            .withRequest(REQUEST)
-            .build();
-    private static final RepairStageEntity REPAIR_STAGE_ENTITY = RepairStageEntity.builder()
-            .withId(5)
-            .build();
-    private static final RepairStage REPAIR_STAGE = RepairStage.builder()
-            .withId(5)
-            .build();
+    private static final RequestEntity REQUEST_ENTITY = initRequestEntity();
+    private static final Request REQUEST = initRequest();
+    private static final Page<RequestEntity> REQUEST_ENTITY_PAGE = initRequestEntityPage();
+    private static final Page<Request> REQUEST_PAGE = initRequestPage();
+    private static final OrderEntity ORDER_ENTITY = initOrderEntity();
+    private static final Order ORDER = initOrder();
+    private static final RefusalEntity REFUSAL_ENTITY = initRefusalEntity();
+    private static final Refusal REFUSAL = initRefusal();
+    private static final FeedbackEntity FEEDBACK_ENTITY = initFeedbackEntity();
+    private static final Feedback FEEDBACK = initFeedback();
+    private static final RepairStageEntity REPAIR_STAGE_ENTITY = initRepairStageEntity();
+    private static final RepairStage REPAIR_STAGE = initRepairStage();
 
     @Mock
     private UserValidatorImpl userValidator;
@@ -194,5 +162,83 @@ public class ClientServiceImplTest {
 
     @Test
     public void findRepairStage() {
+    }
+
+    private static RequestEntity initRequestEntity() {
+        return RequestEntity.builder()
+                .withId(1)
+                .build();
+    }
+
+    private static Request initRequest() {
+        return Request.builder()
+                .withId(1)
+                .build();
+    }
+
+    private static Page<RequestEntity> initRequestEntityPage() {
+        return Page.<RequestEntity>builder()
+                .withItems(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
+                .build();
+    }
+
+    private static Page<Request> initRequestPage() {
+        return Page.<Request>builder()
+                .withItems(Collections.emptyList())
+                .build();
+    }
+
+    private static OrderEntity initOrderEntity() {
+        return OrderEntity.builder()
+                .withId(2)
+                .withRequestId(1)
+                .build();
+    }
+
+    private static Order initOrder() {
+        return Order.builder()
+                .withId(2)
+                .withRequest(REQUEST)
+                .build();
+    }
+
+    private static RefusalEntity initRefusalEntity() {
+        return RefusalEntity.builder()
+                .withId(3)
+                .withRequestId(1)
+                .build();
+    }
+
+    private static Refusal initRefusal() {
+        return Refusal.builder()
+                .withId(3)
+                .withRequest(REQUEST)
+                .build();
+    }
+
+    private static FeedbackEntity initFeedbackEntity() {
+        return FeedbackEntity.builder()
+                .withId(4)
+                .withRequestId(1)
+                .build();
+    }
+
+    private static Feedback initFeedback() {
+        return Feedback.builder()
+                .withId(4)
+                .withRequest(REQUEST)
+                .build();
+    }
+
+    private static RepairStageEntity initRepairStageEntity() {
+        return RepairStageEntity.builder()
+                .withId(5)
+                .build();
+    }
+
+    private static RepairStage initRepairStage() {
+        return RepairStage.builder()
+                .withId(5)
+                .build();
     }
 }
