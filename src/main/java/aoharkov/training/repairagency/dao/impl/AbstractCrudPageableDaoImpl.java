@@ -22,14 +22,15 @@ import static aoharkov.training.repairagency.dao.util.PageCalculator.fitPageNumb
 
 public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<E> {
     private static final Logger LOGGER = LogManager.getLogger(AbstractCrudPageableDaoImpl.class);
-    protected static final BiConsumer<PreparedStatement, Integer> INT_PARAM_SETTER = ((preparedStatement, integer) -> {
+
+    static final BiConsumer<PreparedStatement, Integer> INT_PARAM_SETTER = ((preparedStatement, integer) -> {
         try {
             preparedStatement.setInt(1, integer);
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
     });
-    protected static final BiConsumer<PreparedStatement, String> STRING_PARAM_SETTER = ((preparedStatement, str) -> {
+    static final BiConsumer<PreparedStatement, String> STRING_PARAM_SETTER = ((preparedStatement, str) -> {
         try {
             preparedStatement.setString(1, str);
         } catch (SQLException e) {
@@ -45,7 +46,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     private final String defaultCountQuery;
     private final String updateQuery;
 
-    public AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String defaultCountQuery, String updateQuery) {
+    AbstractCrudPageableDaoImpl(Connector connector, String saveQuery, String findByIdQuery, String findAllAtPageQuery, String defaultCountQuery, String updateQuery) {
         this.connector = connector;
         this.saveQuery = saveQuery;
         this.findByIdQuery = findByIdQuery;
@@ -77,8 +78,8 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
 
     protected abstract E mapResultSetToEntity(ResultSet resultSet) throws SQLException;
 
-    protected <P> Optional<E> findByParam(P param, String sqlQuery,
-                                          BiConsumer<PreparedStatement, P> designedParamSetting) {
+    <P> Optional<E> findByParam(P param, String sqlQuery,
+                                BiConsumer<PreparedStatement, P> designedParamSetting) {
         try (final PreparedStatement preparedStatement =
                      connector.getConnection().prepareStatement(sqlQuery)) {
 
