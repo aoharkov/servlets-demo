@@ -14,8 +14,9 @@ import java.sql.Statement;
 
 class TestDBLoader {
     private static final Logger LOGGER = LogManager.getLogger(TestDBLoader.class);
-    private static final String SCHEME_PATH = "D:\\Projects\\ServletsRepairAgency\\src\\test\\resources\\sql\\schema_test.sql";
-    private static final String DATA_PATH = "D:\\Projects\\ServletsRepairAgency\\src\\test\\resources\\sql\\data_test.sql";
+
+    private static final String SCHEME_PATH = "D:\\Projects\\repair-agency\\src\\test\\resources\\sql\\schema_test.sql";
+    private static final String DATA_PATH = "D:\\Projects\\repair-agency\\src\\test\\resources\\sql\\data_test.sql";
     private static final String FAIL_TO_LOAD_SCHEME = "Fail to load scheme from file for testing";
     private static final String FAIL_TO_LOAD_DATA = "Fail to load data from file for testing";
     private static final String FAIL_TO_CONNECT = "Fail to connect to db for testing";
