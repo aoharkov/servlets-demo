@@ -6,26 +6,26 @@ import aoharkov.training.repairagency.entity.UserEntity;
 public class UserMapper implements Mapper<UserEntity, User> {
 
     @Override
-    public UserEntity mapDomainToEntity(User item) {
+    public UserEntity mapDomainToEntity(User user) {
         return UserEntity.builder()
-                .withId(item.getId())
-                .withName(item.getName())
-                .withSurname(item.getSurname())
-                .withEmail(item.getEmail())
-                .withPassword(item.getPassword())
-                .withRole(item.getRole())
+                .withId(user.getId())
+                .withName(user.getName())
+                .withSurname(user.getSurname())
+                .withEmail(user.getEmail())
+                .withPassword(user.getPassword())
+                .withRole(user.getRole())
                 .build();
     }
 
     @Override
-    public User mapEntityToDomain(UserEntity entity) {
+    public User mapEntityToDomain(UserEntity userEntity) {
         return User.builder()
-                .withId(entity.getId())
-                .withName(entity.getName())
-                .withSurname(entity.getSurname())
-                .withEmail(entity.getEmail())
-                .withPassword(entity.getPassword())
-                .withRole(entity.getRole())
+                .withId(userEntity.getId())
+                .withName(userEntity.getName())
+                .withSurname(userEntity.getSurname())
+                .withEmail(userEntity.getEmail())
+                .withPassword(userEntity.getPassword())
+                .withRole(userEntity.getRole())
                 .build();
     }
 }

@@ -7,22 +7,22 @@ import aoharkov.training.repairagency.entity.FeedbackEntity;
 public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
 
     @Override
-    public FeedbackEntity mapDomainToEntity(Feedback item) {
+    public FeedbackEntity mapDomainToEntity(Feedback feedback) {
         return FeedbackEntity.builder()
-                .withId(item.getId())
-                .withRequestId(item.getRequest().getId())
-                .withScore(item.getScore())
-                .withText(item.getText())
+                .withId(feedback.getId())
+                .withRequestId(feedback.getRequest().getId())
+                .withScore(feedback.getScore())
+                .withText(feedback.getText())
                 .build();
     }
 
     @Override
-    public Feedback mapEntityToDomain(FeedbackEntity entity) {
+    public Feedback mapEntityToDomain(FeedbackEntity feedbackEntity) {
         return Feedback.builder()
-                .withId(entity.getId())
-                .withRequest(Request.builder().withId(entity.getRequestId()).build())
-                .withScore(entity.getScore())
-                .withText(entity.getText())
+                .withId(feedbackEntity.getId())
+                .withRequest(Request.builder().withId(feedbackEntity.getRequestId()).build())
+                .withScore(feedbackEntity.getScore())
+                .withText(feedbackEntity.getText())
                 .build();
     }
 }

@@ -7,24 +7,24 @@ import aoharkov.training.repairagency.entity.RequestEntity;
 public class RequestMapper implements Mapper<RequestEntity, Request> {
 
     @Override
-    public RequestEntity mapDomainToEntity(Request item) {
+    public RequestEntity mapDomainToEntity(Request request) {
         return RequestEntity.builder()
-                .withId(item.getId())
-                .withDescription(item.getDescription())
-                .withClientId(item.getClient().getId())
-                .withViewed(item.getViewed())
-                .withAccepted(item.getAccepted())
+                .withId(request.getId())
+                .withDescription(request.getDescription())
+                .withClientId(request.getClient().getId())
+                .withViewed(request.getViewed())
+                .withAccepted(request.getAccepted())
                 .build();
     }
 
     @Override
-    public Request mapEntityToDomain(RequestEntity entity) {
+    public Request mapEntityToDomain(RequestEntity requestEntity) {
         return Request.builder()
-                .withId(entity.getId())
-                .withDescription(entity.getDescription())
-                .withClient(User.builder().withId(entity.getClientId()).build())
-                .withViewed(entity.getViewed())
-                .withAccepted(entity.getAccepted())
+                .withId(requestEntity.getId())
+                .withDescription(requestEntity.getDescription())
+                .withClient(User.builder().withId(requestEntity.getClientId()).build())
+                .withViewed(requestEntity.getViewed())
+                .withAccepted(requestEntity.getAccepted())
                 .build();
     }
 }
