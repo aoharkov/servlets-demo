@@ -6,6 +6,7 @@ import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.RefusalEntity;
 
 public class RefusalMapper implements Mapper<RefusalEntity, Refusal> {
+
     @Override
     public RefusalEntity mapDomainToEntity(Refusal item) {
         return RefusalEntity.builder()

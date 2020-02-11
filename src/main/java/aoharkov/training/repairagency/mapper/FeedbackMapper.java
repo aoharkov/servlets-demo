@@ -5,6 +5,7 @@ import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
 
 public class FeedbackMapper implements Mapper<FeedbackEntity, Feedback> {
+
     @Override
     public FeedbackEntity mapDomainToEntity(Feedback item) {
         return FeedbackEntity.builder()

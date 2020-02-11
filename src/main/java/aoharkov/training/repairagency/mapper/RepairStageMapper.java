@@ -4,6 +4,7 @@ import aoharkov.training.repairagency.domain.RepairStage;
 import aoharkov.training.repairagency.entity.RepairStageEntity;
 
 public class RepairStageMapper implements Mapper<RepairStageEntity, RepairStage> {
+
     @Override
     public RepairStageEntity mapDomainToEntity(RepairStage item) {
         return RepairStageEntity.builder()
