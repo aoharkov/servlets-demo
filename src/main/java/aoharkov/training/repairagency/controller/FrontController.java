@@ -11,20 +11,27 @@ import java.io.IOException;
 import java.util.Map;
 
 public class FrontController extends HttpServlet {
-    private final Map<String, Command> commandNameToCommand;
-    private final Command defaultCommand = request -> Command.ERROR_PAGE;
+    private final Map<String, Command> uriToCommand;
 
     public FrontController() {
-        DependencyInjector injector = DependencyInjector.getInstance();
-        commandNameToCommand = injector.getCommands();
+        uriToCommand = DependencyInjector.getInstance().getCommands();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String commandName = req.getParameter("command");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            uriToCommand.get(req.getRequestURI()).doGet(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        final String page = commandNameToCommand.getOrDefault(commandName, defaultCommand).execute(req);
-
-        req.getRequestDispatcher(page).forward(req, resp);
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            uriToCommand.get(req.getRequestURI()).doPost(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

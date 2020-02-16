@@ -1,9 +1,18 @@
 package aoharkov.training.repairagency.command;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public interface Command {
-    String ERROR_PAGE = "view/problem.jsp";
 
-    String execute(HttpServletRequest request);
+    void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+    void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+
+    default void forward(String nextURI, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final String path = String.format("/view%s.jsp", nextURI);
+        request.getRequestDispatcher(path).forward(request, response);
+    }
 }

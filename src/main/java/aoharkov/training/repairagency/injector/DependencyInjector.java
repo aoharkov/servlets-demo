@@ -1,8 +1,6 @@
 package aoharkov.training.repairagency.injector;
 
 import aoharkov.training.repairagency.command.Command;
-import aoharkov.training.repairagency.command.manager.ListAllRequestsCommand;
-import aoharkov.training.repairagency.command.manager.ListUncheckedRequestsCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
 import aoharkov.training.repairagency.command.user.RegisterCommand;
 import aoharkov.training.repairagency.dao.FeedbackDao;
@@ -110,10 +108,6 @@ public class DependencyInjector {
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
 
-    private static final Command LIST_ALL_REQUEST_COMMAND = new ListAllRequestsCommand(MANAGER_SERVICE);
-
-    private static final Command LIST_UNCHECKED_REQUESTS_COMMAND = new ListUncheckedRequestsCommand(MANAGER_SERVICE);
-
     private static final Map<String, Command> COMMANDS = initCommands();
 
     private DependencyInjector() {
@@ -122,10 +116,11 @@ public class DependencyInjector {
 
     private static Map<String, Command> initCommands() {
         Map<String, Command> userCommandNameToCommand = new HashMap<>();
-        userCommandNameToCommand.put("login", LOGIN_COMMAND);
-        userCommandNameToCommand.put("register", REGISTER_COMMAND);
-        userCommandNameToCommand.put("listAllRequests", LIST_ALL_REQUEST_COMMAND);
-        userCommandNameToCommand.put("listUncheckedRequests", LIST_UNCHECKED_REQUESTS_COMMAND);
+        userCommandNameToCommand.put("/", LOGIN_COMMAND);
+        userCommandNameToCommand.put("/login", LOGIN_COMMAND);
+        userCommandNameToCommand.put("/register", REGISTER_COMMAND);
+/*        userCommandNameToCommand.put("/manager/requests/all", LIST_ALL_REQUEST_COMMAND);
+        userCommandNameToCommand.put("/manager/requests/new", LIST_UNCHECKED_REQUESTS_COMMAND);*/
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 
