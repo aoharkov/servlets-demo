@@ -17,10 +17,10 @@
       <h2>Repair Agency</h2>
     </td>
     <td>
-      <h3><a href="user/login.jsp">Login</a></h3>
+      <h3><a href="view/login.jsp">Login</a></h3>
     </td>
     <td>
-      <h3><a href="user/register.jsp">Register</a></h3>
+      <h3><a href="view/register.jsp">Register</a></h3>
     </td>
   </tr>
 </table>
