@@ -1,15 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%--<fmt:setLocale value="${sessionScope.locale}"/>--%>
-<%--<fmt:setBundle basename="messages"/>--%>
+<fmt:setLocale value="${param.lang}"/>
+<fmt:setBundle basename="messages"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="${param.lang}">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Repair Agency</title>
+    <title><fmt:message key="title" /></title>
 </head>
 <body>
 <table>
@@ -20,22 +19,14 @@
                  width="60" height="60">
         </td>
         <td>
-            <h2>Repair Agency</h2>
+            <h1><fmt:message key="title" /></h1>
         </td>
         <td>
-            <h3><a href="login.jsp">Login</a></h3>
+            <h2><a href="/login?lang=${param.lang}">Login</a></h2>
         </td>
         <td>
-            <h3><a href="register.jsp">Register</a></h3>
+            <h2><a href="/register?lang=${param.lang}">Register</a></h2>
         </td>
     </tr>
 </table>
-<%--<div class="locale">
-    <form class="setlocale">
-        <label for="locale"></label><select id="locale" name="locale" onchange="submit()">
-        <option value="uk" ${locale == 'uk' ? 'selected' : ''}><fmt:message key="lang.uk"/></option>
-        <option value="en" ${locale == 'en' ? 'selected' : ''}><fmt:message key="lang.en"/></option>
-        <option value="ru" ${locale == 'ru' ? 'selected' : ''}><fmt:message key="lang.ru"/></option>
-    </select>
-    </form>
-</div>--%>
+
