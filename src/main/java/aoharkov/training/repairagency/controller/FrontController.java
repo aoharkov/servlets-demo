@@ -22,20 +22,20 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            uriToCommand.get(req.getRequestURI()).doGet(req, resp);
+            uriToCommand.get(request.getRequestURI()).doGet(request, response);
         } catch (ServletException | IOException e) {
-            LOGGER.error(String.format("Error in doGet for %s", req.getRequestURI()), e);
+            LOGGER.error(String.format("Error in doGet for %s", request.getRequestURI()), e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
-            uriToCommand.get(req.getRequestURI()).doPost(req, resp);
+            uriToCommand.get(request.getRequestURI()).doPost(request, response);
         } catch (ServletException | IOException e) {
-            LOGGER.error(String.format("doPost for %s", req.getRequestURI()), e);
+            LOGGER.error(String.format("doPost for %s", request.getRequestURI()), e);
         }
     }
 }
