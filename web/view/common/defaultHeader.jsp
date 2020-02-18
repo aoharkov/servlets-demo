@@ -28,8 +28,5 @@
             <h2><a href="/register?lang=${param.lang}">Register</a></h2>
         </td>
     </tr>
-    <tr>
-        <a href="/admin/users?lang=en&rows=4&page=1"><fmt:message key="users" /></a>
-    </tr>
 </table>
 

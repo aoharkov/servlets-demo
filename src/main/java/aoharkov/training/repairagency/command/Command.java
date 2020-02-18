@@ -11,8 +11,9 @@ public interface Command {
 
     void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
-    default void forward(String nextURI, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final String path = String.format("/view%s.jsp", nextURI);
+    default void forward(String requestURI, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final String path = String.format("/view%s.jsp", requestURI);
+        request.setAttribute("requestURI", requestURI);
         request.getRequestDispatcher(path).forward(request, response);
     }
 }

@@ -1,6 +1,7 @@
 package aoharkov.training.repairagency.injector;
 
 import aoharkov.training.repairagency.command.Command;
+import aoharkov.training.repairagency.command.admin.FindAllUsersCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
 import aoharkov.training.repairagency.command.user.RedirectToLoginCommand;
 import aoharkov.training.repairagency.command.user.RegisterCommand;
@@ -111,6 +112,8 @@ public class DependencyInjector {
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
 
+    private static final Command FIND_ALL_USERS = new FindAllUsersCommand(ADMIN_SERVICE);
+
     private static final Map<String, Command> COMMANDS = initCommands();
 
     private DependencyInjector() {
@@ -122,8 +125,7 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/", REDIRECT_TO_LOGIN_COMMAND);
         userCommandNameToCommand.put("/login", LOGIN_COMMAND);
         userCommandNameToCommand.put("/register", REGISTER_COMMAND);
-/*        userCommandNameToCommand.put("/manager/requests/all", LIST_ALL_REQUEST_COMMAND);
-        userCommandNameToCommand.put("/manager/requests/new", LIST_UNCHECKED_REQUESTS_COMMAND);*/
+        userCommandNameToCommand.put("/admin/users", FIND_ALL_USERS);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 

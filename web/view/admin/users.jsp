@@ -1,5 +1,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="../common/defaultHeader.jsp" %>
+<table>
+    <tr>
+        <td>
+            <h3><a href="${requestURI}?lang=en&rows=${itemsPerPage}&page=${pageNum}"><fmt:message key="lang.en" /></a></h3>
+        </td>
+        <td>
+            <h3><a href="${requestURI}?lang=ru&rows=${itemsPerPage}&page=${pageNum}"><fmt:message key="lang.ru" /></a></h3>
+        </td>
+        <td>
+            <h3><a href="${requestURI}?lang=uk&rows=${itemsPerPage}&page=${pageNum}"><fmt:message key="lang.ua" /></a></h3>
+        </td>
+    </tr>
+</table>
 
 <table>
     <tr>
@@ -19,35 +32,43 @@
 </table>
 <table>
     <tr>
-        <h2>
-            <c:if test ="${pageNum} > 1">
-            <td>
-                <a href="/admin/users/all(rows = ${itemsPerPage}, page = 1)}" th:text="1"></a>
-            </td>
-            </c:if>
-            <c:if test ="${pageNum} > 2">
-            <td>
-                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${pageNum} - 1)}" th:text="..."></a>
-            </td>
-            </c:if>
+        <c:if test ="${pageNum > 1}">
             <td>
                 <h1>
-                    <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${pageNum})}"
-                       th:text="${pageNum}"></a>
+                <a href="${requestURI}?lang=${param.lang}&rows=${itemsPerPage}&page=1">1</a>
+                </h1>
+            </td>
+        </c:if>
+
+        <c:if test ="${pageNum > 2}">
+            <td>
+                <h1>
+                <a href="${requestURI}?lang=${param.lang}&rows=${itemsPerPage}&page=${pageNum - 1}">...</a>
+                </h1>
+            </td>
+        </c:if>
+
+            <td>
+                <h1>
+                    <a href="${requestURI}?lang=${param.lang}&rows=${itemsPerPage}&page=${pageNum}">${pageNum}</a>
                 </h1>
             </td>
 
-            <c:if test ="${pageNum} + 1 < ${maxPage}">
+        <c:if test ="${pageNum + 1 < maxPage}">
             <td>
-                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${pageNum} + 1)}" th:text="..."></a>
+                <h1>
+                <a href="${requestURI}?lang=${param.lang}&rows=${itemsPerPage}&page=${pageNum + 1}">...</a>
+                </h1>
             </td>
-            </c:if>
-            <c:if test ="${pageNum} < ${maxPage}">
+        </c:if>
+
+        <c:if test ="${pageNum < maxPage}">
             <td>
-                <a th:href="@{/admin/users/all(rows = ${itemsPerPage}, page = ${maxPage})}" th:text="${maxPage}"></a>
+                <h1>
+                <a href="${requestURI}?lang=${param.lang}&rows=${itemsPerPage}&page=${maxPage}">${maxPage}</a>
+                </h1>
             </td>
-            </c:if>
-        </h2>
+        </c:if>
     </tr>
 </table>
 
