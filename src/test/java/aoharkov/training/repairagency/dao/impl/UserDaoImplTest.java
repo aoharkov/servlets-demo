@@ -71,7 +71,7 @@ public class UserDaoImplTest {
     public void findAllShouldFindPage1WithUser1AndUser2() {
         UserEntity[] expected = new UserEntity[]{userDao.findById(1).get(), userDao.findById(2).get()};
         Page<UserEntity> page = userDao.findAll(1, 2);
-        assertArrayEquals(expected, page.getItems().toArray());
+        assertArrayEquals(expected, page.getContent().toArray());
     }
 
     @Test

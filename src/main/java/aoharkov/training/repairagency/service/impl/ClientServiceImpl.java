@@ -70,11 +70,11 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     @Override
     public Page<Request> findOwnRequests(int page, int itemsPerPage, Integer clientId) {
         Page<RequestEntity> requestEntityPage = requestDao.findAllByClientId(page, itemsPerPage, clientId);
-        List<Request> requestList = requestEntityPage.getItems().stream()
+        List<Request> requestList = requestEntityPage.getContent().stream()
                 .map(requestMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
         return Page.<Request>builder()
-                .withItems(requestList)
+                .withContent(requestList)
                 .withPageNumber(page)
                 .withItemsNumberPerPage(itemsPerPage)
                 .withTotalPages(requestEntityPage.getTotalPages())

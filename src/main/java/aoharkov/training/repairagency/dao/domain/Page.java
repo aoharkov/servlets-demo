@@ -3,24 +3,24 @@ package aoharkov.training.repairagency.dao.domain;
 import java.util.List;
 
 public class Page<T> {
-    private final List<T> items;
+    private final List<T> content;
     private final int pageNumber;
     private final int itemsNumberPerPage;
-    private final int lastPageNumber;
+    private final int totalPages;
 
     private Page(Builder<T> builder) {
-        this.items = builder.items;
+        this.content = builder.content;
         this.pageNumber = builder.pageNumber;
         this.itemsNumberPerPage = builder.itemsNumberPerPage;
-        this.lastPageNumber = builder.lastPageNumber;
+        this.totalPages = builder.totalPages;
     }
 
     public static <T> Builder<T> builder() {
         return new Builder<>();
     }
 
-    public List<T> getItems() {
-        return items;
+    public List<T> getContent() {
+        return content;
     }
 
     public int getPageNumber() {
@@ -31,15 +31,15 @@ public class Page<T> {
         return itemsNumberPerPage;
     }
 
-    public int getLastPageNumber() {
-        return lastPageNumber;
+    public int getTotalPages() {
+        return totalPages;
     }
 
     public static class Builder<T> {
-        private List<T> items;
+        private List<T> content;
         private int pageNumber;
         private int itemsNumberPerPage;
-        private int lastPageNumber;
+        private int totalPages;
 
         private Builder() {
         }
@@ -48,8 +48,8 @@ public class Page<T> {
             return new Page<>(this);
         }
 
-        public Builder<T> withItems(List<T> items) {
-            this.items = items;
+        public Builder<T> withContent(List<T> items) {
+            this.content = items;
             return this;
         }
 
@@ -63,8 +63,8 @@ public class Page<T> {
             return this;
         }
 
-        public Builder<T> withMaxPageNumber(int maxPageNumber) {
-            this.lastPageNumber = maxPageNumber;
+        public Builder<T> withTotalPages(int totalPages) {
+            this.totalPages = totalPages;
             return this;
         }
     }

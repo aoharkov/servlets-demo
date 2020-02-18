@@ -50,11 +50,11 @@ public class MasterServiceImpl extends UserServiceImpl implements MasterService 
     @Override
     public Page<Order> findAllOrders(int page, int itemsPerPage) {
         Page<OrderEntity> orderEntityPage = orderDao.findAll(page, itemsPerPage);
-        List<Order> orderList = orderEntityPage.getItems().stream()
+        List<Order> orderList = orderEntityPage.getContent().stream()
                 .map(orderMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
         return Page.<Order>builder()
-                .withItems(orderList)
+                .withContent(orderList)
                 .withPageNumber(page)
                 .withItemsNumberPerPage(itemsPerPage)
                 .withTotalPages(orderEntityPage.getTotalPages())
@@ -87,11 +87,11 @@ public class MasterServiceImpl extends UserServiceImpl implements MasterService 
     @Override
     public Page<RepairStage> findAllRepairStages(int page, int itemsPerPage) {
         Page<RepairStageEntity> repairStageEntityPage = repairStageDao.findAll(page, itemsPerPage);
-        List<RepairStage> repairStageList = repairStageEntityPage.getItems().stream()
+        List<RepairStage> repairStageList = repairStageEntityPage.getContent().stream()
                 .map(repairStageMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
         return Page.<RepairStage>builder()
-                .withItems(repairStageList)
+                .withContent(repairStageList)
                 .withPageNumber(page)
                 .withItemsNumberPerPage(itemsPerPage)
                 .withTotalPages(repairStageEntityPage.getTotalPages())

@@ -64,7 +64,7 @@ public class RequestDaoImplTest {
     public void findAllShouldFindPage1WithRequest1AndRequest2() {
         RequestEntity[] expected = new RequestEntity[]{requestDao.findById(1).get(), requestDao.findById(2).get()};
         Page<RequestEntity> page = requestDao.findAll(1, 2);
-        assertArrayEquals(expected, page.getItems().toArray());
+        assertArrayEquals(expected, page.getContent().toArray());
     }
 
     @Test
@@ -83,6 +83,6 @@ public class RequestDaoImplTest {
 
     @Test
     public void findAllByClientIdShouldReturnListOfSize3() {
-        Assert.assertEquals(3, requestDao.findAllByClientId(1, 4, 1).getItems().size());
+        Assert.assertEquals(3, requestDao.findAllByClientId(1, 4, 1).getContent().size());
     }
 }

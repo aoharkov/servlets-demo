@@ -105,13 +105,13 @@ public class ClientServiceImplTest {
 
     private static Page<RequestEntity> initRequestEntityPage() {
         return Page.<RequestEntity>builder()
-                .withItems(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
+                .withContent(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
                 .build();
     }
 
     private static Page<Request> initRequestPage() {
         return Page.<Request>builder()
-                .withItems(Collections.emptyList())
+                .withContent(Collections.emptyList())
                 .build();
     }
 

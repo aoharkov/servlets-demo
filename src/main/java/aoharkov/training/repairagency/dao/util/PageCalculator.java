@@ -5,12 +5,12 @@ public class PageCalculator {
     private PageCalculator() {
     }
 
-    public static int calculateMaxPageNumber(int itemsPerPage, int rowNum) {
+    public static int calculateTotalPages(int itemsPerPage, int rowNum) {
         return (rowNum + itemsPerPage - 1) / itemsPerPage;
     }
 
-    public static int fitPageNumber(int pageNumber, int maxPageNumber) {
-        return pageNumber > maxPageNumber ? maxPageNumber : Math.max(pageNumber, 1);
+    public static int fitPageNumber(int pageNumber, int totalPages) {
+        return pageNumber > totalPages ? totalPages : Math.max(pageNumber, 1);
     }
 
     public static int calculateOffset(int pageNumber, int itemsPerPage) {

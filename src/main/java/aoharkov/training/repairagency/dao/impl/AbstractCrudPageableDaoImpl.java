@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-import static aoharkov.training.repairagency.dao.util.PageCalculator.calculateMaxPageNumber;
+import static aoharkov.training.repairagency.dao.util.PageCalculator.calculateTotalPages;
 import static aoharkov.training.repairagency.dao.util.PageCalculator.calculateOffset;
 import static aoharkov.training.repairagency.dao.util.PageCalculator.fitPageNumber;
 
@@ -117,7 +117,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
 
     private Page<E> findAll(int pageNumber, int itemsPerPage, String query, boolean withForeignId, String queryForCount,
                             Integer... identifiers) {
-        int maxPageNumber = calculateMaxPageNumber(itemsPerPage, count(queryForCount));
+        int maxPageNumber = calculateTotalPages(itemsPerPage, count(queryForCount));
         pageNumber = fitPageNumber(pageNumber, maxPageNumber);
         int offset = calculateOffset(pageNumber, itemsPerPage);
 
@@ -139,10 +139,10 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
                     entities.add(mapResultSetToEntity(resultSet));
                 }
                 return Page.<E>builder()
-                        .withItems(entities)
+                        .withContent(entities)
                         .withPageNumber(pageNumber)
                         .withItemsNumberPerPage(itemsPerPage)
-                        .withMaxPageNumber(maxPageNumber)
+                        .withTotalPages(maxPageNumber)
                         .build();
             } catch (SQLException e) {
                 LOGGER.error(EXECUTE_QUERY_ERROR, e);
