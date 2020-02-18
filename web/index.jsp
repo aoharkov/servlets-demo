@@ -12,6 +12,9 @@
             <h3><a href="?lang=uk"><fmt:message key="lang.ua" /></a></h3>
         </td>
     </tr>
+    <tr>
+        <a href="/admin/users?lang=$en&rows=4&page=1"><fmt:message key="users" /></a>
+    </tr>
 </table>
 
 <h1><fmt:message key="m.welcome" /></h1>

@@ -10,7 +10,7 @@
 
     <servlet-mapping>
         <servlet-name>FrontController</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern></url-pattern>
         <url-pattern>/login</url-pattern>
         <url-pattern>/register</url-pattern>
         <url-pattern>/admin/*</url-pattern>
