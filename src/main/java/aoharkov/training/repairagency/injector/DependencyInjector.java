@@ -2,6 +2,7 @@ package aoharkov.training.repairagency.injector;
 
 import aoharkov.training.repairagency.command.Command;
 import aoharkov.training.repairagency.command.user.LoginCommand;
+import aoharkov.training.repairagency.command.user.RedirectToLoginCommand;
 import aoharkov.training.repairagency.command.user.RegisterCommand;
 import aoharkov.training.repairagency.dao.FeedbackDao;
 import aoharkov.training.repairagency.dao.OrderDao;
@@ -104,6 +105,8 @@ public class DependencyInjector {
     private static final AdminService ADMIN_SERVICE =
             new AdminServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR, USER_DAO, USER_MAPPER);
 
+    private static final Command REDIRECT_TO_LOGIN_COMMAND = new RedirectToLoginCommand();
+
     private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
@@ -116,7 +119,7 @@ public class DependencyInjector {
 
     private static Map<String, Command> initCommands() {
         Map<String, Command> userCommandNameToCommand = new HashMap<>();
-        userCommandNameToCommand.put("/", LOGIN_COMMAND);
+        userCommandNameToCommand.put("/", REDIRECT_TO_LOGIN_COMMAND);
         userCommandNameToCommand.put("/login", LOGIN_COMMAND);
         userCommandNameToCommand.put("/register", REGISTER_COMMAND);
 /*        userCommandNameToCommand.put("/manager/requests/all", LIST_ALL_REQUEST_COMMAND);
