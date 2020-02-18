@@ -22,11 +22,17 @@ public class AdminServiceImpl extends UserServiceImpl implements AdminService {
     }
 
     @Override
-    public List<User> findAllUsers(int page, int itemsPerPage) {
+    public Page<User> findAllUsers(int page, int itemsPerPage) {
         Page<UserEntity> userEntityPage = userDao.findAll(page, itemsPerPage);
-        return userEntityPage.getItems().stream()
+        List<User> userList = userEntityPage.getItems().stream()
                 .map(userMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+        return Page.<User>builder()
+                .withItems(userList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(userEntityPage.getTotalPages())
+                .build();
     }
 
     @Override

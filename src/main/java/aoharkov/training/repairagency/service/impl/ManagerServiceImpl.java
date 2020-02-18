@@ -53,11 +53,17 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
     }
 
     @Override
-    public List<Request> findAllRequests(int page, int itemsPerPage) {
+    public Page<Request> findAllRequests(int page, int itemsPerPage) {
         Page<RequestEntity> requestEntityPage = requestDao.findAll(page, itemsPerPage);
-        return requestEntityPage.getItems().stream()
+        List<Request> requestList = requestEntityPage.getItems().stream()
                 .map(requestMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+        return Page.<Request>builder()
+                .withItems(requestList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(requestEntityPage.getTotalPages())
+                .build();
     }
 
     @Override
@@ -91,10 +97,16 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
     }
 
     @Override
-    public List<Feedback> findAllFeedback(int page, int itemsPerPage) {
+    public Page<Feedback> findAllFeedback(int page, int itemsPerPage) {
         Page<FeedbackEntity> feedbackEntityPage = feedbackDao.findAll(page, itemsPerPage);
-        return feedbackEntityPage.getItems().stream()
+        List<Feedback> feedbackList = feedbackEntityPage.getItems().stream()
                 .map(feedbackMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+        return Page.<Feedback>builder()
+                .withItems(feedbackList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(feedbackEntityPage.getTotalPages())
+                .build();
     }
 }

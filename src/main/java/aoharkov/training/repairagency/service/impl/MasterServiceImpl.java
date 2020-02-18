@@ -48,11 +48,17 @@ public class MasterServiceImpl extends UserServiceImpl implements MasterService 
     }
 
     @Override
-    public List<Order> findAllOrders(int page, int itemsPerPage) {
+    public Page<Order> findAllOrders(int page, int itemsPerPage) {
         Page<OrderEntity> orderEntityPage = orderDao.findAll(page, itemsPerPage);
-        return orderEntityPage.getItems().stream()
+        List<Order> orderList = orderEntityPage.getItems().stream()
                 .map(orderMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+        return Page.<Order>builder()
+                .withItems(orderList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(orderEntityPage.getTotalPages())
+                .build();
     }
 
     @Override
@@ -79,10 +85,16 @@ public class MasterServiceImpl extends UserServiceImpl implements MasterService 
     }
 
     @Override
-    public List<RepairStage> findAllRepairStages(int page, int itemsPerPage) {
+    public Page<RepairStage> findAllRepairStages(int page, int itemsPerPage) {
         Page<RepairStageEntity> repairStageEntityPage = repairStageDao.findAll(page, itemsPerPage);
-        return repairStageEntityPage.getItems().stream()
+        List<RepairStage> repairStageList = repairStageEntityPage.getItems().stream()
                 .map(repairStageMapper::mapEntityToDomain)
                 .collect(Collectors.toList());
+        return Page.<RepairStage>builder()
+                .withItems(repairStageList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(repairStageEntityPage.getTotalPages())
+                .build();
     }
 }
