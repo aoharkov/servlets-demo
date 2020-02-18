@@ -1,18 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ include file="common/defaultHeader.jsp" %>
-<table>
-  <tr>
-    <td>
-      <h3><a href="/register?lang=en"><fmt:message key="lang.en" /></a></h3>
-    </td>
-    <td>
-      <h3><a href="/register?lang=ru"><fmt:message key="lang.ru" /></a></h3>
-    </td>
-    <td>
-      <h3><a href="/register?lang=uk"><fmt:message key="lang.ua" /></a></h3>
-    </td>
-  </tr>
-</table>
+<%@ include file="common/defaultLangChooser.jsp" %>
 
 <h1>Registration Form</h1>
 <form action="user_register" method="post">
