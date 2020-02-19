@@ -8,8 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserValidatorImpl implements Validator<User> {
-    private static final String EMAIL_REGEX
-            = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+    private static final String ATOM = "[\\w!#$%&'*+-\\/=?^`{|}~]+";
+    private static final String LOCAL_PART = ATOM + "(\\." + ATOM + ")*";
+    private static final String LABEL = "[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*";
+    private static final String DOMAIN = LABEL + "(\\." + LABEL + ")*";
+    private static final String EMAIL_REGEX = "^" + LOCAL_PART + "@" + DOMAIN + "$";
     private static final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_PASSWORD_LENGTH = 60;
     private static final String PASSWORD_IS_TOO_SHORT
