@@ -1,6 +1,8 @@
 package aoharkov.training.repairagency.command.user;
 
 import aoharkov.training.repairagency.command.Command;
+import aoharkov.training.repairagency.domain.Role;
+import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.service.UserService;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,15 @@ public class RegisterCommand implements Command {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = User.builder()
+                .withName(request.getParameter("name"))
+                .withSurname(request.getParameter("surname"))
+                .withEmail(request.getParameter("email"))
+                .withPassword(request.getParameter("password"))
+                .withRole(Role.CLIENT)
+                .build();
+        userService.register(user);
+        request.getSession().setAttribute("user", user);
         forward("/login", request, response);
     }
 }
