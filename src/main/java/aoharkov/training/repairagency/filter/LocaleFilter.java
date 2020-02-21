@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,16 +24,19 @@ public class LocaleFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpSession session = request.getSession();
 
         String langParameter = request.getParameter(LANG_PARAMETER_NAME);
         if (langParameter != null && LANGUAGES.contains(langParameter)) {
-            request.setAttribute(LANG_PARAMETER_NAME, langParameter);
-        } else {
-            String lang = (String) request.getAttribute(LANG_PARAMETER_NAME);
-            if (lang == null) {
-                request.setAttribute(LANG_PARAMETER_NAME, DEFAULT_LANG);
-            }
+            session.setAttribute(LANG_PARAMETER_NAME, langParameter);
         }
+
+        String lang = (String) session.getAttribute(LANG_PARAMETER_NAME);
+        if (lang == null) {
+            session.setAttribute(LANG_PARAMETER_NAME, DEFAULT_LANG);
+            lang = DEFAULT_LANG;
+        }
+        request.setAttribute(LANG_PARAMETER_NAME, lang);
 
         filterChain.doFilter(request, servletResponse);
     }
