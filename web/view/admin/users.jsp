@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ include file="../common/defaultHeader.jsp" %>
-<%@ include file="../common/pageLangChooser.jsp" %>
+<%@ include file="../common/header/defaultHeader.jsp" %>
+<%@ include file="../common/langchooser/pageLangChooser.jsp" %>
 
 <table>
     <tr>
@@ -19,4 +19,4 @@
 </c:forEach>
 </table>
 
-<%@ include file="../common/pageFooter.jsp" %>
+<%@ include file="../common/footer/pageFooter.jsp" %>

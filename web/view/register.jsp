@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ include file="common/defaultHeader.jsp" %>
-<%@ include file="common/defaultLangChooser.jsp" %>
+<%@ include file="common/header/defaultHeader.jsp" %>
+<%@ include file="common/langchooser/defaultLangChooser.jsp" %>
 
 <h1>Registration Form</h1>
 
@@ -61,4 +61,4 @@
     </table>
 </form>
 
-<%@ include file="common/defaultFooter.jsp" %>
+<%@ include file="common/footer/defaultFooter.jsp" %>
