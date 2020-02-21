@@ -1,57 +1,56 @@
 package aoharkov.training.repairagency.controller;
 
+import aoharkov.training.repairagency.service.exception.validation.ValidateException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class ErrorHandler extends HttpServlet {
+    private static final int UNPROCESSABLE_ENTITY = 422;
+    private static final int INTERNAL_SERVER_ERROR = 500;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Throwable throwable = (Throwable)
-                request.getAttribute("javax.servlet.error.exception");
         Integer statusCode = (Integer)
                 request.getAttribute("javax.servlet.error.status_code");
-        String requestUri = (String)
-                request.getAttribute("javax.servlet.error.request_uri");
-        if (requestUri == null) {
-            requestUri = "Unknown";
-        }
-        PrintWriter out = response.getWriter();
-        String title = "Error/Exception Information";
-        String docType =
-                "<!doctype html public \"-//w3c//dtd html 4.0 " +
-                        "transitional//en\">\n";
 
-        out.println(docType +
-                "<html>\n" +
-                "<head><title>" + title + "</title></head>\n");
-
-        if (throwable == null && statusCode == null) {
-            out.println("<h2>Error information is missing</h2>");
-            out.println("Please return to the <a href=\"" +
-                    response.encodeURL("http://localhost:8080/") +
-                    "\">Home Page</a>.");
-        } else if (statusCode != null) {
-            out.println("The status code : " + statusCode);
-        } else {
-            out.println("<h2>Error information</h2>");
-            out.println("Exception Type : " + throwable.getClass().getName() + "</br></br>");
-            out.println("The request URI: " + requestUri + "<br><br>");
-            out.println("The exception message: " + throwable.getMessage());
+        if (request.getAttribute("javax.servlet.error.exception") != null) {
+            Throwable throwable = (Throwable)
+                    request.getAttribute("javax.servlet.error.exception");
+            if (throwable instanceof ValidateException) {
+                statusCode = UNPROCESSABLE_ENTITY;
+            }
         }
-        out.println("</body>");
-        out.println("</html>");
+
+        if (statusCode == null) {
+            statusCode = INTERNAL_SERVER_ERROR;
+        }
+
+        switch (statusCode) {
+            case UNPROCESSABLE_ENTITY:
+                forward("/error/422", request, response);
+                break;
+            case INTERNAL_SERVER_ERROR:
+                forward("/error/500", request, response);
+                break;
+            default:
+                forward("/error/404", request, response);
+        }
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         doGet(request, response);
+    }
+
+    private void forward(String requestURI, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        final String path = String.format("/view%s.jsp", requestURI);
+        request.setAttribute("requestURI", requestURI);
+        request.getRequestDispatcher(path).forward(request, response);
     }
 }
