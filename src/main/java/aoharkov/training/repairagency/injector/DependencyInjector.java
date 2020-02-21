@@ -2,8 +2,9 @@ package aoharkov.training.repairagency.injector;
 
 import aoharkov.training.repairagency.command.Command;
 import aoharkov.training.repairagency.command.admin.FindAllUsersCommand;
+import aoharkov.training.repairagency.command.user.InitialRedirectCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
-import aoharkov.training.repairagency.command.user.RedirectToLoginCommand;
+import aoharkov.training.repairagency.command.user.RedirectToHomeCommand;
 import aoharkov.training.repairagency.command.user.RegisterCommand;
 import aoharkov.training.repairagency.dao.FeedbackDao;
 import aoharkov.training.repairagency.dao.OrderDao;
@@ -106,13 +107,15 @@ public class DependencyInjector {
     private static final AdminService ADMIN_SERVICE =
             new AdminServiceImpl(PASSWORD_ENCODER, USER_VALIDATOR, USER_DAO, USER_MAPPER);
 
-    private static final Command REDIRECT_TO_LOGIN_COMMAND = new RedirectToLoginCommand();
+    private static final Command INITIAL_REDIRECT_COMMAND = new InitialRedirectCommand();
 
     private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
 
     private static final Command FIND_ALL_USERS = new FindAllUsersCommand(ADMIN_SERVICE);
+
+    private static final Command REDIRECT_TO_HOME_COMMAND = new RedirectToHomeCommand();
 
     private static final Map<String, Command> COMMANDS = initCommands();
 
@@ -122,9 +125,10 @@ public class DependencyInjector {
 
     private static Map<String, Command> initCommands() {
         Map<String, Command> userCommandNameToCommand = new HashMap<>();
-        userCommandNameToCommand.put("/", REDIRECT_TO_LOGIN_COMMAND);
+        userCommandNameToCommand.put("/", INITIAL_REDIRECT_COMMAND);
         userCommandNameToCommand.put("/login", LOGIN_COMMAND);
         userCommandNameToCommand.put("/register", REGISTER_COMMAND);
+        userCommandNameToCommand.put("/home", REDIRECT_TO_HOME_COMMAND);
         userCommandNameToCommand.put("/admin/users", FIND_ALL_USERS);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }

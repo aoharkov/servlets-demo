@@ -31,18 +31,6 @@ public class LoginCommand implements Command {
 
         final HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        switch (user.getRole()) {
-            case ADMIN:
-                forward("/admin/home", request, response);
-                break;
-            case MANAGER:
-                forward("/manager/home", request, response);
-                break;
-            case MASTER:
-                forward("/master/home", request, response);
-                break;
-            default:
-                forward("/client/home", request, response);
-        }
+        response.sendRedirect("/home");
     }
 }

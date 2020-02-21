@@ -1,14 +1,13 @@
 package aoharkov.training.repairagency.command.user;
 
 import aoharkov.training.repairagency.command.Command;
-import aoharkov.training.repairagency.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RedirectToLoginCommand implements Command {
+public class InitialRedirectCommand implements Command {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
