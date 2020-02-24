@@ -23,7 +23,7 @@ public class RedirectToHomeCommand implements Command {
                     forward("/admin/home", request, response);
                     break;
                 case MANAGER:
-                    forward("/manager/home", request, response);
+                    forward("/mgr/home", request, response);
                     break;
                 case MASTER:
                     forward("/master/home", request, response);

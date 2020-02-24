@@ -15,7 +15,7 @@
         <url-pattern>/register</url-pattern>
         <url-pattern>/home</url-pattern>
         <url-pattern>/admin/*</url-pattern>
-        <url-pattern>/manager/*</url-pattern>
+        <url-pattern>/mgr/*</url-pattern>
         <url-pattern>/master/*</url-pattern>
         <url-pattern>/client/*</url-pattern>
         <url-pattern>/error/*</url-pattern>
@@ -41,7 +41,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>ErrorHandler</servlet-name>
         <servlet-class>aoharkov.training.repairagency.controller.ErrorHandler</servlet-class>
     </servlet>
@@ -64,5 +64,5 @@
     <error-page>
         <exception-type>java.lang.Throwable</exception-type >
         <location>/error</location>
-    </error-page>
+    </error-page>-->
 </web-app>
