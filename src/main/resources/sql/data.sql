@@ -1,26 +1,26 @@
 INSERT INTO repair_stages (name)
-VALUES ('Waiting for its turn');
+VALUES ('Waiting for delivery to service center');
 
 INSERT INTO repair_stages (name)
-VALUES ('Teardown');
+VALUES ('On delivery to master');
 
 INSERT INTO repair_stages (name)
-VALUES ('Parts Ordering');
+VALUES ('Issue confirmation');
 
 INSERT INTO repair_stages (name)
-VALUES ('Structural Repair');
+VALUES ('Repair');
 
 INSERT INTO repair_stages (name)
-VALUES ('Body Repair');
+VALUES ('Assembly');
 
 INSERT INTO repair_stages (name)
-VALUES ('Refinishing and Painting');
+VALUES ('Final testing');
 
 INSERT INTO repair_stages (name)
-VALUES ('Reassembly');
+VALUES ('On delivery to service centre');
 
 INSERT INTO repair_stages (name)
-VALUES ('Finished');
+VALUES ('Ready to pick up');
 
 INSERT INTO users (name, surname, email, password, role)
 VALUES ('Alex', 'Kr.', 'alex@gmail.com', '$2a$10$gOIJt9MD21n3srRFc9T1.upEHbZYr2VcNrTlWBlR3GM217wekKSKW', 'MASTER');
@@ -91,18 +91,123 @@ INSERT INTO users (name, surname, email, password, role)
 VALUES ('Yuriy', 'D.', 'yuriy@gmail.com', '$2a$10$DqhoHPIwlZGG4DguQrPYGugFd7fo7efPuU.uD81LH7e8uZWm9B3tC', 'MASTER');
 
 INSERT INTO requests (client_id, description, viewed, accepted)
-VALUES (1, 'Change color of the car to red', 1, 0);
-
-INSERT INTO refusals (request_id, explanation, manager_id)
-VALUES (1, 'You can have a car painted any color that you want so long as it is black', 2);
-
-INSERT INTO feedback (request_id, text, score)
-VALUES (1, 'Did not accepted my request(', 1);
-
-INSERT INTO requests (client_id, description, viewed, accepted)
-VALUES (1, 'Change color of the car to black', 1, 1);
+VALUES (6, 'Replace the electrical plug of refrigerator', 1, 1);
 
 INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
-VALUES (2, 2, 4500, 3, 8);
+VALUES (1, 14, 200, 1, 8);
+
+INSERT INTO feedback (request_id, text, score)
+VALUES (1, 'Very high quality and good service ', 10);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of electric car', 1, 0);
+
+INSERT INTO refusals (request_id, explanation, manager_id)
+VALUES (2, 'We do not repair charging stations of electric car' , 14);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of charger for remote control toy car', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (3, 14, 200, 4, 8);
+
+INSERT INTO feedback (request_id, text, score)
+VALUES (3, 'Very high quality and good service ', 10);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (15, 'Replace the electrical plug of washing machine', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (4, 12, 200, 1, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of washing machine', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (5, 14, 200, 10, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of dishwasher', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (6, 12, 200, 1, 8);
+
+INSERT INTO feedback (request_id, text, score)
+VALUES (6, 'High quality and good service ', 9);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of microwave oven', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (7, 14, 200, 13, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (15, 'Replace the electrical plug of fan', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (8, 12, 200, 1, 8);
+
+INSERT INTO feedback (request_id, text, score)
+VALUES (9, 'Very high quality and good service ', 10);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of electric heater', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (9, 14, 200, 1, 8);
+
+INSERT INTO feedback (request_id, text, score)
+VALUES (9, 'Stop working in one hour after repair', 1);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of coffeemaker', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (10, 14, 200, 13, 6);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of electric kettle', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (11, 14, 200, 1, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of toaster', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (12, 14, 200, 22, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (15, 'Replace the electrical plug of blender', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (13, 14, 200, 1, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (15, 'Replace the electrical plug of waffle iron', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (14, 12, 200, 17, 8);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of food processor', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (15, 14, 200, 1, 8);
+
+INSERT INTO feedback (request_id, text, score)
+VALUES (15, 'Manager was rude on the phone', 6);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (15, 'Replace the electrical plug of rice cooker', 1, 1);
+
+INSERT INTO orders (request_id, manager_id, price, master_id, repair_stage_id)
+VALUES (16, 12, 200, 1, 5);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (15, 'Replace the electrical plug of sewing machine', 0, 0);
+
+INSERT INTO requests (client_id, description, viewed, accepted)
+VALUES (6, 'Replace the electrical plug of air conditioner', 0, 0);
 
 
