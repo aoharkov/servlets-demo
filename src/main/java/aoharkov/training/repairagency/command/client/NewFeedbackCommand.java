@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class newFeedbackCommand implements Command {
+public class NewFeedbackCommand implements Command {
     private final ClientService clientService;
 
-    public newFeedbackCommand(ClientService clientService) {
+    public NewFeedbackCommand(ClientService clientService) {
         this.clientService = clientService;
     }
 

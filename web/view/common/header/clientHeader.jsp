@@ -26,6 +26,9 @@
         <td>
             <h2><a href="/client/requests?lang=${lang}&rows=4&page=1"><fmt:message key="menu.requests" /></a></h2>
         </td>
+        <td>
+            <h2><a href="/client/new/request?lang=${lang}"><fmt:message key="menu.new.request" /></a></h2>
+        </td>
     </tr>
 </table>
 
