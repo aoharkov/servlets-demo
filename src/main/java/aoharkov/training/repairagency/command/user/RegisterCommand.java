@@ -4,6 +4,7 @@ import aoharkov.training.repairagency.command.Command;
 import aoharkov.training.repairagency.domain.Role;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.service.UserService;
+import aoharkov.training.repairagency.service.encoder.Encoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,11 @@ import java.io.IOException;
 
 public class RegisterCommand implements Command {
     private final UserService userService;
+    private final Encoder encoder;
 
-    public RegisterCommand(UserService userService) {
+    public RegisterCommand(UserService userService, Encoder encoder) {
         this.userService = userService;
+        this.encoder = encoder;
     }
 
     @Override
@@ -28,11 +31,10 @@ public class RegisterCommand implements Command {
                 .withName(request.getParameter("name"))
                 .withSurname(request.getParameter("surname"))
                 .withEmail(request.getParameter("email"))
-                .withPassword(request.getParameter("password"))
+                .withPassword(encoder.encode(request.getParameter("password")))
                 .withRole(Role.CLIENT)
                 .build();
         userService.register(user);
-        request.getSession().setAttribute("user", user);
         forward("/login", request, response);
     }
 }
