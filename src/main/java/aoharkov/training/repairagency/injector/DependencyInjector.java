@@ -2,6 +2,7 @@ package aoharkov.training.repairagency.injector;
 
 import aoharkov.training.repairagency.command.Command;
 import aoharkov.training.repairagency.command.admin.FindAllUsersCommand;
+import aoharkov.training.repairagency.command.client.FindOwnRequestsCommand;
 import aoharkov.training.repairagency.command.user.InitialRedirectCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
 import aoharkov.training.repairagency.command.user.RedirectToHomeCommand;
@@ -114,9 +115,12 @@ public class DependencyInjector {
 
     private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE, PASSWORD_ENCODER);
 
+    private static final Command REDIRECT_TO_HOME_COMMAND = new RedirectToHomeCommand();
+
     private static final Command FIND_ALL_USERS = new FindAllUsersCommand(ADMIN_SERVICE);
 
-    private static final Command REDIRECT_TO_HOME_COMMAND = new RedirectToHomeCommand();
+    private static final Command FIND_OWN_REQUESTS_COMMAND = new FindOwnRequestsCommand(CLIENT_SERVICE);
+
 
     private static final Map<String, Command> COMMANDS = initCommands();
 
@@ -135,6 +139,7 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/manager/home", REDIRECT_TO_HOME_COMMAND);
         userCommandNameToCommand.put("/master/home", REDIRECT_TO_HOME_COMMAND);
         userCommandNameToCommand.put("/admin/users", FIND_ALL_USERS);
+        userCommandNameToCommand.put("/client/requests", FIND_OWN_REQUESTS_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 

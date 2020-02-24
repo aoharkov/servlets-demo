@@ -24,7 +24,7 @@
             <h1><fmt:message key="title" /></h1>
         </td>
         <td>
-            <h2><a href="/admin/users?lang=${lang}"><fmt:message key="menu.users" /></a></h2>
+            <h2><a href="/admin/users?lang=${lang}&rows=4&page=1"><fmt:message key="menu.users" /></a></h2>
         </td>
     </tr>
 </table>
