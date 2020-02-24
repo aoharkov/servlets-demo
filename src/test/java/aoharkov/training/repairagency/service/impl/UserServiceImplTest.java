@@ -7,6 +7,7 @@ import aoharkov.training.repairagency.mapper.UserMapper;
 import aoharkov.training.repairagency.service.encoder.Encoder;
 import aoharkov.training.repairagency.service.exception.EntityAlreadyExistException;
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
+import aoharkov.training.repairagency.service.exception.IncorrectPasswordException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
 import aoharkov.training.repairagency.service.validator.Validator;
@@ -32,10 +33,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
-    private static final String ENCODED_PASSWORD = "encoded_password";
-    private static final String PASSWORD = "password";
-    private static final String INCORRECT_PASSWORD = "incorrect password";
-    private static final String INCORRECT_ENCODED_PASSWORD = "incorrect encoded_password";
+    private static final String ENCODED_PASSWORD = "$2a$10$0zVxYquinNxduTpbd7iw.OIm7VysEarEuBs0RVBXH4B2s5ktggkvy";
+    private static final String PASSWORD = "admin@gmail.com";
+    private static final String INCORRECT_PASSWORD = "artem@gmail.com";
+    private static final String INCORRECT_ENCODED_PASSWORD =
+            "$2a$10$Cke4fwQkrg/vZuTaESojHeaSTEUkaOCceixZY6MzVIbqDkypdba.G";
     private static final String EMAIL = "admin@gmail.com";
     private static final String INVALID_EMAIL = "admin#gmail.com";
     private static final String CORRECT_EMAIL_NOT_IN_DB = "admin@mail.ru";
@@ -79,7 +81,7 @@ public class UserServiceImplTest {
     public void userShouldLoginSuccessfully() {
         doNothing().when(userValidator).validateEmail(eq(EMAIL));
         when(userDao.findByEmail(eq(EMAIL))).thenReturn(Optional.of(USER_ENTITY));
-        when(passwordEncoder.encode(eq(PASSWORD))).thenReturn(ENCODED_PASSWORD);
+        when(passwordEncoder.check(eq(PASSWORD), eq(ENCODED_PASSWORD))).thenReturn(true);
         when(userMapper.mapEntityToDomain(eq(USER_ENTITY))).thenReturn(USER);
 
         final User user = userService.login(EMAIL, PASSWORD);
@@ -87,7 +89,7 @@ public class UserServiceImplTest {
 
         verify(userValidator).validateEmail(eq(EMAIL));
         verify(userDao).findByEmail(eq(EMAIL));
-        verify(passwordEncoder).encode(eq(PASSWORD));
+        verify(passwordEncoder).check(eq(PASSWORD), eq(ENCODED_PASSWORD));
         verify(userMapper).mapEntityToDomain(eq(USER_ENTITY));
     }
 
@@ -116,7 +118,7 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userMapper);
     }
 
-    @Test(expected = InvalidPasswordException.class)
+    @Test(expected = IncorrectPasswordException.class)
     public void userShouldNotLoginAsPasswordIsIncorrect() {
         doNothing().when(userValidator).validateEmail(eq(EMAIL));
         when(userDao.findByEmail(eq(EMAIL))).thenReturn(Optional.of(USER_ENTITY));
