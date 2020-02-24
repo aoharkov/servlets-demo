@@ -2,8 +2,8 @@
 <%@ include file="common/header/defaultHeader.jsp" %>
 <%@ include file="common/langchooser/defaultLangChooser.jsp" %>
 
+<div align="center">
 <h1>Registration Form</h1>
-
 <form action="${requestURI}" method="post">
     <table>
         <tr><td>
@@ -55,10 +55,9 @@
                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Repeated password should be the same' : '');"
                    placeholder="${repeated_password}"/>
         </td></tr>
-        <tr><td>
-        <input type="submit" value="submit"/>
-        </td></tr>
     </table>
+    <input type="submit" value="submit"/>
 </form>
+</div>
 
 <%@ include file="common/footer/defaultFooter.jsp" %>
