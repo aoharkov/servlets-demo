@@ -1,3 +1,4 @@
+<div align="center">
 <table>
     <tr>
         <c:if test ="${pageNum > 1}">
@@ -39,5 +40,6 @@
         </c:if>
     </tr>
 </table>
+</div>
 </body>
 </html>

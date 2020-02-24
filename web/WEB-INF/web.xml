@@ -13,10 +13,12 @@
         <url-pattern></url-pattern>
         <url-pattern>/login</url-pattern>
         <url-pattern>/register</url-pattern>
+        <url-pattern>/home</url-pattern>
         <url-pattern>/admin/*</url-pattern>
         <url-pattern>/manager/*</url-pattern>
         <url-pattern>/master/*</url-pattern>
         <url-pattern>/client/*</url-pattern>
+        <url-pattern>/error/*</url-pattern>
     </servlet-mapping>
 
     <filter>

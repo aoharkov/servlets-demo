@@ -24,10 +24,16 @@
             <h1><fmt:message key="title" /></h1>
         </td>
         <td>
-            <h2><a href="/login?lang=${lang}"><fmt:message key="menu.login" /></a></h2>
+            <h2><a href="/manager/requests?lang=${lang}"><fmt:message key="menu.requests" /></a></h2>
         </td>
         <td>
-            <h2><a href="/register?lang=${lang}"><fmt:message key="menu.register" /></a></h2>
+            <h2><a href="/manager/orders?lang=${lang}"><fmt:message key="menu.orders" /></a></h2>
+        </td>
+        <td>
+            <h2><a href="/manager/refusals?lang=${lang}"><fmt:message key="menu.refusals" /></a></h2>
+        </td>
+        <td>
+            <h2><a href="/manager/feedback?lang=${lang}"><fmt:message key="menu.feedback" /></a></h2>
         </td>
     </tr>
 </table>
