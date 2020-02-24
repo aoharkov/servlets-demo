@@ -10,8 +10,8 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
-public class EncoderPBKDF2 implements Encoder {
-    private static final Logger LOGGER = LogManager.getLogger(EncoderPBKDF2.class);
+public class PBKDF2Encoder implements Encoder {
+    private static final Logger LOGGER = LogManager.getLogger(PBKDF2Encoder.class);
 
     private static final int LENGTH_OF_SALT = 16;
     private static final int ITERATION_COUNT = 65536;
@@ -20,7 +20,7 @@ public class EncoderPBKDF2 implements Encoder {
     private static final String PBKDF2_ALGORITHM_NAME = "PBKDF2WithHmacSHA1";
     private SecretKeyFactory hashFactory;
 
-    public EncoderPBKDF2() {
+    public PBKDF2Encoder() {
         try {
             hashFactory = SecretKeyFactory.getInstance(PBKDF2_ALGORITHM_NAME);
         } catch (NoSuchAlgorithmException e) {
@@ -41,5 +41,10 @@ public class EncoderPBKDF2 implements Encoder {
             LOGGER.error(e.getMessage());
         }
         return String.valueOf(hash);
+    }
+
+    @Override
+    public boolean check(String password, String hashedPassword) {
+        return encode(password).equals(hashedPassword);
     }
 }

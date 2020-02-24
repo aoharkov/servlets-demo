@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService {
         userValidator.validateEmail(email);
         Optional<UserEntity> userEntity = userDao.findByEmail(email);
         if (userEntity.isPresent()) {
-            String encryptedPassword = encoder.encode(password);
-            if (encryptedPassword.equals(userEntity.get().getPassword())) {
+            if (encoder.check(password, userEntity.get().getPassword())) {
                 return userMapper.mapEntityToDomain(userEntity.get());
             } else {
                 throw new IncorrectPasswordException();

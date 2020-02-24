@@ -32,8 +32,9 @@ import aoharkov.training.repairagency.service.ClientService;
 import aoharkov.training.repairagency.service.ManagerService;
 import aoharkov.training.repairagency.service.MasterService;
 import aoharkov.training.repairagency.service.UserService;
+import aoharkov.training.repairagency.service.encoder.BCryptEncoder;
 import aoharkov.training.repairagency.service.encoder.Encoder;
-import aoharkov.training.repairagency.service.encoder.EncoderPBKDF2;
+import aoharkov.training.repairagency.service.encoder.PBKDF2Encoder;
 import aoharkov.training.repairagency.service.impl.AdminServiceImpl;
 import aoharkov.training.repairagency.service.impl.ClientServiceImpl;
 import aoharkov.training.repairagency.service.impl.ManagerServiceImpl;
@@ -52,7 +53,7 @@ public class DependencyInjector {
 
     private static final Validator<User> USER_VALIDATOR = new UserValidatorImpl();
 
-    private static final Encoder PASSWORD_ENCODER = new EncoderPBKDF2();
+    private static final Encoder PASSWORD_ENCODER = new BCryptEncoder();
 
     private static final Connector CONNECTOR = new HikariCP("db");
 
@@ -111,7 +112,7 @@ public class DependencyInjector {
 
     private static final Command LOGIN_COMMAND = new LoginCommand(USER_SERVICE);
 
-    private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE);
+    private static final Command REGISTER_COMMAND = new RegisterCommand(USER_SERVICE, PASSWORD_ENCODER);
 
     private static final Command FIND_ALL_USERS = new FindAllUsersCommand(ADMIN_SERVICE);
 
@@ -129,6 +130,10 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/login", LOGIN_COMMAND);
         userCommandNameToCommand.put("/register", REGISTER_COMMAND);
         userCommandNameToCommand.put("/home", REDIRECT_TO_HOME_COMMAND);
+        userCommandNameToCommand.put("/admin/home", REDIRECT_TO_HOME_COMMAND);
+        userCommandNameToCommand.put("/client/home", REDIRECT_TO_HOME_COMMAND);
+        userCommandNameToCommand.put("/manager/home", REDIRECT_TO_HOME_COMMAND);
+        userCommandNameToCommand.put("/master/home", REDIRECT_TO_HOME_COMMAND);
         userCommandNameToCommand.put("/admin/users", FIND_ALL_USERS);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
