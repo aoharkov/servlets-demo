@@ -11,7 +11,7 @@
                    required
                    type="text"
                    maxlength="60"
-                   pattern="^([A-Za-zА-Яа-я]+[ A-Za-zА-Яа-я])*[A-Za-zА-Яа-я]+$"
+                   pattern="^([A-Za-z]+[ A-Za-z])*[A-Za-z]+$"
                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Only letters are allowed' : '');"
                    <fmt:message key="name" var="name"/> placeholder="${name}"/>
         </td></tr>
@@ -19,7 +19,7 @@
             <input name="surname"
                    type="text"
                    maxlength="60"
-                   pattern="^([A-Za-zА-Яа-я]+[ A-Za-zА-Яа-я])*[A-Za-zА-Яа-я]+$"
+                   pattern="^([A-Za-z]+[ A-Za-z])*[A-Za-z]+$"
                    onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Only letters and whitespaces (between words) are allowed' : '');"
                    <fmt:message key="surname" var="surname"/> placeholder="${surname}"/>
         </td></tr>

@@ -14,6 +14,7 @@
             <td>${request.getDescription()}</td>
             <td>${request.getViewed()}</td>
             <td>${request.getAccepted()}</td>
+            <td><a href="/client/new/feedback?lang=${lang}&req=${request.getId()}"><fmt:message key="action.new.feedback"/></a></td>
         </tr>
     </c:forEach>
     </table>

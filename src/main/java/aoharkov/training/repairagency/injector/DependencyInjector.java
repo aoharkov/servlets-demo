@@ -3,6 +3,7 @@ package aoharkov.training.repairagency.injector;
 import aoharkov.training.repairagency.command.Command;
 import aoharkov.training.repairagency.command.admin.FindAllUsersCommand;
 import aoharkov.training.repairagency.command.client.FindOwnRequestsCommand;
+import aoharkov.training.repairagency.command.client.newFeedbackCommand;
 import aoharkov.training.repairagency.command.user.InitialRedirectCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
 import aoharkov.training.repairagency.command.user.RedirectToHomeCommand;
@@ -35,7 +36,6 @@ import aoharkov.training.repairagency.service.MasterService;
 import aoharkov.training.repairagency.service.UserService;
 import aoharkov.training.repairagency.service.encoder.BCryptEncoder;
 import aoharkov.training.repairagency.service.encoder.Encoder;
-import aoharkov.training.repairagency.service.encoder.PBKDF2Encoder;
 import aoharkov.training.repairagency.service.impl.AdminServiceImpl;
 import aoharkov.training.repairagency.service.impl.ClientServiceImpl;
 import aoharkov.training.repairagency.service.impl.ManagerServiceImpl;
@@ -121,6 +121,7 @@ public class DependencyInjector {
 
     private static final Command FIND_OWN_REQUESTS_COMMAND = new FindOwnRequestsCommand(CLIENT_SERVICE);
 
+    private static final Command NEW_FEEDBACK_COMMAND = new newFeedbackCommand(CLIENT_SERVICE);
 
     private static final Map<String, Command> COMMANDS = initCommands();
 
@@ -140,6 +141,7 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/master/home", REDIRECT_TO_HOME_COMMAND);
         userCommandNameToCommand.put("/admin/users", FIND_ALL_USERS);
         userCommandNameToCommand.put("/client/requests", FIND_OWN_REQUESTS_COMMAND);
+        userCommandNameToCommand.put("/client/new/feedback", NEW_FEEDBACK_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 

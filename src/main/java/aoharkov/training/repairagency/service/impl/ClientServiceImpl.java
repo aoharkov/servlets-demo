@@ -82,6 +82,15 @@ public class ClientServiceImpl extends UserServiceImpl implements ClientService 
     }
 
     @Override
+    public Request findRequest(Integer id) {
+        Optional<RequestEntity> requestEntity = requestDao.findById(id);
+        if (requestEntity.isPresent()) {
+            return requestMapper.mapEntityToDomain(requestEntity.get());
+        }
+        throw new EntityNotFoundException();
+    }
+
+    @Override
     public Order findOrder(Integer requestId) {
         Optional<OrderEntity> orderEntity = orderDao.findByRequestId(requestId);
         if (orderEntity.isPresent()) {

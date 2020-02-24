@@ -13,6 +13,8 @@ public interface ClientService {
 
     Page<Request> findOwnRequests(int page, int itemsPerPage, Integer id);
 
+    Request findRequest(Integer id);
+
     Order findOrder(Integer requestId);
 
     Refusal findRefusal(Integer requestId);
