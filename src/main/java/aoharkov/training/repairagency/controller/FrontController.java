@@ -24,7 +24,12 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            uriToCommand.get(request.getRequestURI()).doGet(request, response);
+            Command command = uriToCommand.get(request.getRequestURI());
+            if (command != null) {
+                command.doGet(request, response);
+            } else {
+                LOGGER.error(String.format("Unknown RequestURI %s",  request.getRequestURI()));
+            }
         } catch (ServletException | IOException e) {
             LOGGER.error(String.format("Error in doGet for %s", request.getRequestURI()), e);
         }
@@ -33,7 +38,12 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
-            uriToCommand.get(request.getRequestURI()).doPost(request, response);
+            Command command = uriToCommand.get(request.getRequestURI());
+            if (command != null) {
+                command.doPost(request, response);
+            } else {
+                LOGGER.error(String.format("Unknown RequestURI %s",  request.getRequestURI()));
+            }
         } catch (ServletException | IOException e) {
             LOGGER.error(String.format("doPost for %s", request.getRequestURI()), e);
         }

@@ -24,7 +24,7 @@
             <h1><fmt:message key="title" /></h1>
         </td>
         <td>
-            <h2><a href="/mgr/requests?lang=${lang}&rows=4&page=1"><fmt:message key="menu.requests" /></a></h2>
+            <h2><a href="/mgr/requests?lang=${lang}&rows=6&page=1"><fmt:message key="menu.requests" /></a></h2>
         </td>
         <td>
             <h2><a href="/mgr/orders?lang=${lang}&rows=4&page=1"><fmt:message key="menu.orders" /></a></h2>

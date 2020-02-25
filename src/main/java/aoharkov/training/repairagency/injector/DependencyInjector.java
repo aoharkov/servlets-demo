@@ -6,6 +6,7 @@ import aoharkov.training.repairagency.command.client.FindOwnRequestsCommand;
 import aoharkov.training.repairagency.command.client.NewFeedbackCommand;
 import aoharkov.training.repairagency.command.client.NewRequestCommand;
 import aoharkov.training.repairagency.command.manager.FindAllRequestsCommand;
+import aoharkov.training.repairagency.command.manager.NewOrderCommand;
 import aoharkov.training.repairagency.command.user.InitialRedirectCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
 import aoharkov.training.repairagency.command.user.RedirectToHomeCommand;
@@ -129,6 +130,8 @@ public class DependencyInjector {
 
     private static final Command FIND_ALL_REQUESTS_COMMAND = new FindAllRequestsCommand(MANAGER_SERVICE);
 
+    private static final Command NEW_ORDER_COMMAND = new NewOrderCommand(MANAGER_SERVICE);
+
     private static final Map<String, Command> COMMANDS = initCommands();
 
     private DependencyInjector() {
@@ -150,6 +153,7 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/client/new/feedback", NEW_FEEDBACK_COMMAND);
         userCommandNameToCommand.put("/client/new/request", NEW_REQUEST_COMMAND);
         userCommandNameToCommand.put("/mgr/requests", FIND_ALL_REQUESTS_COMMAND);
+        userCommandNameToCommand.put("/mgr/new/order", NEW_ORDER_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 
