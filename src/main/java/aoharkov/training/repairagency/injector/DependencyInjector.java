@@ -11,6 +11,7 @@ import aoharkov.training.repairagency.command.manager.FindAllRefusalsCommand;
 import aoharkov.training.repairagency.command.manager.FindAllRequestsCommand;
 import aoharkov.training.repairagency.command.manager.NewOrderCommand;
 import aoharkov.training.repairagency.command.manager.NewRefusalCommand;
+import aoharkov.training.repairagency.command.master.FindAllRepairStagesCommand;
 import aoharkov.training.repairagency.command.master.ProcessOrdersCommand;
 import aoharkov.training.repairagency.command.user.InitialRedirectCommand;
 import aoharkov.training.repairagency.command.user.LoginCommand;
@@ -147,6 +148,8 @@ public class DependencyInjector {
 
     private static final Command PROCESS_ORDERS_COMMAND = new ProcessOrdersCommand(MASTER_SERVICE);
 
+    private static final Command FIND_ALL_REPAIR_STAGES_COMMAND = new FindAllRepairStagesCommand(MASTER_SERVICE);
+
     private static final Map<String, Command> COMMANDS = initCommands();
 
     private DependencyInjector() {
@@ -174,6 +177,7 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/mgr/refusals", FIND_ALL_REFUSALS_COMMAND);
         userCommandNameToCommand.put("/mgr/feedback", FIND_ALL_FEEDBACK_COMMAND);
         userCommandNameToCommand.put("/master/orders", PROCESS_ORDERS_COMMAND);
+        userCommandNameToCommand.put("/master/stages", FIND_ALL_REPAIR_STAGES_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 
