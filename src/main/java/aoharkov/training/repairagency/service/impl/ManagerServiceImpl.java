@@ -12,6 +12,7 @@ import aoharkov.training.repairagency.domain.Refusal;
 import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
+import aoharkov.training.repairagency.entity.OrderEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.mapper.FeedbackMapper;
 import aoharkov.training.repairagency.mapper.OrderMapper;
@@ -63,6 +64,20 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
                 .withPageNumber(page)
                 .withItemsNumberPerPage(itemsPerPage)
                 .withTotalPages(requestEntityPage.getTotalPages())
+                .build();
+    }
+
+    @Override
+    public Page<Order> findAllOrders(int page, int itemsPerPage) {
+        Page<OrderEntity> orderEntityPage = orderDao.findAll(page, itemsPerPage);
+        List<Order> orderList = orderEntityPage.getContent().stream()
+                .map(orderMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
+        return Page.<Order>builder()
+                .withContent(orderList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(orderEntityPage.getTotalPages())
                 .build();
     }
 

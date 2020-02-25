@@ -10,6 +10,8 @@ public interface ManagerService {
 
     Page<Request> findAllRequests(int page, int itemsPerPage);
 
+    Page<Order> findAllOrders(int page, int itemsPerPage);
+
     boolean acceptRequest(Order order);
 
     boolean declineRequest(Refusal refusal);
