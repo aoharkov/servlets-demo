@@ -5,6 +5,7 @@ import aoharkov.training.repairagency.command.admin.FindAllUsersCommand;
 import aoharkov.training.repairagency.command.client.FindOwnRequestsCommand;
 import aoharkov.training.repairagency.command.client.NewFeedbackCommand;
 import aoharkov.training.repairagency.command.client.NewRequestCommand;
+import aoharkov.training.repairagency.command.manager.FindAllFeedbackCommand;
 import aoharkov.training.repairagency.command.manager.FindAllOrdersCommand;
 import aoharkov.training.repairagency.command.manager.FindAllRefusalsCommand;
 import aoharkov.training.repairagency.command.manager.FindAllRequestsCommand;
@@ -141,6 +142,8 @@ public class DependencyInjector {
 
     private static final Command FIND_ALL_REFUSALS_COMMAND = new FindAllRefusalsCommand(MANAGER_SERVICE);
 
+    private static final Command FIND_ALL_FEEDBACK_COMMAND = new FindAllFeedbackCommand(MANAGER_SERVICE);
+
     private static final Map<String, Command> COMMANDS = initCommands();
 
     private DependencyInjector() {
@@ -166,31 +169,12 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/mgr/new/refusal", NEW_REFUSAL_COMMAND);
         userCommandNameToCommand.put("/mgr/orders", FIND_ALL_ORDERS_COMMAND);
         userCommandNameToCommand.put("/mgr/refusals", FIND_ALL_REFUSALS_COMMAND);
+        userCommandNameToCommand.put("/mgr/feedback", FIND_ALL_FEEDBACK_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 
     public static DependencyInjector getInstance() {
         return INSTANCE;
-    }
-
-    public UserService getUserService() {
-        return USER_SERVICE;
-    }
-
-    public ClientService getClientService() {
-        return CLIENT_SERVICE;
-    }
-
-    public ManagerService getManagerService() {
-        return MANAGER_SERVICE;
-    }
-
-    public MasterService getMasterService() {
-        return MASTER_SERVICE;
-    }
-
-    public AdminService getAdminService() {
-        return ADMIN_SERVICE;
     }
 
     public Map<String, Command> getCommands() {

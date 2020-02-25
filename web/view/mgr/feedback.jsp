@@ -6,14 +6,14 @@
     <table>
         <tr>
             <th scope="col"><fmt:message key="requestId"/></th>
-            <th scope="col"><fmt:message key="explanation"/></th>
-            <th scope="col"><fmt:message key="managerId"/></th>
+            <th scope="col"><fmt:message key="text"/></th>
+            <th scope="col"><fmt:message key="score"/></th>
         </tr>
-    <c:forEach items="${refusals}" var="refusal">
+    <c:forEach items="${feedback}" var="oneFeedback">
         <tr>
-            <td>${refusal.getRequest().getId()}</td>
-            <td>${refusal.getExplanation()}</td>
-            <td>${refusal.getManager().getId()}</td>
+            <td>${oneFeedback.getRequest().getId()}</td>
+            <td>${oneFeedback.getText()}</td>
+            <td>${oneFeedback.getScore()}</td>
         </tr>
     </c:forEach>
     </table>
