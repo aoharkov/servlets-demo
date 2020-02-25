@@ -13,6 +13,7 @@ import aoharkov.training.repairagency.domain.Request;
 import aoharkov.training.repairagency.domain.User;
 import aoharkov.training.repairagency.entity.FeedbackEntity;
 import aoharkov.training.repairagency.entity.OrderEntity;
+import aoharkov.training.repairagency.entity.RefusalEntity;
 import aoharkov.training.repairagency.entity.RequestEntity;
 import aoharkov.training.repairagency.mapper.FeedbackMapper;
 import aoharkov.training.repairagency.mapper.OrderMapper;
@@ -78,6 +79,20 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
                 .withPageNumber(page)
                 .withItemsNumberPerPage(itemsPerPage)
                 .withTotalPages(orderEntityPage.getTotalPages())
+                .build();
+    }
+
+    @Override
+    public Page<Refusal> findAllRefusals(int page, int itemsPerPage) {
+        Page<RefusalEntity> refusalEntityPage = refusalDao.findAll(page, itemsPerPage);
+        List<Refusal> refusalList = refusalEntityPage.getContent().stream()
+                .map(refusalMapper::mapEntityToDomain)
+                .collect(Collectors.toList());
+        return Page.<Refusal>builder()
+                .withContent(refusalList)
+                .withPageNumber(page)
+                .withItemsNumberPerPage(itemsPerPage)
+                .withTotalPages(refusalEntityPage.getTotalPages())
                 .build();
     }
 

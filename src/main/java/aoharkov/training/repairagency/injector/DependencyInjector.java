@@ -6,6 +6,7 @@ import aoharkov.training.repairagency.command.client.FindOwnRequestsCommand;
 import aoharkov.training.repairagency.command.client.NewFeedbackCommand;
 import aoharkov.training.repairagency.command.client.NewRequestCommand;
 import aoharkov.training.repairagency.command.manager.FindAllOrdersCommand;
+import aoharkov.training.repairagency.command.manager.FindAllRefusalsCommand;
 import aoharkov.training.repairagency.command.manager.FindAllRequestsCommand;
 import aoharkov.training.repairagency.command.manager.NewOrderCommand;
 import aoharkov.training.repairagency.command.manager.NewRefusalCommand;
@@ -138,6 +139,8 @@ public class DependencyInjector {
 
     private static final Command FIND_ALL_ORDERS_COMMAND = new FindAllOrdersCommand(MANAGER_SERVICE);
 
+    private static final Command FIND_ALL_REFUSALS_COMMAND = new FindAllRefusalsCommand(MANAGER_SERVICE);
+
     private static final Map<String, Command> COMMANDS = initCommands();
 
     private DependencyInjector() {
@@ -162,6 +165,7 @@ public class DependencyInjector {
         userCommandNameToCommand.put("/mgr/new/order", NEW_ORDER_COMMAND);
         userCommandNameToCommand.put("/mgr/new/refusal", NEW_REFUSAL_COMMAND);
         userCommandNameToCommand.put("/mgr/orders", FIND_ALL_ORDERS_COMMAND);
+        userCommandNameToCommand.put("/mgr/refusals", FIND_ALL_REFUSALS_COMMAND);
         return Collections.unmodifiableMap(userCommandNameToCommand);
     }
 
