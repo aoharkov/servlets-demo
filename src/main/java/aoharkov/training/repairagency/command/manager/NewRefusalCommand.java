@@ -35,6 +35,6 @@ public class NewRefusalCommand implements Command {
                 .build();
 
         managerService.declineRequest(refusal);
-        forward("/mgr/home", request, response);
+        response.sendRedirect("/mgr/home");
     }
 }

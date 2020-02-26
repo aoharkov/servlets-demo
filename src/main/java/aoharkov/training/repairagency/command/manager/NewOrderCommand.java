@@ -40,6 +40,6 @@ public class NewOrderCommand implements Command {
                 .build();
 
         managerService.acceptRequest(order);
-        forward("/mgr/home", request, response);
+        response.sendRedirect("/mgr/home");
     }
 }

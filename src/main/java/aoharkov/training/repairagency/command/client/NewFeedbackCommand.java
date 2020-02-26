@@ -33,6 +33,6 @@ public class NewFeedbackCommand implements Command {
                 .withText(request.getParameter("text"))
                 .build();
         clientService.saveFeedback(feedback);
-        forward("/client/home", request, response);
+        response.sendRedirect("/client/home");
     }
 }

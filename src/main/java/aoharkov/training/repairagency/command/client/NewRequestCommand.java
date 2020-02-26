@@ -32,6 +32,6 @@ public class NewRequestCommand implements Command {
                 .withAccepted(Boolean.FALSE)
                 .build();
         clientService.saveRequest(myRequest);
-        forward("/client/home", request, response);
+        response.sendRedirect("/client/home");
     }
 }
