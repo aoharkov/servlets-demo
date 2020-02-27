@@ -19,13 +19,13 @@
             <c:if test="${request.getViewed()=='false'}">
             <td>
                 <a href="/mgr/new/order?lang=${lang}&req=${request.getId()}">
-                <img border="0" alt="Feedback"
+                <img border="0" alt="accept"
                      src="../images/accept.png"
                      width="66" height="60"></a>
             </td>
             <td>
                 <a href="/mgr/new/refusal?lang=${lang}&req=${request.getId()}">
-                    <img border="0" alt="Feedback"
+                    <img border="0" alt="decline"
                          src="../images/decline.png"
                          width="66" height="60"></a>
             </td>

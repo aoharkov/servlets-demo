@@ -29,7 +29,8 @@ public class AuthorizationFilter implements Filter {
                 requestURI.equals("/index") ||
                 requestURI.equals("/login") ||
                 requestURI.equals("/register") ||
-                requestURI.equals("/home");
+                requestURI.equals("/home") ||
+                requestURI.startsWith("/images/");
     }
 
     private boolean checkRoleAccess(String requestURI, Role role) {
