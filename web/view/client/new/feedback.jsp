@@ -26,7 +26,7 @@
                    placeholder="${score}"/>
         </td></tr>
     </table>
-    <input type="submit" value="submit"/>
+    <input type="submit" value="<fmt:message key="btn.submit"/>"/>
 </form>
 </div>
 

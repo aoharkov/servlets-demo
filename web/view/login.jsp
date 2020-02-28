@@ -2,7 +2,7 @@
 <%@ include file="common/header/defaultHeader.jsp" %>
 <%@ include file="common/langchooser/defaultLangChooser.jsp" %>
 <div align="center">
-<h1>Login page</h1>
+<h1><fmt:message key="title.login"/></h1>
   <form action="${requestURI}" method="post">
       <input type="hidden" name="command" value="login"/>
       <input name="email"
@@ -23,7 +23,7 @@
                                if(this.checkValidity()) form.repeated_password.pattern = this.value;
                                else form.repeated_password.pattern = form.password.pattern"
              placeholder="${password1}"/><br>
-      <input type="submit" value="Log in"/>
+      <input type="submit" value="<fmt:message key="menu.login"/>"/>
   </form>
 </div>
 

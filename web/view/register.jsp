@@ -3,7 +3,7 @@
 <%@ include file="common/langchooser/defaultLangChooser.jsp" %>
 
 <div align="center">
-<h1>Registration Form</h1>
+<h1><fmt:message key="title.registration"/></h1>
 <form action="${requestURI}" method="post">
     <table>
         <tr><td>
@@ -56,7 +56,7 @@
                    placeholder="${repeated_password}"/>
         </td></tr>
     </table>
-    <input type="submit" value="submit"/>
+    <input type="submit" value="<fmt:message key="menu.register"/>"/>
 </form>
 </div>
 

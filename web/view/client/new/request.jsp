@@ -14,7 +14,7 @@
                    <fmt:message key="text" var="text"/> placeholder="${text}"/>
         </td></tr>
     </table>
-    <input type="submit" value="submit"/>
+    <input type="submit" value="<fmt:message key="btn.submit"/>"/>
 </form>
 </div>
 

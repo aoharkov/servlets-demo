@@ -24,7 +24,7 @@
                     <fmt:message key="masterId" var="masterId"/> placeholder="${masterId}"/>
         </td></tr>
     </table>
-    <input type="submit" value="submit"/>
+    <input type="submit" value="<fmt:message key="btn.submit"/>"/>
 </form>
 </div>
 
