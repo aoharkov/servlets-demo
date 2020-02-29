@@ -9,10 +9,11 @@ import aoharkov.training.repairagency.service.exception.EntityAlreadyExistExcept
 import aoharkov.training.repairagency.service.exception.EntityNotFoundException;
 import aoharkov.training.repairagency.service.exception.IncorrectPasswordException;
 import aoharkov.training.repairagency.service.exception.validation.InvalidEmailException;
-import aoharkov.training.repairagency.service.exception.validation.InvalidPasswordException;
 import aoharkov.training.repairagency.service.validator.Validator;
 import org.junit.After;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -36,7 +37,7 @@ public class UserServiceImplTest {
     private static final String ENCODED_PASSWORD = "$2a$10$0zVxYquinNxduTpbd7iw.OIm7VysEarEuBs0RVBXH4B2s5ktggkvy";
     private static final String PASSWORD = "admin@gmail.com";
     private static final String INCORRECT_PASSWORD = "artem@gmail.com";
-    private static final String INCORRECT_ENCODED_PASSWORD =
+    private static final String ENCODED_INCORRECT_PASSWORD =
             "$2a$10$Cke4fwQkrg/vZuTaESojHeaSTEUkaOCceixZY6MzVIbqDkypdba.G";
     private static final String EMAIL = "admin@gmail.com";
     private static final String INVALID_EMAIL = "admin#gmail.com";
@@ -44,8 +45,11 @@ public class UserServiceImplTest {
     private static final UserEntity USER_ENTITY = initUserEntity();
     private static final User USER = initUser();
 
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
+
     @Mock
-    private Validator userValidator;
+    private Validator<User> userValidator;
     @Mock
     private Encoder passwordEncoder;
     @Mock
@@ -93,10 +97,11 @@ public class UserServiceImplTest {
         verify(userMapper).mapEntityToDomain(eq(USER_ENTITY));
     }
 
-    @Test(expected = InvalidEmailException.class)
+    @Test
     public void userShouldNotLoginAsEmailIsNotValid() {
         doThrow(InvalidEmailException.class).when(userValidator).validateEmail(INVALID_EMAIL);
 
+        exception.expect(InvalidEmailException.class);
         userService.login(INVALID_EMAIL, PASSWORD);
 
         verify(userValidator).validateEmail(eq(INVALID_EMAIL));
@@ -105,11 +110,12 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userMapper);
     }
 
-    @Test(expected = EntityNotFoundException.class)
+    @Test
     public void userShouldNotLoginAsEmailNotFoundInDB() {
         doNothing().when(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
         doThrow(EntityNotFoundException.class).when(userDao).findByEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
 
+        exception.expect(EntityNotFoundException.class);
         userService.login(CORRECT_EMAIL_NOT_IN_DB, PASSWORD);
 
         verify(userValidator).validateEmail(eq(CORRECT_EMAIL_NOT_IN_DB));
@@ -118,12 +124,13 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userMapper);
     }
 
-    @Test(expected = IncorrectPasswordException.class)
+    @Test
     public void userShouldNotLoginAsPasswordIsIncorrect() {
         doNothing().when(userValidator).validateEmail(eq(EMAIL));
         when(userDao.findByEmail(eq(EMAIL))).thenReturn(Optional.of(USER_ENTITY));
-        doThrow(InvalidPasswordException.class).when(passwordEncoder).encode(eq(INCORRECT_PASSWORD));
+        when(passwordEncoder.encode(eq(INCORRECT_PASSWORD))).thenReturn(ENCODED_INCORRECT_PASSWORD);
 
+        exception.expect(IncorrectPasswordException.class);
         userService.login(EMAIL, INCORRECT_PASSWORD);
 
         verify(userValidator).validateEmail(eq(EMAIL));
@@ -147,10 +154,11 @@ public class UserServiceImplTest {
         verify(userDao).save(USER_ENTITY);
     }
 
-    @Test(expected = InvalidEmailException.class)
+    @Test
     public void userShouldNotRegisterAsEmailIsInvalid() {
         doThrow(InvalidEmailException.class).when(userValidator).validate(any(User.class));
 
+        exception.expect(InvalidEmailException.class);
         userService.register(USER);
 
         verify(userValidator).validate(any(User.class));
@@ -159,11 +167,12 @@ public class UserServiceImplTest {
         verifyZeroInteractions(userDao);
     }
 
-    @Test(expected = EntityAlreadyExistException.class)
+    @Test
     public void userShouldNotRegisterAsEmailIsAlreadyInDB() {
         doNothing().when(userValidator).validate(any(User.class));
         doThrow(EntityAlreadyExistException.class).when(userDao).findByEmail(EMAIL);
 
+        exception.expect(EntityAlreadyExistException.class);
         userService.register(USER);
 
         verify(userValidator).validate(any(User.class));
