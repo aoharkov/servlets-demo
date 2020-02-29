@@ -76,29 +76,32 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
         return findByParam(id, findByIdQuery, INT_PARAM_SETTER);
     }
 
-    protected abstract E mapResultSetToEntity(ResultSet resultSet) throws SQLException;
-
     <P> Optional<E> findByParam(P param, String sqlQuery,
                                 BiConsumer<PreparedStatement, P> designedParamSetting) {
         try (final PreparedStatement preparedStatement =
                      connector.getConnection().prepareStatement(sqlQuery)) {
 
             designedParamSetting.accept(preparedStatement, param);
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return Optional.of(mapResultSetToEntity(resultSet));
-                }
-            } catch (SQLException e) {
-                LOGGER.error(EXECUTE_QUERY_ERROR, e);
-                throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
-            }
-
+            return executeFindByParam(preparedStatement);
         } catch (SQLException e) {
             LOGGER.error(DB_CONNECTION_PROBLEM, e);
             throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
         }
-        return Optional.empty();
     }
+
+    private Optional<E> executeFindByParam(PreparedStatement preparedStatement) {
+        try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                return Optional.of(mapResultSetToEntity(resultSet));
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            LOGGER.error(EXECUTE_QUERY_ERROR, e);
+            throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
+        }
+    }
+
+    protected abstract E mapResultSetToEntity(ResultSet resultSet) throws SQLException;
 
     @Override
     public Page<E> findAll(int pageNumber, int itemsPerPage) {
@@ -133,25 +136,29 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
                 preparedStatement.setInt(2, itemsPerPage);
             }
 
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                List<E> entities = new ArrayList<>();
-                while (resultSet.next()) {
-                    entities.add(mapResultSetToEntity(resultSet));
-                }
-                return Page.<E>builder()
-                        .withContent(entities)
-                        .withPageNumber(pageNumber)
-                        .withItemsNumberPerPage(itemsPerPage)
-                        .withTotalPages(maxPageNumber)
-                        .build();
-            } catch (SQLException e) {
-                LOGGER.error(EXECUTE_QUERY_ERROR, e);
-                throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
-            }
+            return Page.<E>builder()
+                    .withContent(executeFindAll(preparedStatement))
+                    .withPageNumber(pageNumber)
+                    .withItemsNumberPerPage(itemsPerPage)
+                    .withTotalPages(maxPageNumber)
+                    .build();
 
         } catch (SQLException e) {
             LOGGER.error(DB_CONNECTION_PROBLEM, e);
             throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
+        }
+    }
+
+    private List<E> executeFindAll(PreparedStatement preparedStatement) {
+        try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<E> entities = new ArrayList<>();
+            while (resultSet.next()) {
+                entities.add(mapResultSetToEntity(resultSet));
+            }
+            return entities;
+        } catch (SQLException e) {
+            LOGGER.error(EXECUTE_QUERY_ERROR, e);
+            throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
         }
     }
 
@@ -164,17 +171,20 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     public int count(String query) {
         try (Connection connection = connector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            try (final ResultSet resultSet = preparedStatement.executeQuery()) {
-                resultSet.next();
-                return resultSet.getInt("rowcount");
-            } catch (SQLException e) {
-                LOGGER.error(EXECUTE_QUERY_ERROR, e);
-                throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
-            }
-
+            return executeCount(preparedStatement);
         } catch (SQLException e) {
             LOGGER.error(DB_CONNECTION_PROBLEM, e);
             throw new DataBaseSqlRuntimeException(DB_CONNECTION_PROBLEM);
+        }
+    }
+
+    private int executeCount(PreparedStatement preparedStatement) {
+        try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+            resultSet.next();
+            return resultSet.getInt("rowcount");
+        } catch (SQLException e) {
+            LOGGER.error(EXECUTE_QUERY_ERROR, e);
+            throw new DataBaseSqlRuntimeException(EXECUTE_QUERY_ERROR);
         }
     }
 
