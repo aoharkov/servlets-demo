@@ -39,7 +39,7 @@ public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<
     });
     private static final String EXECUTE_QUERY_ERROR = "executeQuery error";
     private static final String DB_CONNECTION_PROBLEM = "db connection problem";
-    protected final Connector connector;
+    private final Connector connector;
     private final String saveQuery;
     private final String findByIdQuery;
     private final String findAllAtPageQuery;

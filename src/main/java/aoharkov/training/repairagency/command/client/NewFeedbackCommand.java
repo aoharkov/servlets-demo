@@ -23,7 +23,7 @@ public class NewFeedbackCommand implements Command {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer requestId = Integer.parseInt(request.getParameter("req"));
         Request myRequest = clientService.findRequest(requestId);
         Integer score = Integer.parseInt(request.getParameter("score"));

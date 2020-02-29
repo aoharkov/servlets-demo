@@ -25,7 +25,7 @@ public class NewOrderCommand implements Command {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         Integer requestId = Integer.parseInt(request.getParameter("req"));
         Integer price = Integer.parseInt(request.getParameter("price"));

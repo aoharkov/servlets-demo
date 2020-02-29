@@ -22,7 +22,7 @@ public class LoginCommand implements Command {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final String email = request.getParameter("email");
         final String password = request.getParameter("password");
 

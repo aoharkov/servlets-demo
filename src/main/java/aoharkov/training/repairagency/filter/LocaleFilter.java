@@ -21,7 +21,7 @@ public class LocaleFilter implements Filter {
     private static final String LANG_PARAMETER_NAME = "lang";
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
@@ -38,6 +38,6 @@ public class LocaleFilter implements Filter {
         }
         request.setAttribute(LANG_PARAMETER_NAME, lang);
 
-        filterChain.doFilter(request, servletResponse);
+        chain.doFilter(request, servletResponse);
     }
 }

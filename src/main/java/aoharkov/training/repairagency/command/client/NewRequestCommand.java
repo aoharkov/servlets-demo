@@ -23,7 +23,7 @@ public class NewRequestCommand implements Command {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         Request myRequest = Request.builder()
                 .withClient(user)
