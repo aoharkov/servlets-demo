@@ -9,7 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+
+import static aoharkov.training.repairagency.command.utils.PageAttributesParser.DEFAULT_PAGE;
+import static aoharkov.training.repairagency.command.utils.PageAttributesParser.DEFAULT_ROWS;
+import static aoharkov.training.repairagency.command.utils.PageAttributesParser.parseWithDefault;
 
 public class FindAllRefusalsCommand implements Command {
     private final ManagerService managerService;
@@ -20,17 +23,13 @@ public class FindAllRefusalsCommand implements Command {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String rows = request.getParameter("rows");
-        String page = request.getParameter("page");
-
-        int itemsPerPage = Integer.parseInt(rows);
-        int pageNum = Integer.parseInt(page);
+        int itemsPerPage = parseWithDefault(request.getParameter("rows"), DEFAULT_ROWS);
+        int pageNum = parseWithDefault(request.getParameter("page"), DEFAULT_PAGE);
 
         Page<Refusal> pageOfRefusals = managerService.findAllRefusals(pageNum, itemsPerPage);
-
-        List<Refusal> refusals = pageOfRefusals.getContent();
-        request.setAttribute("refusals", refusals);
+        request.setAttribute("refusals", pageOfRefusals.getContent());
         request.setAttribute("maxPage", pageOfRefusals.getTotalPages());
+
         request.setAttribute("pageNum", pageNum);
         request.setAttribute("itemsPerPage", itemsPerPage);
 
