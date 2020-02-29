@@ -36,7 +36,7 @@ public class SessionFilterTest {
 
     @After
     public void resetMocks() {
-        Mockito.reset(request, response, chain);
+        Mockito.reset(request, response, chain, session);
     }
 
     @Test
