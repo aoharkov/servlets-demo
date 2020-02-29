@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-import static aoharkov.training.repairagency.dao.util.PageCalculator.calculateTotalPages;
 import static aoharkov.training.repairagency.dao.util.PageCalculator.calculateOffset;
+import static aoharkov.training.repairagency.dao.util.PageCalculator.calculateTotalPages;
 import static aoharkov.training.repairagency.dao.util.PageCalculator.fitPageNumber;
 
 public abstract class AbstractCrudPageableDaoImpl<E> implements CrudPageableDao<E> {

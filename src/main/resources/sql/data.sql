@@ -43,10 +43,12 @@ INSERT INTO users (name, surname, email, password, role)
 VALUES ('Dmytro', 'St.', 'dmytro@gmail.com', '$2a$10$WgCH8nsshdiZwg67SvKNiu/HZ63g48TeBslqbpFQmIoFPSEj82sxe', 'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Elizabeth', 'V.', 'elizabeth@gmail.com', '$2a$10$Bfk6gCvgZ0dPseIV6SVv.OULF3A2ilzGkb4EKk4/lCo78IhGiJRaa', 'MANAGER');
+VALUES ('Elizabeth', 'V.', 'elizabeth@gmail.com', '$2a$10$Bfk6gCvgZ0dPseIV6SVv.OULF3A2ilzGkb4EKk4/lCo78IhGiJRaa',
+        'MANAGER');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Evhenii', 'Shm.', 'evhenii@gmail.com', '$2a$10$OCQ1bqHTum8uAKHIQNmrb.Zj3DgtquDKFxDG6ICk5Gc3M36o36GLe', 'CLIENT');
+VALUES ('Evhenii', 'Shm.', 'evhenii@gmail.com', '$2a$10$OCQ1bqHTum8uAKHIQNmrb.Zj3DgtquDKFxDG6ICk5Gc3M36o36GLe',
+        'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
 VALUES ('George', 'Ch.', 'george@gmail.com', '$2a$10$lDQQZyXJBH/4/jlVSUo5U.9BePVpH6nhTnclP0mSxPpzAezn/29CO', 'CLIENT');
@@ -58,7 +60,8 @@ INSERT INTO users (name, surname, email, password, role)
 VALUES ('Ivan', 'M.', 'ivan@gmail.com', '$2a$10$JRW1tUmpw1cf2HP7CyN53OE2V0pNEF6pa4tf0kZUI/TPLpjqLt.tW', 'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Kateryna', 'B.', 'kateryna@gmail.com', '$2a$10$Ca8uOLIfIjmPn9WaaPCyvO1WXzcmniXk8qMEoe7hvjPCfgP6bkAqe', 'MANAGER');
+VALUES ('Kateryna', 'B.', 'kateryna@gmail.com', '$2a$10$Ca8uOLIfIjmPn9WaaPCyvO1WXzcmniXk8qMEoe7hvjPCfgP6bkAqe',
+        'MANAGER');
 
 INSERT INTO users (name, surname, email, password, role)
 VALUES ('Nikita', 'K.', 'nikita@gmail.com', '$2a$10$tkaP3Y2xn.jjAAC56mxtuepkxQkEiRlLpY/KknGIs4oM.CsdUFAYm', 'MASTER');
@@ -70,19 +73,23 @@ INSERT INTO users (name, surname, email, password, role)
 VALUES ('Olha', 'B.', 'olha@gmail.com', '$2a$10$AtqinJgn2uVi2ikXJqOFz.E7J1w3GXwdiWMDhPKVf0b2L66lJa4qu', 'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Stanislav', 'S.', 'stanislav@gmail.com', '$2a$10$dlnGitkDszl/pe6dS31zCOuZazgACLQMy8dqzEwM7pBOgNV06Vg0G', 'CLIENT');
+VALUES ('Stanislav', 'S.', 'stanislav@gmail.com', '$2a$10$dlnGitkDszl/pe6dS31zCOuZazgACLQMy8dqzEwM7pBOgNV06Vg0G',
+        'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
 VALUES ('Viktor', 'Ovs.', 'viktor@gmail.com', '$2a$10$gyGNIpbGS4xp2807m2FRX.LBUR1vtX.YHcAf2wbQe4KRWWSnkworm', 'MASTER');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Viktoriia', 'Ol.', 'viktoriia@gmail.com', '$2a$10$jIv.kSGBt1LpjxFEPBnjZuLahj0.oLLhu3.sZAN3k1Tgh2Ba0LqYG', 'CLIENT');
+VALUES ('Viktoriia', 'Ol.', 'viktoriia@gmail.com', '$2a$10$jIv.kSGBt1LpjxFEPBnjZuLahj0.oLLhu3.sZAN3k1Tgh2Ba0LqYG',
+        'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Vitalii', 'Iv.', 'vitalii@gmail.com', '$2a$10$ZWiKBc01HslDhT2kYWLomOEzHAsuL8UeXvosjp6AzgssLOhzx0Ju6', 'CLIENT');
+VALUES ('Vitalii', 'Iv.', 'vitalii@gmail.com', '$2a$10$ZWiKBc01HslDhT2kYWLomOEzHAsuL8UeXvosjp6AzgssLOhzx0Ju6',
+        'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
-VALUES ('Vitalii', 'V.', 'vitalii.v@gmail.com', '$2a$10$WS1OvyCUYO25FSx/GG4.MumduuWCTO2vNziWym9D911zdfpqq4yPO', 'CLIENT');
+VALUES ('Vitalii', 'V.', 'vitalii.v@gmail.com', '$2a$10$WS1OvyCUYO25FSx/GG4.MumduuWCTO2vNziWym9D911zdfpqq4yPO',
+        'CLIENT');
 
 INSERT INTO users (name, surname, email, password, role)
 VALUES ('Yurii', 'M.', 'yurii@gmail.com', '$2a$10$i964LXhlsr0t.YHgiwX1ZeHV/YXjyQp.X3S93gIqgBLh.mwlfGaKS', 'CLIENT');
@@ -103,7 +110,7 @@ INSERT INTO requests (client_id, description, viewed, accepted)
 VALUES (6, 'Replace the electrical plug of electric car', 1, 0);
 
 INSERT INTO refusals (request_id, explanation, manager_id)
-VALUES (2, 'We do not repair charging stations of electric car' , 14);
+VALUES (2, 'We do not repair charging stations of electric car', 14);
 
 INSERT INTO requests (client_id, description, viewed, accepted)
 VALUES (6, 'Replace the electrical plug of charger for remote control toy car', 1, 1);

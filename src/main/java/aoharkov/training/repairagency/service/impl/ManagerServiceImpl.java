@@ -98,7 +98,6 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
 
     @Override
     public boolean acceptRequest(Order order) {
-        //todo as transaction in dao
         Optional<RequestEntity> requestEntity = requestDao.findById(order.getRequest().getId());
         if (requestEntity.isPresent()) {
             Request request = requestMapper.mapEntityToDomain(requestEntity.get());
@@ -113,7 +112,6 @@ public class ManagerServiceImpl extends UserServiceImpl implements ManagerServic
 
     @Override
     public boolean declineRequest(Refusal refusal) {
-        //todo as transaction in dao
         Optional<RequestEntity> requestEntity = requestDao.findById(refusal.getRequest().getId());
         if (requestEntity.isPresent()) {
             Request request = requestMapper.mapEntityToDomain(requestEntity.get());
