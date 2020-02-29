@@ -35,6 +35,9 @@
         <td>
             <h2><a href="/mgr/feedback?lang=${lang}&rows=4&page=1"><fmt:message key="menu.feedback" /></a></h2>
         </td>
+        <td>
+            <h2><a href="/logout?lang=${lang}"><fmt:message key="menu.logout" /></a></h2>
+        </td>
     </tr>
 </table>
 

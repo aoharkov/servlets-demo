@@ -29,6 +29,9 @@
         <td>
             <h2><a href="/master/stages?lang=${lang}&rows=4&page=1"><fmt:message key="menu.stages" /></a></h2>
         </td>
+        <td>
+            <h2><a href="/logout?lang=${lang}"><fmt:message key="menu.logout" /></a></h2>
+        </td>
     </tr>
 </table>
 

@@ -30,6 +30,7 @@ public class AuthorizationFilter implements Filter {
                 requestURI.equals("/login") ||
                 requestURI.equals("/register") ||
                 requestURI.equals("/home") ||
+                requestURI.equals("/logout") ||
                 requestURI.startsWith("/images/");
     }
 

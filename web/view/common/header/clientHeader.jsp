@@ -29,6 +29,9 @@
         <td>
             <h2><a href="/client/new/request?lang=${lang}"><fmt:message key="menu.new.request" /></a></h2>
         </td>
+        <td>
+            <h2><a href="/logout?lang=${lang}"><fmt:message key="menu.logout" /></a></h2>
+        </td>
     </tr>
 </table>
 
