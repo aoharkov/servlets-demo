@@ -99,80 +99,6 @@ public class ClientServiceImplTest {
     @InjectMocks
     private ClientServiceImpl clientService;
 
-    private static RequestEntity initRequestEntity() {
-        return RequestEntity.builder()
-                .withId(1)
-                .build();
-    }
-
-    private static Request initRequest() {
-        return Request.builder()
-                .withId(1)
-                .build();
-    }
-
-    private static Page<RequestEntity> initRequestEntityPage() {
-        return Page.<RequestEntity>builder()
-                .withContent(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
-                .build();
-    }
-
-    private static OrderEntity initOrderEntity() {
-        return OrderEntity.builder()
-                .withId(2)
-                .withRequestId(1)
-                .withRepairStageId(5)
-                .build();
-    }
-
-    private static Order initOrder() {
-        return Order.builder()
-                .withId(2)
-                .withRequest(REQUEST)
-                .withRepairStage(REPAIR_STAGE)
-                .build();
-    }
-
-    private static RefusalEntity initRefusalEntity() {
-        return RefusalEntity.builder()
-                .withId(3)
-                .withRequestId(1)
-                .build();
-    }
-
-    private static Refusal initRefusal() {
-        return Refusal.builder()
-                .withId(3)
-                .withRequest(REQUEST)
-                .build();
-    }
-
-    private static FeedbackEntity initFeedbackEntity() {
-        return FeedbackEntity.builder()
-                .withId(4)
-                .withRequestId(1)
-                .build();
-    }
-
-    private static Feedback initFeedback() {
-        return Feedback.builder()
-                .withId(4)
-                .withRequest(REQUEST)
-                .build();
-    }
-
-    private static RepairStageEntity initRepairStageEntity() {
-        return RepairStageEntity.builder()
-                .withId(5)
-                .build();
-    }
-
-    private static RepairStage initRepairStage() {
-        return RepairStage.builder()
-                .withId(5)
-                .build();
-    }
-
     @After
     public void resetMocks() {
         Mockito.reset(userValidator, passwordEncoder, userDao, userMapper,
@@ -306,5 +232,79 @@ public class ClientServiceImplTest {
         verifyZeroInteractions(orderMapper);
         verifyZeroInteractions(repairStageDao);
         verifyZeroInteractions(repairStageMapper);
+    }
+
+    private static RequestEntity initRequestEntity() {
+        return RequestEntity.builder()
+                .withId(1)
+                .build();
+    }
+
+    private static Request initRequest() {
+        return Request.builder()
+                .withId(1)
+                .build();
+    }
+
+    private static Page<RequestEntity> initRequestEntityPage() {
+        return Page.<RequestEntity>builder()
+                .withContent(Arrays.asList(REQUEST_ENTITY, REQUEST_ENTITY))
+                .build();
+    }
+
+    private static OrderEntity initOrderEntity() {
+        return OrderEntity.builder()
+                .withId(2)
+                .withRequestId(1)
+                .withRepairStageId(5)
+                .build();
+    }
+
+    private static Order initOrder() {
+        return Order.builder()
+                .withId(2)
+                .withRequest(REQUEST)
+                .withRepairStage(REPAIR_STAGE)
+                .build();
+    }
+
+    private static RefusalEntity initRefusalEntity() {
+        return RefusalEntity.builder()
+                .withId(3)
+                .withRequestId(1)
+                .build();
+    }
+
+    private static Refusal initRefusal() {
+        return Refusal.builder()
+                .withId(3)
+                .withRequest(REQUEST)
+                .build();
+    }
+
+    private static FeedbackEntity initFeedbackEntity() {
+        return FeedbackEntity.builder()
+                .withId(4)
+                .withRequestId(1)
+                .build();
+    }
+
+    private static Feedback initFeedback() {
+        return Feedback.builder()
+                .withId(4)
+                .withRequest(REQUEST)
+                .build();
+    }
+
+    private static RepairStageEntity initRepairStageEntity() {
+        return RepairStageEntity.builder()
+                .withId(5)
+                .build();
+    }
+
+    private static RepairStage initRepairStage() {
+        return RepairStage.builder()
+                .withId(5)
+                .build();
     }
 }
