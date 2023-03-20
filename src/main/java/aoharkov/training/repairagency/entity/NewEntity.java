@@ -13,6 +13,10 @@ public class NewEntity {
         this.numericValue = builder.numericValue;
     }
 
+    public void emptyMethod() {
+
+    }
+
     public static Builder builder() {
         return new Builder();
     }
