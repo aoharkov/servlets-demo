@@ -8,6 +8,20 @@ public class NewEntity {
     private final String text;
     private final Integer anotherNumericValue;
 
+    public NewEntity(Integer id, Integer numericValue, String text, Integer anotherNumericValue) {
+        this.id = id;
+        this.numericValue = numericValue;
+        this.text = text;
+        this.anotherNumericValue = anotherNumericValue;
+    }
+
+    public NewEntity(Integer id, Integer numericValue, String text1, String text2, Integer anotherNumericValue) {
+        this.id = id;
+        this.numericValue = numericValue;
+        this.text = text1 + text2;
+        this.anotherNumericValue = anotherNumericValue;
+    }
+
     private NewEntity(Builder builder) {
         this.id = builder.id;
         this.numericValue = builder.numericValue;
