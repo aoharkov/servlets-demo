@@ -17,6 +17,10 @@ public class NewEntity {
 
     }
 
+/*    public void emptyMethod() {
+
+    }*/
+
     public static Builder builder() {
         return new Builder();
     }
