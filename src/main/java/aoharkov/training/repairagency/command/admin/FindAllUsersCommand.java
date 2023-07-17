@@ -36,6 +36,29 @@ public class FindAllUsersCommand implements Command {
         forward("/admin/users", request, response);
     }
 
+    public void doGet2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int itemsPerPage = parseWithDefault(request.getParameter("rows"), DEFAULT_ROWS);
+        int pageNum = parseWithDefault(request.getParameter("page"), DEFAULT_PAGE);
+
+        Page<User> pageOfUsers = adminService.findAllUsers(pageNum, itemsPerPage);
+        request.setAttribute("users", pageOfUsers.getContent());
+        request.setAttribute("maxPage", pageOfUsers.getTotalPages());
+
+        request.setAttribute("magicNumber", 10);
+        request.setAttribute("itemsPerPage", itemsPerPage);
+
+        forward("/admin/users", request, response);
+    }
+
+/*    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }*/
+
+    public void empty() {
+
+    }
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
